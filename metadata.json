@@ -1,0 +1,6 @@
+{
+  "name": "Mindly",
+  "description": "An intelligent personal learning and knowledge-management platform that transforms messy learning material into structured, searchable lessons, notes, and glossaries.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
