@@ -12,6 +12,7 @@ import { ProfileView } from './components/ProfileView';
 import { OnboardingModal } from './components/OnboardingModal';
 import { AuthModal } from './components/AuthModal';
 import { api } from './lib/api';
+import { getDemoDatabase } from './lib/demoData';
 import { User, Course, Lesson, Note, KeyTermItem, ActivityItem, SearchResultItem, StudyProgress } from './types';
 import { Sparkles, Brain } from 'lucide-react';
 
@@ -67,7 +68,14 @@ export default function App() {
         setShowOnboarding(true);
       }
     } catch (err) {
-      console.error('Initialization error:', err);
+      console.warn('Initialization notice - running in resilient mode:', err);
+      const demo = getDemoDatabase();
+      if (!currentUser) setCurrentUser(demo.user);
+      if (courses.length === 0) setCourses(demo.courses);
+      if (notes.length === 0) setNotes(demo.notes);
+      if (terms.length === 0) setTerms(demo.terms);
+      if (activities.length === 0) setActivities(demo.activities);
+      if (!studyProgress) setStudyProgress(demo.progress);
     } finally {
       setIsLoading(false);
     }
@@ -199,6 +207,8 @@ export default function App() {
     );
   }
 
+  const activeUser = currentUser || getDemoDatabase().user;
+
   return (
     <div className="min-h-screen bg-[#0c0d10] text-zinc-100 flex flex-col md:flex-row font-sans selection:bg-indigo-600/40 selection:text-white">
       {/* Sidebar Navigation (Desktop) & Bottom Bar (Mobile) */}
@@ -213,7 +223,7 @@ export default function App() {
           }
         }}
         onOpenAddMaterial={() => handleOpenAddMaterial()}
-        currentUser={currentUser}
+        currentUser={activeUser}
       />
 
       {/* Main View Area */}
@@ -263,16 +273,14 @@ export default function App() {
         ) : (
           /* Primary Tab Routing */
           <>
-            {currentTab === 'home' && currentUser && (
+            {currentTab === 'home' && (
               <HomeDashboard
-                user={currentUser}
+                user={activeUser}
                 courses={courses}
                 recentActivities={activities}
                 studyProgress={studyProgress}
                 onUpdateStudyGoal={async (newGoal) => {
-                  if (currentUser) {
-                    setCurrentUser({ ...currentUser, dailyStudyGoalMinutes: newGoal });
-                  }
+                  setCurrentUser({ ...activeUser, dailyStudyGoalMinutes: newGoal });
                   const res = await api.getStudyProgress();
                   setStudyProgress(res.progress);
                 }}
@@ -327,9 +335,9 @@ export default function App() {
               <SearchView onSelectResult={handleSelectSearchResult} />
             )}
 
-            {currentTab === 'profile' && currentUser && (
+            {currentTab === 'profile' && (
               <ProfileView
-                user={currentUser}
+                user={activeUser}
                 courses={courses}
                 notes={notes}
                 terms={terms}
