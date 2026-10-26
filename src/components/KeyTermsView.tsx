@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Bookmark, Search, Plus, Trash2, BookOpen, ExternalLink } from 'lucide-react';
 import { KeyTermItem, Course } from '../types';
 import { api } from '../lib/api';
+import { NokiaLoader } from './NokiaLoader';
 
 interface KeyTermsViewProps {
   terms: KeyTermItem[];
@@ -88,21 +89,24 @@ export const KeyTermsView: React.FC<KeyTermsViewProps> = ({
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+    <div className="max-w-6xl mx-auto px-4 sm:px-8 py-8 space-y-6">
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-            Key Terms & Glossary
-          </h1>
-          <p className="text-xs sm:text-sm text-zinc-400 mt-0.5">
+          <div className="flex items-center gap-2 mb-1.5">
+            <Bookmark className="w-5 h-5 text-[#00B4FF]" />
+            <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+              Key Terms & Glossary
+            </h1>
+          </div>
+          <p className="text-xs text-[#9bb1d6]">
             Subject-specific vocabulary, precise definitions, and contextual origins across your learning.
           </p>
         </div>
 
         <button
           onClick={() => setShowAddModal(true)}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold tracking-wide transition-all shadow-md shadow-indigo-950/40 cursor-pointer self-start sm:self-auto"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#00B4FF] hover:bg-[#009de0] text-[#0B1F44] text-xs font-bold transition-all shadow-md shadow-[#00B4FF]/20 cursor-pointer self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
           <span>Add Custom Term</span>
@@ -110,26 +114,26 @@ export const KeyTermsView: React.FC<KeyTermsViewProps> = ({
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-[#111216] p-3 rounded-xl border border-[#20222a] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="bg-[#0B1F44] p-3 rounded-2xl border border-[#1a366f] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         {/* Search */}
         <div className="relative flex-1 min-w-[200px]">
-          <Search className="w-4 h-4 text-zinc-500 absolute left-3 top-2.5" />
+          <Search className="w-4 h-4 text-[#627ca8] absolute left-3 top-2.5" />
           <input
             type="text"
             placeholder="Search glossary terms or definitions..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg bg-[#0c0d10] border border-[#262831] text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+            className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl bg-[#081734] border border-[#1a366f] text-white placeholder-[#627ca8] focus:outline-none focus:border-[#00B4FF]"
           />
         </div>
 
         {/* Course Dropdown */}
         <div className="flex items-center gap-2 text-xs">
-          <span className="text-zinc-400">Filter by Course:</span>
+          <span className="text-[#9bb1d6]">Filter by Course:</span>
           <select
             value={selectedCourseFilter}
             onChange={(e) => setSelectedCourseFilter(e.target.value)}
-            className="px-2.5 py-1.5 rounded-lg bg-[#0c0d10] border border-[#262831] text-zinc-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
+            className="px-2.5 py-1.5 rounded-xl bg-[#081734] border border-[#1a366f] text-white focus:outline-none focus:border-[#00B4FF] cursor-pointer"
           >
             <option value="all">All Courses</option>
             {courses.map((c) => (
@@ -143,17 +147,19 @@ export const KeyTermsView: React.FC<KeyTermsViewProps> = ({
 
       {/* Terms Grid */}
       {filteredTerms.length === 0 ? (
-        <div className="p-12 text-center rounded-2xl bg-[#121316] border border-dashed border-[#262831] space-y-3">
-          <Bookmark className="w-10 h-10 text-zinc-600 mx-auto" />
-          <h3 className="text-sm font-semibold text-zinc-300">No glossary terms found</h3>
-          <p className="text-xs text-zinc-500 max-w-sm mx-auto">
+        <div className="p-12 text-center rounded-2xl bg-[#0B1F44] border border-[#1a366f] space-y-4">
+          <div className="w-12 h-12 rounded-xl bg-[#00B4FF]/10 text-[#00B4FF] flex items-center justify-center mx-auto">
+            <Bookmark className="w-6 h-6" />
+          </div>
+          <h3 className="text-sm font-bold text-white">No glossary terms found</h3>
+          <p className="text-xs text-[#9bb1d6] max-w-sm mx-auto leading-relaxed">
             When you import transcripts or notes, Mindly extracts terms automatically, or you can add custom terms manually.
           </p>
           <button
             onClick={() => setShowAddModal(true)}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#00B4FF] hover:bg-[#009de0] text-[#0B1F44] text-xs font-bold transition-all shadow-md shadow-[#00B4FF]/20 cursor-pointer"
           >
-            <Plus className="w-3.5 h-3.5" />
+            <Plus className="w-4 h-4" />
             <span>Add Term</span>
           </button>
         </div>
@@ -165,29 +171,29 @@ export const KeyTermsView: React.FC<KeyTermsViewProps> = ({
             return (
               <div
                 key={term.id}
-                className="group p-5 rounded-2xl bg-[#131418] hover:bg-[#16171d] border border-[#23252e] hover:border-zinc-700 transition-all flex flex-col justify-between"
+                className="group p-5 rounded-2xl bg-[#0B1F44] hover:bg-[#0d244f] border border-[#1a366f] hover:border-[#00B4FF]/60 transition-all flex flex-col justify-between shadow-sm"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between gap-2">
-                    <h3 className="text-base font-semibold text-white group-hover:text-indigo-300 transition-colors">
+                    <h3 className="text-sm font-bold text-white group-hover:text-[#00B4FF] transition-colors">
                       {term.term}
                     </h3>
                     <button
                       onClick={() => term.id && handleDelete(term.id)}
-                      className="p-1 text-zinc-600 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="p-1 text-[#627ca8] hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
                       title="Delete Term"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
                   </div>
 
-                  <p className="text-xs text-zinc-300 leading-relaxed font-sans">
+                  <p className="text-xs text-[#9bb1d6] leading-relaxed">
                     {term.definition}
                   </p>
 
                   {term.context && (
-                    <div className="p-2.5 rounded-lg bg-[#0e0f12] text-xs text-zinc-400">
-                      <span className="text-[10px] font-mono text-zinc-500 block uppercase mb-0.5">
+                    <div className="p-2.5 rounded-xl bg-[#081734] border border-[#1a366f] text-xs text-[#9bb1d6]">
+                      <span className="text-[10px] font-mono text-[#00B4FF] block uppercase mb-0.5 font-bold">
                         Context
                       </span>
                       {term.context}
@@ -199,7 +205,7 @@ export const KeyTermsView: React.FC<KeyTermsViewProps> = ({
                       {term.relatedConcepts.map((rel, rIdx) => (
                         <span
                           key={rIdx}
-                          className="text-[10px] px-2 py-0.5 rounded bg-zinc-800 text-zinc-300"
+                          className="text-[10px] px-2 py-0.5 rounded-md bg-[#00B4FF]/10 text-[#00B4FF] border border-[#00B4FF]/20 font-medium"
                         >
                           {rel}
                         </span>
@@ -208,19 +214,14 @@ export const KeyTermsView: React.FC<KeyTermsViewProps> = ({
                   )}
                 </div>
 
-                {/* Origin / Where it appeared */}
-                <div className="pt-4 mt-4 border-t border-[#1e2027] flex items-center justify-between text-[11px] text-zinc-400">
-                  <span className="truncate max-w-[180px]">
-                    {course ? course.title : 'Global Term'}
-                  </span>
-                  {term.lessonId && onNavigateToCourseLesson && (
+                <div className="pt-3 mt-3 border-t border-[#1a366f] flex items-center justify-between text-[11px] text-[#627ca8]">
+                  <span className="truncate">{course ? course.title : 'Global Glossary'}</span>
+                  {term.courseId && onNavigateToCourseLesson && (
                     <button
-                      onClick={() =>
-                        onNavigateToCourseLesson(term.courseId || '', term.lessonId)
-                      }
-                      className="text-indigo-400 hover:underline flex items-center gap-1 cursor-pointer"
+                      onClick={() => onNavigateToCourseLesson(term.courseId!, term.lessonId)}
+                      className="text-[#00B4FF] hover:underline font-semibold flex items-center gap-1 cursor-pointer"
                     >
-                      <span>Go to lesson</span>
+                      <span>Study Lesson</span>
                       <ExternalLink className="w-3 h-3" />
                     </button>
                   )}
@@ -231,63 +232,70 @@ export const KeyTermsView: React.FC<KeyTermsViewProps> = ({
         </div>
       )}
 
-      {/* Add Custom Term Modal */}
+      {/* Add Term Modal */}
       {showAddModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-150">
-          <div className="relative w-full max-w-md rounded-2xl bg-[#131418] border border-[#272932] shadow-2xl p-6 text-zinc-100">
-            <h3 className="text-base font-semibold text-white mb-1">Add Key Term</h3>
-            <p className="text-xs text-zinc-400 mb-4">
-              Add a specialized word, formula, or concept to your glossary.
+          <div className="relative w-full max-w-md rounded-2xl bg-[#0B1F44] border border-[#1a366f] shadow-2xl p-6 text-white">
+            <h3 className="text-base font-bold text-white mb-1">Add Term to Glossary</h3>
+            <p className="text-xs text-[#9bb1d6] mb-4">
+              Add technical vocabulary, definitions, and mental models to your study index.
             </p>
 
             <form onSubmit={handleCreateTerm} className="space-y-3.5">
               <div>
-                <label className="block text-xs font-medium text-zinc-300 mb-1">Term</label>
+                <label className="block text-xs font-semibold text-white mb-1">Term or Concept</label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Change of Character (CHoCH)"
+                  placeholder="e.g. Liquidity Sweep, Bernouilli's Principle"
                   value={newTerm}
                   onChange={(e) => setNewTerm(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg bg-[#0e0f12] border border-[#272932] text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-[#081734] border border-[#1a366f] text-white placeholder-[#627ca8] focus:outline-none focus:border-[#00B4FF]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-zinc-300 mb-1">Definition</label>
+                <label className="block text-xs font-semibold text-white mb-1">Precise Definition</label>
                 <textarea
-                  rows={3}
                   required
-                  placeholder="Clear, authoritative explanation..."
+                  rows={3}
+                  placeholder="Clear conceptual meaning without extraneous fluff..."
                   value={newDefinition}
                   onChange={(e) => setNewDefinition(e.target.value)}
-                  className="w-full p-2.5 text-xs rounded-lg bg-[#0e0f12] border border-[#272932] text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-[#081734] border border-[#1a366f] text-white placeholder-[#627ca8] focus:outline-none focus:border-[#00B4FF] resize-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-zinc-300 mb-1">
-                  Context / Notes (Optional)
-                </label>
+                <label className="block text-xs font-semibold text-white mb-1">Contextual Origin (Optional)</label>
                 <input
                   type="text"
-                  placeholder="e.g. First sign of an impending trend reversal"
+                  placeholder="Where or when this concept applies in practice..."
                   value={newContext}
                   onChange={(e) => setNewContext(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg bg-[#0e0f12] border border-[#272932] text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-[#081734] border border-[#1a366f] text-white placeholder-[#627ca8] focus:outline-none focus:border-[#00B4FF]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-zinc-300 mb-1">
-                  Course Association
-                </label>
+                <label className="block text-xs font-semibold text-white mb-1">Related Concepts (Comma-separated)</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Order Blocks, Fair Value Gaps"
+                  value={newRelated}
+                  onChange={(e) => setNewRelated(e.target.value)}
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-[#081734] border border-[#1a366f] text-white placeholder-[#627ca8] focus:outline-none focus:border-[#00B4FF]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-white mb-1">Attach to Course (Optional)</label>
                 <select
                   value={newCourseId}
                   onChange={(e) => setNewCourseId(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg bg-[#0e0f12] border border-[#272932] text-zinc-200 focus:outline-none focus:border-indigo-500"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-[#081734] border border-[#1a366f] text-white focus:outline-none focus:border-[#00B4FF]"
                 >
-                  <option value="">Global / No Course</option>
+                  <option value="">Global Glossary (All Courses)</option>
                   {courses.map((c) => (
                     <option key={c.id} value={c.id}>
                       {c.title}
@@ -296,20 +304,24 @@ export const KeyTermsView: React.FC<KeyTermsViewProps> = ({
                 </select>
               </div>
 
-              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#1f2128]">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#1a366f]">
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="px-3.5 py-2 rounded-lg text-xs text-zinc-400 hover:text-zinc-200"
+                  className="px-3.5 py-2 rounded-xl text-xs text-[#9bb1d6] hover:text-white"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSaving}
-                  className="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold tracking-wide transition-all shadow-md disabled:opacity-50"
+                  className="px-5 py-2.5 rounded-xl bg-[#00B4FF] hover:bg-[#009de0] text-[#0B1F44] text-xs font-bold transition-all shadow-md shadow-[#00B4FF]/20 disabled:opacity-50 cursor-pointer"
                 >
-                  {isSaving ? 'Saving...' : 'Add to Glossary'}
+                  {isSaving ? (
+                    <NokiaLoader label="Saving..." color="#0B1F44" dotSize="w-1 h-1" />
+                  ) : (
+                    'Add Term'
+                  )}
                 </button>
               </div>
             </form>

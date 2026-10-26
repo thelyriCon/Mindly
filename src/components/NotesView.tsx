@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Plus, Search, Tag, FileText, Trash2, Edit2, CheckCircle2, Bookmark, BookOpen } from 'lucide-react';
+import { Plus, Search, Tag, FileText, Trash2, Edit2, BookOpen } from 'lucide-react';
 import { Note, Course } from '../types';
 import { api } from '../lib/api';
+import { NokiaLoader } from './NokiaLoader';
 
 interface NotesViewProps {
   notes: Note[];
@@ -109,8 +110,9 @@ export const NotesView: React.FC<NotesViewProps> = ({
     }
   };
 
-  const handleDelete = async (noteId: string) => {
-    if (!window.confirm('Delete this note?')) return;
+  const handleDeleteNote = async (e: React.MouseEvent, noteId: string) => {
+    e.stopPropagation();
+    if (!window.confirm('Delete this note permanently?')) return;
     try {
       await api.deleteNote(noteId);
       onNoteDeleted(noteId);
@@ -120,21 +122,24 @@ export const NotesView: React.FC<NotesViewProps> = ({
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+    <div className="max-w-6xl mx-auto px-4 sm:px-8 py-8 space-y-6">
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-            Personal Notes
-          </h1>
-          <p className="text-xs sm:text-sm text-zinc-400 mt-0.5">
-            Your personal takeaways, reminders, research insights, and study summaries.
+          <div className="flex items-center gap-2 mb-1.5">
+            <FileText className="w-5 h-5 text-[#00B4FF]" />
+            <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+              Study Notes & Insights
+            </h1>
+          </div>
+          <p className="text-xs text-[#9bb1d6]">
+            Personal takeaways, synthetic summaries, and research references.
           </p>
         </div>
 
         <button
           onClick={openNewNoteModal}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold tracking-wide transition-all shadow-md shadow-indigo-950/40 cursor-pointer self-start sm:self-auto"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#00B4FF] hover:bg-[#009de0] text-[#0B1F44] text-xs font-bold transition-all shadow-md shadow-[#00B4FF]/20 cursor-pointer self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
           <span>New Note</span>
@@ -142,27 +147,27 @@ export const NotesView: React.FC<NotesViewProps> = ({
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-[#111216] p-3 rounded-xl border border-[#20222a] space-y-3">
+      <div className="bg-[#0B1F44] p-3 rounded-2xl border border-[#1a366f] space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           {/* Search */}
           <div className="relative flex-1 min-w-[200px]">
-            <Search className="w-4 h-4 text-zinc-500 absolute left-3 top-2.5" />
+            <Search className="w-4 h-4 text-[#627ca8] absolute left-3 top-2.5" />
             <input
               type="text"
               placeholder="Search notes by title, keywords, or #tags..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg bg-[#0c0d10] border border-[#262831] text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl bg-[#081734] border border-[#1a366f] text-white placeholder-[#627ca8] focus:outline-none focus:border-[#00B4FF]"
             />
           </div>
 
           {/* Course Dropdown */}
           <div className="flex items-center gap-2 text-xs">
-            <span className="text-zinc-400">Course:</span>
+            <span className="text-[#9bb1d6]">Course:</span>
             <select
               value={selectedCourseFilter}
               onChange={(e) => setSelectedCourseFilter(e.target.value)}
-              className="px-2.5 py-1.5 rounded-lg bg-[#0c0d10] border border-[#262831] text-zinc-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
+              className="px-2.5 py-1.5 rounded-xl bg-[#081734] border border-[#1a366f] text-white focus:outline-none focus:border-[#00B4FF] cursor-pointer"
             >
               <option value="all">All Courses</option>
               {courses.map((c) => (
@@ -175,43 +180,43 @@ export const NotesView: React.FC<NotesViewProps> = ({
         </div>
 
         {/* Filter Pills */}
-        <div className="flex items-center gap-2 border-t border-[#1d1f27] pt-2 overflow-x-auto text-xs">
+        <div className="flex items-center gap-2 border-t border-[#1a366f]/60 pt-2 overflow-x-auto text-xs">
           <button
             onClick={() => setActiveFilter('all')}
-            className={`px-3 py-1 rounded-lg transition-colors cursor-pointer ${
+            className={`px-3 py-1 rounded-xl transition-colors cursor-pointer font-semibold ${
               activeFilter === 'all'
-                ? 'bg-zinc-800 text-white font-medium border border-zinc-700'
-                : 'text-zinc-400 hover:text-zinc-200'
+                ? 'bg-[#00B4FF] text-[#0B1F44] font-bold'
+                : 'text-[#9bb1d6] hover:text-white hover:bg-[#0f2756]'
             }`}
           >
             All Notes ({notes.length})
           </button>
           <button
             onClick={() => setActiveFilter('course')}
-            className={`px-3 py-1 rounded-lg transition-colors cursor-pointer ${
+            className={`px-3 py-1 rounded-xl transition-colors cursor-pointer font-semibold ${
               activeFilter === 'course'
-                ? 'bg-zinc-800 text-white font-medium border border-zinc-700'
-                : 'text-zinc-400 hover:text-zinc-200'
+                ? 'bg-[#00B4FF] text-[#0B1F44] font-bold'
+                : 'text-[#9bb1d6] hover:text-white hover:bg-[#0f2756]'
             }`}
           >
             Course Notes
           </button>
           <button
             onClick={() => setActiveFilter('lesson')}
-            className={`px-3 py-1 rounded-lg transition-colors cursor-pointer ${
+            className={`px-3 py-1 rounded-xl transition-colors cursor-pointer font-semibold ${
               activeFilter === 'lesson'
-                ? 'bg-zinc-800 text-white font-medium border border-zinc-700'
-                : 'text-zinc-400 hover:text-zinc-200'
+                ? 'bg-[#00B4FF] text-[#0B1F44] font-bold'
+                : 'text-[#9bb1d6] hover:text-white hover:bg-[#0f2756]'
             }`}
           >
             Lesson Notes
           </button>
           <button
             onClick={() => setActiveFilter('general')}
-            className={`px-3 py-1 rounded-lg transition-colors cursor-pointer ${
+            className={`px-3 py-1 rounded-xl transition-colors cursor-pointer font-semibold ${
               activeFilter === 'general'
-                ? 'bg-zinc-800 text-white font-medium border border-zinc-700'
-                : 'text-zinc-400 hover:text-zinc-200'
+                ? 'bg-[#00B4FF] text-[#0B1F44] font-bold'
+                : 'text-[#9bb1d6] hover:text-white hover:bg-[#0f2756]'
             }`}
           >
             General Notes
@@ -221,17 +226,19 @@ export const NotesView: React.FC<NotesViewProps> = ({
 
       {/* Notes Grid */}
       {filteredNotes.length === 0 ? (
-        <div className="p-12 text-center rounded-2xl bg-[#121316] border border-dashed border-[#262831] space-y-3">
-          <FileText className="w-10 h-10 text-zinc-600 mx-auto" />
-          <h3 className="text-sm font-semibold text-zinc-300">No notes found</h3>
-          <p className="text-xs text-zinc-500 max-w-sm mx-auto">
+        <div className="p-12 text-center rounded-2xl bg-[#0B1F44] border border-[#1a366f] space-y-4">
+          <div className="w-12 h-12 rounded-xl bg-[#00B4FF]/10 text-[#00B4FF] flex items-center justify-center mx-auto">
+            <FileText className="w-6 h-6" />
+          </div>
+          <h3 className="text-sm font-bold text-white">No notes found</h3>
+          <p className="text-xs text-[#9bb1d6] max-w-sm mx-auto leading-relaxed">
             Jot down your observations, formulas, chart summaries, or question lists.
           </p>
           <button
             onClick={openNewNoteModal}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#00B4FF] hover:bg-[#009de0] text-[#0B1F44] text-xs font-bold transition-all shadow-md shadow-[#00B4FF]/20 cursor-pointer"
           >
-            <Plus className="w-3.5 h-3.5" />
+            <Plus className="w-4 h-4" />
             <span>Create First Note</span>
           </button>
         </div>
@@ -243,24 +250,28 @@ export const NotesView: React.FC<NotesViewProps> = ({
             return (
               <div
                 key={note.id}
-                className="group p-5 rounded-2xl bg-[#131418] hover:bg-[#16171d] border border-[#23252e] hover:border-zinc-700 transition-all flex flex-col justify-between"
+                onClick={() => openEditNote(note)}
+                className="group p-5 rounded-2xl bg-[#0B1F44] hover:bg-[#0d244f] border border-[#1a366f] hover:border-[#00B4FF]/60 transition-all flex flex-col justify-between cursor-pointer shadow-sm"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-400">
-                      {course ? course.title : 'General Note'}
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#081734] text-[#00B4FF] border border-[#1a366f]">
+                      {note.type === 'course' ? 'Course Note' : note.type === 'lesson' ? 'Lesson Note' : 'General'}
                     </span>
-                    <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex items-center gap-1">
                       <button
-                        onClick={() => openEditNote(note)}
-                        className="p-1 text-zinc-500 hover:text-zinc-200 rounded"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openEditNote(note);
+                        }}
+                        className="p-1 text-[#627ca8] hover:text-[#00B4FF] opacity-0 group-hover:opacity-100 transition-opacity"
                         title="Edit Note"
                       >
                         <Edit2 className="w-3.5 h-3.5" />
                       </button>
                       <button
-                        onClick={() => handleDelete(note.id)}
-                        className="p-1 text-zinc-500 hover:text-red-400 rounded"
+                        onClick={(e) => handleDeleteNote(e, note.id)}
+                        className="p-1 text-[#627ca8] hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
                         title="Delete Note"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -269,28 +280,18 @@ export const NotesView: React.FC<NotesViewProps> = ({
                   </div>
 
                   <div>
-                    <h3 className="text-sm font-semibold text-white group-hover:text-indigo-300 transition-colors">
+                    <h3 className="text-sm font-bold text-white group-hover:text-[#00B4FF] transition-colors">
                       {note.title}
                     </h3>
-                    <p className="text-xs text-zinc-300 whitespace-pre-wrap line-clamp-4 mt-2 leading-relaxed font-sans">
+                    <p className="text-xs text-[#9bb1d6] line-clamp-3 mt-1.5 leading-relaxed whitespace-pre-line">
                       {note.content}
                     </p>
                   </div>
                 </div>
 
-                {/* Tags and Date Footer */}
-                <div className="pt-4 mt-4 border-t border-[#1e2027] flex items-center justify-between text-[11px] text-zinc-400">
-                  <div className="flex flex-wrap gap-1">
-                    {note.tags?.map((tag, tIdx) => (
-                      <span
-                        key={tIdx}
-                        className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-950/60 text-indigo-300 border border-indigo-800/40"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                  <span>{new Date(note.updatedAt).toLocaleDateString()}</span>
+                <div className="pt-3 mt-3 border-t border-[#1a366f] flex items-center justify-between text-[11px] text-[#627ca8]">
+                  <span className="truncate">{course ? course.title : 'Independent Note'}</span>
+                  <span>{new Date(note.updatedAt || note.createdAt).toLocaleDateString()}</span>
                 </div>
               </div>
             );
@@ -301,85 +302,86 @@ export const NotesView: React.FC<NotesViewProps> = ({
       {/* Note Editor Modal */}
       {showEditor && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-150">
-          <div className="relative w-full max-w-lg rounded-2xl bg-[#131418] border border-[#272932] shadow-2xl p-6 text-zinc-100">
-            <h3 className="text-base font-semibold text-white mb-1">
-              {editingNoteId ? 'Edit Note' : 'Create New Note'}
+          <div className="relative w-full max-w-lg rounded-2xl bg-[#0B1F44] border border-[#1a366f] shadow-2xl p-6 text-white">
+            <h3 className="text-base font-bold text-white mb-1">
+              {editingNoteId ? 'Edit Study Note' : 'Create New Note'}
             </h3>
-            <p className="text-xs text-zinc-400 mb-4">
-              Write personal observations, checklists, or key rules.
+            <p className="text-xs text-[#9bb1d6] mb-4">
+              Write down your takeaways, mental models, or quick reminders.
             </p>
 
             <form onSubmit={handleSaveNote} className="space-y-3.5">
               <div>
-                <label className="block text-xs font-medium text-zinc-300 mb-1">Title</label>
+                <label className="block text-xs font-semibold text-white mb-1">Note Title</label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Key BOS confirmation rules for 15m chart"
+                  placeholder="e.g. Key distinction between supply and demand zones"
                   value={noteTitle}
                   onChange={(e) => setNoteTitle(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg bg-[#0e0f12] border border-[#272932] text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-[#081734] border border-[#1a366f] text-white placeholder-[#627ca8] focus:outline-none focus:border-[#00B4FF]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-zinc-300 mb-1">Content</label>
+                <label className="block text-xs font-semibold text-white mb-1">Related Course (Optional)</label>
+                <select
+                  value={noteCourseId}
+                  onChange={(e) => setNoteCourseId(e.target.value)}
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-[#081734] border border-[#1a366f] text-white focus:outline-none focus:border-[#00B4FF]"
+                >
+                  <option value="">No Course (General Note)</option>
+                  {courses.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.title}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-white mb-1">Note Content</label>
                 <textarea
-                  rows={6}
                   required
-                  placeholder="Type your notes here..."
+                  rows={6}
+                  placeholder="Explain the concept in your own words, formulate analogies..."
                   value={noteContent}
                   onChange={(e) => setNoteContent(e.target.value)}
-                  className="w-full p-3 text-xs rounded-lg bg-[#0e0f12] border border-[#272932] text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500 leading-relaxed"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-[#081734] border border-[#1a366f] text-white placeholder-[#627ca8] focus:outline-none focus:border-[#00B4FF] resize-none"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-medium text-zinc-300 mb-1">
-                    Associate with Course
-                  </label>
-                  <select
-                    value={noteCourseId}
-                    onChange={(e) => setNoteCourseId(e.target.value)}
-                    className="w-full px-3 py-2 text-xs rounded-lg bg-[#0e0f12] border border-[#272932] text-zinc-200 focus:outline-none focus:border-indigo-500"
-                  >
-                    <option value="">None (General Note)</option>
-                    {courses.map((c) => (
-                      <option key={c.id} value={c.id}>
-                        {c.title}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-zinc-300 mb-1">
-                    Tags (Comma-separated)
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="trading, setup, rules"
-                    value={noteTags}
-                    onChange={(e) => setNoteTags(e.target.value)}
-                    className="w-full px-3 py-2 text-xs rounded-lg bg-[#0e0f12] border border-[#272932] text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
-                  />
-                </div>
+              <div>
+                <label className="block text-xs font-semibold text-white mb-1">Tags (Comma-separated)</label>
+                <input
+                  type="text"
+                  placeholder="e.g. trading, liquidity, psychology"
+                  value={noteTags}
+                  onChange={(e) => setNoteTags(e.target.value)}
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-[#081734] border border-[#1a366f] text-white placeholder-[#627ca8] focus:outline-none focus:border-[#00B4FF]"
+                />
               </div>
 
-              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#1f2128]">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#1a366f]">
                 <button
                   type="button"
                   onClick={() => setShowEditor(false)}
-                  className="px-3.5 py-2 rounded-lg text-xs text-zinc-400 hover:text-zinc-200"
+                  className="px-3.5 py-2 rounded-xl text-xs text-[#9bb1d6] hover:text-white"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSaving}
-                  className="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold tracking-wide transition-all shadow-md disabled:opacity-50"
+                  className="px-5 py-2.5 rounded-xl bg-[#00B4FF] hover:bg-[#009de0] text-[#0B1F44] text-xs font-bold transition-all shadow-md shadow-[#00B4FF]/20 disabled:opacity-50 cursor-pointer"
                 >
-                  {isSaving ? 'Saving...' : 'Save Note'}
+                  {isSaving ? (
+                    <NokiaLoader label="Saving..." color="#0B1F44" dotSize="w-1 h-1" />
+                  ) : editingNoteId ? (
+                    'Save Changes'
+                  ) : (
+                    'Save Note'
+                  )}
                 </button>
               </div>
             </form>

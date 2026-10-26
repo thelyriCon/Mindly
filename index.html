@@ -5,10 +5,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mindly — Personal Learning & Knowledge Base</title>
     <meta name="description" content="An intelligent personal learning and knowledge-management platform that transforms messy learning material into structured, searchable lessons, notes, and glossaries." />
+    <meta name="theme-color" content="#0B1F44" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Mindly" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <meta property="og:title" content="Mindly — Personal Learning & Knowledge Base" />
     <meta property="og:description" content="An intelligent personal learning and knowledge-management platform that transforms messy learning material into structured, searchable lessons, notes, and glossaries." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      // Ignore Vite HMR WebSocket errors in environments where WebSockets are unavailable or HMR is disabled
+      (function() {
+        try {
+          var NativeWebSocket = window.WebSocket;
+          if (NativeWebSocket) {
+            window.WebSocket = function(url, protocols) {
+              var urlStr = String(url || '');
+              var isViteHmr = (typeof protocols === 'string' && protocols === 'vite-hmr') ||
+                              (Array.isArray(protocols) && protocols.indexOf('vite-hmr') !== -1) ||
+                              urlStr.indexOf('vite-hmr') !== -1 ||
+                              urlStr.indexOf('@vite') !== -1;
+              if (isViteHmr) {
+                var listeners = {};
+                var dummy = {
+                  readyState: 1, // OPEN
+                  OPEN: 1,
+                  CONNECTING: 0,
+                  CLOSING: 2,
+                  CLOSED: 3,
+                  url: urlStr,
+                  protocol: 'vite-hmr',
+                  send: function() {},
+                  close: function() {
+                    dummy.readyState = 3;
+                    var closeEvent = { type: 'close', code: 1000, reason: 'Normal Closure', wasClean: true };
+                    if (typeof dummy.onclose === 'function') dummy.onclose(closeEvent);
+                    (listeners['close'] || []).forEach(function(fn) { try { fn(closeEvent); } catch(e){} });
+                  },
+                  addEventListener: function(event, handler) {
+                    listeners[event] = listeners[event] || [];
+                    listeners[event].push(handler);
+                  },
+                  removeEventListener: function(event, handler) {
+                    if (!listeners[event]) return;
+                    listeners[event] = listeners[event].filter(function(h) { return h !== handler; });
+                  },
+                  dispatchEvent: function() { return true; }
+                };
+                setTimeout(function() {
+                  var openEvent = { type: 'open' };
+                  if (typeof dummy.onopen === 'function') dummy.onopen(openEvent);
+                  (listeners['open'] || []).forEach(function(fn) { try { fn(openEvent); } catch(e){} });
+                }, 0);
+                return dummy;
+              }
+              return new NativeWebSocket(url, protocols);
+            };
+            window.WebSocket.prototype = NativeWebSocket.prototype;
+            window.WebSocket.OPEN = 1;
+            window.WebSocket.CONNECTING = 0;
+            window.WebSocket.CLOSING = 2;
+            window.WebSocket.CLOSED = 3;
+          }
+        } catch (e) {}
+
+        var origError = console.error;
+        console.error = function() {
+          var args = Array.prototype.slice.call(arguments);
+          var text = args.map(function(a) { return (a && a.stack) ? a.stack : String(a || ''); }).join(' ');
+          if (text.indexOf('WebSocket') !== -1 || text.indexOf('@vite/client') !== -1 || text.indexOf('vite:ws') !== -1) {
+            return;
+          }
+          if (typeof origError === 'function') {
+            origError.apply(console, args);
+          }
+        };
+
+        window.addEventListener('unhandledrejection', function(event) {
+          if (event && event.reason) {
+            var msg = (event.reason.message || String(event.reason || ''));
+            var stack = (event.reason.stack || '');
+            if (msg.indexOf('WebSocket') !== -1 || stack.indexOf('@vite/client') !== -1 || msg.indexOf('vite:ws') !== -1) {
+              event.preventDefault();
+              if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+              if (event.stopPropagation) event.stopPropagation();
+            }
+          }
+        }, true);
+
+        window.addEventListener('error', function(event) {
+          if (event) {
+            var msg = (event.message || '');
+            var file = (event.filename || '');
+            if (msg.indexOf('WebSocket') !== -1 || file.indexOf('@vite/client') !== -1) {
+              event.preventDefault();
+              if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+              if (event.stopPropagation) event.stopPropagation();
+            }
+          }
+        }, true);
+      })();
+    </script>
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('mindly_theme');
+          var isLight = saved === 'light-mode' || saved === 'light';
+          if (isLight) {
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.documentElement.classList.add('theme-light');
+            document.documentElement.style.colorScheme = 'light';
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', '#f8fafc');
+          } else {
+            document.documentElement.setAttribute('data-theme', 'deep-space');
+            document.documentElement.classList.remove('theme-light');
+            document.documentElement.style.colorScheme = 'dark';
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

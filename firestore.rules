@@ -1,0 +1,209 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // User Profile Documents: keyed strictly by Firebase UID (strictly private to owner)
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create: if isOwner(userId) && request.resource.data.uid == userId;
+      allow update: if isOwner(userId) && request.resource.data.uid == userId;
+      allow delete: if isOwner(userId);
+    }
+
+    // Username Uniqueness Registry
+    match /usernames/{username} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && 
+                    request.resource.data.uid == request.auth.uid && 
+                    !exists(/databases/$(database)/documents/usernames/$(username));
+      allow update, delete: if isAuthenticated() && resource.data.uid == request.auth.uid;
+    }
+
+    // Courses Collection
+    match /courses/{courseId} {
+      allow get: if isAuthenticated() && (resource.data.userId == request.auth.uid || resource.data.isDemo == true || resource.data.userId == 'system' || resource.data.isPublic == true);
+      allow list: if isAuthenticated() && (resource.data.userId == request.auth.uid || resource.data.isDemo == true || resource.data.userId == 'system' || resource.data.isPublic == true);
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid && request.resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+
+      // Lessons Subcollection
+      match /lessons/{lessonId} {
+        allow get: if isAuthenticated() && (
+          resource.data.userId == request.auth.uid ||
+          get(/databases/$(database)/documents/courses/$(courseId)).data.userId == request.auth.uid ||
+          resource.data.isDemo == true ||
+          resource.data.userId == 'system' ||
+          resource.data.isPublic == true
+        );
+        allow list: if isAuthenticated() && (
+          resource.data.userId == request.auth.uid ||
+          get(/databases/$(database)/documents/courses/$(courseId)).data.userId == request.auth.uid ||
+          resource.data.isDemo == true ||
+          resource.data.userId == 'system' ||
+          resource.data.isPublic == true
+        );
+        allow create: if isAuthenticated() && 
+                      request.resource.data.userId == request.auth.uid &&
+                      request.resource.data.courseId == courseId;
+        allow update: if isAuthenticated() && 
+                      resource.data.userId == request.auth.uid &&
+                      request.resource.data.userId == request.auth.uid &&
+                      request.resource.data.courseId == courseId;
+        allow delete: if isAuthenticated() && 
+                      resource.data.userId == request.auth.uid;
+      }
+    }
+
+    // Public Shared Courses Collection (Public read for preview & import, write restricted to creator)
+    match /sharedCourses/{shareId} {
+      allow read: if true;
+      allow create: if isAuthenticated() && request.resource.data.creatorId == request.auth.uid;
+      allow update, delete: if isAuthenticated() && resource.data.creatorId == request.auth.uid;
+    }
+
+    // Collection Group Query for Lessons (cross-course lookup by owner)
+    match /{path=**}/lessons/{lessonId} {
+      allow read: if isAuthenticated() && (
+        resource.data.userId == request.auth.uid ||
+        resource.data.isDemo == true ||
+        resource.data.userId == 'system' ||
+        resource.data.isPublic == true
+      );
+    }
+
+    // Notes Collection (strictly private to owner)
+    match /notes/{noteId} {
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid && request.resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // Key Terms Collection
+    match /terms/{termId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || resource.data.userId == 'system' || resource.data.isDemo == true);
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid && request.resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // Materials Collection
+    match /materials/{materialId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || resource.data.userId == 'system' || resource.data.isDemo == true);
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid && request.resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // Study Sessions Collection (strictly private to owner)
+    match /studySessions/{sessionId} {
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid && request.resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // Study Activity Collection (strictly private to owner)
+    match /studyActivity/{activityId} {
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid && request.resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // Quiz Attempts Collection (strictly private to owner)
+    match /quizAttempts/{attemptId} {
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid && request.resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // Individual Certificates Collection (strictly private to owner, client writes restricted)
+    match /certificates/{certificateId} {
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow write: if false;
+    }
+
+    // Combined Master Certificates Collection (strictly private to owner, client writes restricted)
+    match /combinedCertificates/{combinedCertificateId} {
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow write: if false;
+    }
+
+    // Community Circles Collection
+    match /circles/{circleId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['membersCount']);
+      allow delete: if false;
+    }
+
+    // Circle Memberships Collection (strictly private to member)
+    match /circleMemberships/{membershipId} {
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if false;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // Community Discussions Collection
+    match /discussions/{discussionId} {
+      allow read: if true;
+      allow create: if isAuthenticated() && (request.resource.data.userId == request.auth.uid || request.resource.data.userId.matches('^usr_community_.*'));
+      allow update: if isAuthenticated() && (
+        (resource.data.userId == request.auth.uid && request.resource.data.userId == request.auth.uid) ||
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['replyCount', 'updatedAt'])
+      );
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // Discussion Replies Collection
+    match /discussionReplies/{replyId} {
+      allow read: if true;
+      allow create: if isAuthenticated() && (request.resource.data.userId == request.auth.uid || request.resource.data.userId.matches('^usr_community_.*'));
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid && request.resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // Study Rooms Collection
+    match /studyRooms/{roomId} {
+      allow read: if true;
+      allow create: if isAuthenticated() && (request.resource.data.creatorId == request.auth.uid || request.resource.data.creatorId.matches('^usr_community_.*'));
+      allow update: if isAuthenticated() && (
+        (resource.data.creatorId == request.auth.uid && request.resource.data.creatorId == request.auth.uid) ||
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['membersCount'])
+      );
+      allow delete: if isAuthenticated() && resource.data.creatorId == request.auth.uid;
+    }
+
+    // Study Room Memberships Collection (strictly private to member)
+    match /studyRoomMembers/{memberId} {
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if false;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // Shared Public Courses Collection (Read-only to public, writeable by authenticated creator)
+    match /sharedCourses/{shareId} {
+      allow read: if true;
+      allow create: if isAuthenticated() && request.resource.data.creatorId == request.auth.uid;
+      allow update, delete: if isAuthenticated() && resource.data.creatorId == request.auth.uid;
+    }
+
+    // Default deny for all other collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -18,9 +18,824 @@
         "dailyStudyGoalMinutes": 30
       },
       "dailyStudyGoalMinutes": 30
+    },
+    {
+      "name": "Dr. Alan Grant",
+      "realName": "Dr. Alan Grant",
+      "username": "@alangrant",
+      "email": "alangrant@mindly.local",
+      "passwordHash": "$2b$10$X4UWhRXOysy9VtRVK6BLweQCGBZ41AL9PTP.zXqTu1MeZKTDyRGvC",
+      "interests": [],
+      "hasCompletedOnboarding": true,
+      "dailyStudyGoalMinutes": 35,
+      "todayStudySeconds": 0,
+      "privacySettings": {
+        "profileVisibility": "public",
+        "showCompletedCourses": true,
+        "showCertificates": true,
+        "showStudyActivity": true
+      },
+      "settings": {
+        "theme": "dark",
+        "fontSize": "normal",
+        "aiStrictness": "balanced",
+        "dailyStudyGoalMinutes": 30
+      },
+      "id": "usr_1790839315095_5umpd",
+      "createdAt": "2026-10-01T07:21:55.095Z"
+    },
+    {
+      "id": "usr_test_alpha_1791625402653",
+      "name": "Augusta Ada King-Noel",
+      "realName": "Augusta Ada King-Noel",
+      "username": "@adalovelace",
+      "email": "ada@example.com",
+      "interests": [
+        "Computing",
+        "Mathematics"
+      ],
+      "createdAt": "2026-10-10T09:43:22.655Z",
+      "hasCompletedOnboarding": true,
+      "dailyStudyGoalMinutes": 30,
+      "todayStudySeconds": 0,
+      "privacySettings": {
+        "profileVisibility": "public",
+        "showCompletedCourses": true,
+        "showCertificates": true,
+        "showStudyActivity": true
+      },
+      "settings": {
+        "theme": "dark",
+        "fontSize": "normal",
+        "aiStrictness": "balanced",
+        "dailyStudyGoalMinutes": 30
+      }
+    },
+    {
+      "id": "usr_test_beta_1791625402653",
+      "name": "Charles Babbage",
+      "realName": "Charles Babbage",
+      "username": "@babbage",
+      "email": "charles@example.com",
+      "interests": [
+        "Engineering",
+        "Mathematics"
+      ],
+      "createdAt": "2026-10-10T09:43:22.655Z",
+      "hasCompletedOnboarding": true,
+      "dailyStudyGoalMinutes": 30,
+      "todayStudySeconds": 0,
+      "privacySettings": {
+        "profileVisibility": "public",
+        "showCompletedCourses": true,
+        "showCertificates": true,
+        "showStudyActivity": true
+      },
+      "settings": {
+        "theme": "dark",
+        "fontSize": "normal",
+        "aiStrictness": "balanced",
+        "dailyStudyGoalMinutes": 30
+      }
+    },
+    {
+      "id": "usr_test_alpha_1791631887975",
+      "name": "Augusta Ada King-Noel",
+      "realName": "Augusta Ada King-Noel",
+      "username": "@adalovelace",
+      "email": "ada@example.com",
+      "interests": [
+        "Computing",
+        "Mathematics"
+      ],
+      "createdAt": "2026-10-10T11:31:27.977Z",
+      "hasCompletedOnboarding": true,
+      "dailyStudyGoalMinutes": 30,
+      "todayStudySeconds": 0,
+      "privacySettings": {
+        "profileVisibility": "public",
+        "showCompletedCourses": true,
+        "showCertificates": true,
+        "showStudyActivity": true
+      },
+      "settings": {
+        "theme": "dark",
+        "fontSize": "normal",
+        "aiStrictness": "balanced",
+        "dailyStudyGoalMinutes": 30
+      }
+    },
+    {
+      "id": "usr_test_beta_1791631887975",
+      "name": "Charles Babbage",
+      "realName": "Charles Babbage",
+      "username": "@babbage",
+      "email": "charles@example.com",
+      "interests": [
+        "Engineering",
+        "Mathematics"
+      ],
+      "createdAt": "2026-10-10T11:31:27.977Z",
+      "hasCompletedOnboarding": true,
+      "dailyStudyGoalMinutes": 30,
+      "todayStudySeconds": 0,
+      "privacySettings": {
+        "profileVisibility": "public",
+        "showCompletedCourses": true,
+        "showCertificates": true,
+        "showStudyActivity": true
+      },
+      "settings": {
+        "theme": "dark",
+        "fontSize": "normal",
+        "aiStrictness": "balanced",
+        "dailyStudyGoalMinutes": 30
+      }
+    },
+    {
+      "id": "usr_test_alpha_1791631952510",
+      "name": "Augusta Ada King-Noel",
+      "realName": "Augusta Ada King-Noel",
+      "username": "@adalovelace",
+      "email": "ada@example.com",
+      "interests": [
+        "Computing",
+        "Mathematics"
+      ],
+      "hasCompletedOnboarding": true,
+      "dailyStudyGoalMinutes": 30,
+      "todayStudySeconds": 0,
+      "createdAt": "2026-10-10T11:32:32.512Z",
+      "privacySettings": {
+        "profileVisibility": "public",
+        "showCompletedCourses": true,
+        "showCertificates": true,
+        "showStudyActivity": true
+      },
+      "settings": {
+        "theme": "dark",
+        "fontSize": "normal",
+        "aiStrictness": "balanced",
+        "dailyStudyGoalMinutes": 30
+      }
+    },
+    {
+      "id": "usr_test_beta_1791631952510",
+      "name": "Charles Babbage",
+      "realName": "Charles Babbage",
+      "username": "@babbage",
+      "email": "charles@example.com",
+      "interests": [
+        "Engineering",
+        "Mathematics"
+      ],
+      "hasCompletedOnboarding": true,
+      "dailyStudyGoalMinutes": 30,
+      "todayStudySeconds": 0,
+      "createdAt": "2026-10-10T11:32:32.513Z",
+      "privacySettings": {
+        "profileVisibility": "public",
+        "showCompletedCourses": true,
+        "showCertificates": true,
+        "showStudyActivity": true
+      },
+      "settings": {
+        "theme": "dark",
+        "fontSize": "normal",
+        "aiStrictness": "balanced",
+        "dailyStudyGoalMinutes": 30
+      }
+    },
+    {
+      "id": "usr_test_alpha_1791632733114",
+      "name": "Augusta Ada King-Noel",
+      "realName": "Augusta Ada King-Noel",
+      "username": "@adalovelace",
+      "email": "ada@example.com",
+      "interests": [
+        "Computing",
+        "Mathematics"
+      ],
+      "hasCompletedOnboarding": true,
+      "dailyStudyGoalMinutes": 30,
+      "todayStudySeconds": 0,
+      "createdAt": "2026-10-10T11:45:33.116Z",
+      "privacySettings": {
+        "profileVisibility": "public",
+        "showCompletedCourses": true,
+        "showCertificates": true,
+        "showStudyActivity": true
+      },
+      "settings": {
+        "theme": "dark",
+        "fontSize": "normal",
+        "aiStrictness": "balanced",
+        "dailyStudyGoalMinutes": 30
+      }
+    },
+    {
+      "id": "usr_test_beta_1791632733114",
+      "name": "Charles Babbage",
+      "realName": "Charles Babbage",
+      "username": "@babbage",
+      "email": "charles@example.com",
+      "interests": [
+        "Engineering",
+        "Mathematics"
+      ],
+      "hasCompletedOnboarding": true,
+      "dailyStudyGoalMinutes": 30,
+      "todayStudySeconds": 0,
+      "createdAt": "2026-10-10T11:45:33.116Z",
+      "privacySettings": {
+        "profileVisibility": "public",
+        "showCompletedCourses": true,
+        "showCertificates": true,
+        "showStudyActivity": true
+      },
+      "settings": {
+        "theme": "dark",
+        "fontSize": "normal",
+        "aiStrictness": "balanced",
+        "dailyStudyGoalMinutes": 30
+      }
+    },
+    {
+      "id": "usr_test_alpha_1791789864439",
+      "name": "Augusta Ada King-Noel",
+      "realName": "Augusta Ada King-Noel",
+      "username": "@adalovelace",
+      "email": "ada@example.com",
+      "interests": [
+        "Computing",
+        "Mathematics"
+      ],
+      "hasCompletedOnboarding": true,
+      "dailyStudyGoalMinutes": 30,
+      "todayStudySeconds": 0,
+      "createdAt": "2026-10-12T07:24:24.441Z",
+      "privacySettings": {
+        "profileVisibility": "public",
+        "showCompletedCourses": true,
+        "showCertificates": true,
+        "showStudyActivity": true
+      },
+      "settings": {
+        "theme": "dark",
+        "fontSize": "normal",
+        "aiStrictness": "balanced",
+        "dailyStudyGoalMinutes": 30
+      }
+    },
+    {
+      "id": "usr_test_beta_1791789864439",
+      "name": "Charles Babbage",
+      "realName": "Charles Babbage",
+      "username": "@babbage",
+      "email": "charles@example.com",
+      "interests": [
+        "Engineering",
+        "Mathematics"
+      ],
+      "hasCompletedOnboarding": true,
+      "dailyStudyGoalMinutes": 30,
+      "todayStudySeconds": 0,
+      "createdAt": "2026-10-12T07:24:24.441Z",
+      "privacySettings": {
+        "profileVisibility": "public",
+        "showCompletedCourses": true,
+        "showCertificates": true,
+        "showStudyActivity": true
+      },
+      "settings": {
+        "theme": "dark",
+        "fontSize": "normal",
+        "aiStrictness": "balanced",
+        "dailyStudyGoalMinutes": 30
+      }
+    },
+    {
+      "id": "usr_test_alpha_1791792503514",
+      "name": "Augusta Ada King-Noel",
+      "realName": "Augusta Ada King-Noel",
+      "username": "@adalovelace",
+      "email": "ada@example.com",
+      "interests": [
+        "Computing",
+        "Mathematics"
+      ],
+      "hasCompletedOnboarding": true,
+      "dailyStudyGoalMinutes": 30,
+      "todayStudySeconds": 0,
+      "createdAt": "2026-10-12T08:08:23.517Z",
+      "privacySettings": {
+        "profileVisibility": "public",
+        "showCompletedCourses": true,
+        "showCertificates": true,
+        "showStudyActivity": true
+      },
+      "settings": {
+        "theme": "dark",
+        "fontSize": "normal",
+        "aiStrictness": "balanced",
+        "dailyStudyGoalMinutes": 30
+      }
+    },
+    {
+      "id": "usr_test_beta_1791792503514",
+      "name": "Charles Babbage",
+      "realName": "Charles Babbage",
+      "username": "@babbage",
+      "email": "charles@example.com",
+      "interests": [
+        "Engineering",
+        "Mathematics"
+      ],
+      "hasCompletedOnboarding": true,
+      "dailyStudyGoalMinutes": 30,
+      "todayStudySeconds": 0,
+      "createdAt": "2026-10-12T08:08:23.517Z",
+      "privacySettings": {
+        "profileVisibility": "public",
+        "showCompletedCourses": true,
+        "showCertificates": true,
+        "showStudyActivity": true
+      },
+      "settings": {
+        "theme": "dark",
+        "fontSize": "normal",
+        "aiStrictness": "balanced",
+        "dailyStudyGoalMinutes": 30
+      }
+    },
+    {
+      "id": "usr_test_alpha_1792992602482",
+      "name": "Augusta Ada King-Noel",
+      "realName": "Augusta Ada King-Noel",
+      "username": "@adalovelace",
+      "email": "ada@example.com",
+      "interests": [
+        "Computing",
+        "Mathematics"
+      ],
+      "hasCompletedOnboarding": true,
+      "dailyStudyGoalMinutes": 30,
+      "todayStudySeconds": 0,
+      "createdAt": "2026-10-26T05:30:02.484Z",
+      "privacySettings": {
+        "profileVisibility": "public",
+        "showCompletedCourses": true,
+        "showCertificates": true,
+        "showStudyActivity": true
+      },
+      "settings": {
+        "theme": "dark",
+        "fontSize": "normal",
+        "aiStrictness": "balanced",
+        "dailyStudyGoalMinutes": 30
+      }
+    },
+    {
+      "id": "usr_test_beta_1792992602482",
+      "name": "Charles Babbage",
+      "realName": "Charles Babbage",
+      "username": "@babbage",
+      "email": "charles@example.com",
+      "interests": [
+        "Engineering",
+        "Mathematics"
+      ],
+      "hasCompletedOnboarding": true,
+      "dailyStudyGoalMinutes": 30,
+      "todayStudySeconds": 0,
+      "createdAt": "2026-10-26T05:30:02.485Z",
+      "privacySettings": {
+        "profileVisibility": "public",
+        "showCompletedCourses": true,
+        "showCertificates": true,
+        "showStudyActivity": true
+      },
+      "settings": {
+        "theme": "dark",
+        "fontSize": "normal",
+        "aiStrictness": "balanced",
+        "dailyStudyGoalMinutes": 30
+      }
     }
   ],
   "courses": [
+    {
+      "id": "crs_reverse_1792992616114",
+      "userId": "usr_learner_1792992616113",
+      "title": "Microservices Mesh & Observability",
+      "description": "Service mesh proxies, distributed tracing, and SLO telemetry.",
+      "category": "Cloud Engineering",
+      "createdAt": "2026-10-26T05:30:16.114Z",
+      "updatedAt": "2026-10-26T05:30:16.114Z",
+      "isCompleted": false
+    },
+    {
+      "id": "crs_cross_device_1792992616113",
+      "userId": "usr_learner_1792992616113",
+      "title": "Full-Stack Distributed Systems Architecture",
+      "description": "Master consensus, replication, and distributed storage engines.",
+      "category": "Computer Science",
+      "coverIcon": "Server",
+      "depth": "standard",
+      "dailyStudyGoalMinutes": 45,
+      "estimatedDays": 7,
+      "createdAt": "2026-10-26T05:30:16.113Z",
+      "updatedAt": "2026-10-26T05:30:16.113Z",
+      "isCompleted": false
+    },
+    {
+      "userId": "usr_alpha_1792992616110",
+      "title": "Alpha Advanced Quantum Cryptography",
+      "description": "Strictly confidential notes on quantum key distribution",
+      "category": "Quantum Computing",
+      "id": "crs_1792992616112_p8izz",
+      "createdAt": "2026-10-26T05:30:16.112Z",
+      "updatedAt": "2026-10-26T05:30:16.112Z",
+      "isCompleted": false
+    },
+    {
+      "userId": "usr_test_alpha_1792992602482",
+      "title": "Poetical Science Principles",
+      "description": "Bridging metaphysical and mechanical disciplines",
+      "category": "Philosophy",
+      "coverIcon": "Sparkles",
+      "courseType": "custom",
+      "depth": "standard",
+      "isCompleted": true,
+      "id": "crs_1792992602486_nxo91",
+      "createdAt": "2026-10-26T05:30:02.486Z",
+      "updatedAt": "2026-10-26T05:30:02.486Z",
+      "certificateId": "MND-CDUZNM"
+    },
+    {
+      "userId": "usr_test_alpha_1792992602482",
+      "title": "Bernoulli Numbers Algorithm",
+      "description": "First published computer program",
+      "category": "Computer Science",
+      "coverIcon": "Binary",
+      "courseType": "custom",
+      "depth": "standard",
+      "isCompleted": true,
+      "id": "crs_1792992602485_rg43v",
+      "createdAt": "2026-10-26T05:30:02.485Z",
+      "updatedAt": "2026-10-26T05:30:02.485Z",
+      "certificateId": "MND-46OWC6"
+    },
+    {
+      "userId": "usr_test_alpha_1792992602482",
+      "title": "Analytical Engine Architecture",
+      "description": "Foundations of mechanical computing",
+      "category": "Computer Science",
+      "coverIcon": "Cpu",
+      "courseType": "custom",
+      "depth": "standard",
+      "id": "crs_1792992602485_7xhdb",
+      "createdAt": "2026-10-26T05:30:02.485Z",
+      "updatedAt": "2026-10-26T05:30:02.485Z",
+      "isCompleted": false
+    },
+    {
+      "userId": "usr_test_alpha_1791792503514",
+      "title": "Poetical Science Principles",
+      "description": "Bridging metaphysical and mechanical disciplines",
+      "category": "Philosophy",
+      "coverIcon": "Sparkles",
+      "courseType": "custom",
+      "depth": "standard",
+      "isCompleted": true,
+      "id": "crs_1791792503518_7lxr3",
+      "createdAt": "2026-10-12T08:08:23.518Z",
+      "updatedAt": "2026-10-12T08:08:23.518Z",
+      "certificateId": "MND-6336IF"
+    },
+    {
+      "userId": "usr_test_alpha_1791792503514",
+      "title": "Bernoulli Numbers Algorithm",
+      "description": "First published computer program",
+      "category": "Computer Science",
+      "coverIcon": "Binary",
+      "courseType": "custom",
+      "depth": "standard",
+      "isCompleted": true,
+      "id": "crs_1791792503518_9u9m3",
+      "createdAt": "2026-10-12T08:08:23.518Z",
+      "updatedAt": "2026-10-12T08:08:23.518Z",
+      "certificateId": "MND-D56XBX"
+    },
+    {
+      "userId": "usr_test_alpha_1791792503514",
+      "title": "Analytical Engine Architecture",
+      "description": "Foundations of mechanical computing",
+      "category": "Computer Science",
+      "coverIcon": "Cpu",
+      "courseType": "custom",
+      "depth": "standard",
+      "id": "crs_1791792503517_183og",
+      "createdAt": "2026-10-12T08:08:23.517Z",
+      "updatedAt": "2026-10-12T08:08:23.517Z",
+      "isCompleted": false
+    },
+    {
+      "id": "crs_reverse_1791792488504",
+      "userId": "usr_learner_1791792488503",
+      "title": "Microservices Mesh & Observability",
+      "description": "Service mesh proxies, distributed tracing, and SLO telemetry.",
+      "category": "Cloud Engineering",
+      "createdAt": "2026-10-12T08:08:08.504Z",
+      "updatedAt": "2026-10-12T08:08:08.504Z",
+      "isCompleted": false
+    },
+    {
+      "id": "crs_cross_device_1791792488503",
+      "userId": "usr_learner_1791792488503",
+      "title": "Full-Stack Distributed Systems Architecture",
+      "description": "Master consensus, replication, and distributed storage engines.",
+      "category": "Computer Science",
+      "coverIcon": "Server",
+      "depth": "standard",
+      "dailyStudyGoalMinutes": 45,
+      "estimatedDays": 7,
+      "createdAt": "2026-10-12T08:08:08.503Z",
+      "updatedAt": "2026-10-12T08:08:08.503Z",
+      "isCompleted": false
+    },
+    {
+      "userId": "usr_alpha_1791792488501",
+      "title": "Alpha Advanced Quantum Cryptography",
+      "description": "Strictly confidential notes on quantum key distribution",
+      "category": "Quantum Computing",
+      "id": "crs_1791792488502_k0pje",
+      "createdAt": "2026-10-12T08:08:08.502Z",
+      "updatedAt": "2026-10-12T08:08:08.502Z",
+      "isCompleted": false
+    },
+    {
+      "id": "crs_reverse_1791792468403",
+      "userId": "usr_learner_1791792468402",
+      "title": "Microservices Mesh & Observability",
+      "description": "Service mesh proxies, distributed tracing, and SLO telemetry.",
+      "category": "Cloud Engineering",
+      "createdAt": "2026-10-12T08:07:48.403Z",
+      "updatedAt": "2026-10-12T08:07:48.403Z",
+      "isCompleted": false
+    },
+    {
+      "id": "crs_cross_device_1791792468402",
+      "userId": "usr_learner_1791792468402",
+      "title": "Full-Stack Distributed Systems Architecture",
+      "description": "Master consensus, replication, and distributed storage engines.",
+      "category": "Computer Science",
+      "coverIcon": "Server",
+      "depth": "standard",
+      "dailyStudyGoalMinutes": 45,
+      "estimatedDays": 7,
+      "createdAt": "2026-10-12T08:07:48.402Z",
+      "updatedAt": "2026-10-12T08:07:48.402Z",
+      "isCompleted": false
+    },
+    {
+      "userId": "usr_alpha_1791792468399",
+      "title": "Alpha Advanced Quantum Cryptography",
+      "description": "Strictly confidential notes on quantum key distribution",
+      "category": "Quantum Computing",
+      "id": "crs_1791792468400_2scva",
+      "createdAt": "2026-10-12T08:07:48.400Z",
+      "updatedAt": "2026-10-12T08:07:48.400Z",
+      "isCompleted": false
+    },
+    {
+      "userId": "usr_test_alpha_1791789864439",
+      "title": "Poetical Science Principles",
+      "description": "Bridging metaphysical and mechanical disciplines",
+      "category": "Philosophy",
+      "coverIcon": "Sparkles",
+      "courseType": "custom",
+      "depth": "standard",
+      "isCompleted": true,
+      "id": "crs_1791789864442_4afhk",
+      "createdAt": "2026-10-12T07:24:24.442Z",
+      "updatedAt": "2026-10-12T07:24:24.442Z",
+      "certificateId": "MND-4UGREJ"
+    },
+    {
+      "userId": "usr_test_alpha_1791789864439",
+      "title": "Bernoulli Numbers Algorithm",
+      "description": "First published computer program",
+      "category": "Computer Science",
+      "coverIcon": "Binary",
+      "courseType": "custom",
+      "depth": "standard",
+      "isCompleted": true,
+      "id": "crs_1791789864442_ddcf4",
+      "createdAt": "2026-10-12T07:24:24.442Z",
+      "updatedAt": "2026-10-12T07:24:24.442Z",
+      "certificateId": "MND-EW125C"
+    },
+    {
+      "userId": "usr_test_alpha_1791789864439",
+      "title": "Analytical Engine Architecture",
+      "description": "Foundations of mechanical computing",
+      "category": "Computer Science",
+      "coverIcon": "Cpu",
+      "courseType": "custom",
+      "depth": "standard",
+      "id": "crs_1791789864442_cue69",
+      "createdAt": "2026-10-12T07:24:24.442Z",
+      "updatedAt": "2026-10-12T07:24:24.442Z",
+      "isCompleted": false
+    },
+    {
+      "userId": "usr_test_alpha_1791632733114",
+      "title": "Poetical Science Principles",
+      "description": "Bridging metaphysical and mechanical disciplines",
+      "category": "Philosophy",
+      "coverIcon": "Sparkles",
+      "courseType": "custom",
+      "depth": "standard",
+      "isCompleted": true,
+      "id": "crs_1791632733116_ixqoh",
+      "createdAt": "2026-10-10T11:45:33.116Z",
+      "updatedAt": "2026-10-10T11:45:33.116Z",
+      "certificateId": "MND-DZL9HY"
+    },
+    {
+      "userId": "usr_test_alpha_1791632733114",
+      "title": "Bernoulli Numbers Algorithm",
+      "description": "First published computer program",
+      "category": "Computer Science",
+      "coverIcon": "Binary",
+      "courseType": "custom",
+      "depth": "standard",
+      "isCompleted": true,
+      "id": "crs_1791632733116_qud9u",
+      "createdAt": "2026-10-10T11:45:33.116Z",
+      "updatedAt": "2026-10-10T11:45:33.116Z",
+      "certificateId": "MND-5ALB8Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791632733114",
+      "title": "Analytical Engine Architecture",
+      "description": "Foundations of mechanical computing",
+      "category": "Computer Science",
+      "coverIcon": "Cpu",
+      "courseType": "custom",
+      "depth": "standard",
+      "id": "crs_1791632733116_4osuw",
+      "createdAt": "2026-10-10T11:45:33.116Z",
+      "updatedAt": "2026-10-10T11:45:33.116Z",
+      "isCompleted": false
+    },
+    {
+      "userId": "usr_test_alpha_1791631952510",
+      "title": "Poetical Science Principles",
+      "description": "Bridging metaphysical and mechanical disciplines",
+      "category": "Philosophy",
+      "coverIcon": "Sparkles",
+      "courseType": "custom",
+      "depth": "standard",
+      "isCompleted": true,
+      "id": "crs_1791631952513_9no5b",
+      "createdAt": "2026-10-10T11:32:32.513Z",
+      "updatedAt": "2026-10-10T11:32:32.513Z",
+      "certificateId": "MND-8YCEKW"
+    },
+    {
+      "userId": "usr_test_alpha_1791631952510",
+      "title": "Bernoulli Numbers Algorithm",
+      "description": "First published computer program",
+      "category": "Computer Science",
+      "coverIcon": "Binary",
+      "courseType": "custom",
+      "depth": "standard",
+      "isCompleted": true,
+      "id": "crs_1791631952513_qhj0u",
+      "createdAt": "2026-10-10T11:32:32.513Z",
+      "updatedAt": "2026-10-10T11:32:32.513Z",
+      "certificateId": "MND-3H7HTN"
+    },
+    {
+      "userId": "usr_test_alpha_1791631952510",
+      "title": "Analytical Engine Architecture",
+      "description": "Foundations of mechanical computing",
+      "category": "Computer Science",
+      "coverIcon": "Cpu",
+      "courseType": "custom",
+      "depth": "standard",
+      "id": "crs_1791631952513_qb028",
+      "createdAt": "2026-10-10T11:32:32.513Z",
+      "updatedAt": "2026-10-10T11:32:32.513Z",
+      "isCompleted": false
+    },
+    {
+      "userId": "usr_test_alpha_1791631887975",
+      "title": "Poetical Science Principles",
+      "description": "Bridging metaphysical and mechanical disciplines",
+      "category": "Philosophy",
+      "coverIcon": "Sparkles",
+      "courseType": "custom",
+      "depth": "standard",
+      "isCompleted": true,
+      "id": "crs_1791631887978_nibdt",
+      "createdAt": "2026-10-10T11:31:27.978Z",
+      "updatedAt": "2026-10-10T11:31:27.978Z",
+      "certificateId": "MND-MX1AT3"
+    },
+    {
+      "userId": "usr_test_alpha_1791631887975",
+      "title": "Bernoulli Numbers Algorithm",
+      "description": "First published computer program",
+      "category": "Computer Science",
+      "coverIcon": "Binary",
+      "courseType": "custom",
+      "depth": "standard",
+      "isCompleted": true,
+      "id": "crs_1791631887977_l7w9q",
+      "createdAt": "2026-10-10T11:31:27.977Z",
+      "updatedAt": "2026-10-10T11:31:27.977Z",
+      "certificateId": "MND-Z1ZFN9"
+    },
+    {
+      "userId": "usr_test_alpha_1791631887975",
+      "title": "Analytical Engine Architecture",
+      "description": "Foundations of mechanical computing",
+      "category": "Computer Science",
+      "coverIcon": "Cpu",
+      "courseType": "custom",
+      "depth": "standard",
+      "id": "crs_1791631887977_djfxs",
+      "createdAt": "2026-10-10T11:31:27.977Z",
+      "updatedAt": "2026-10-10T11:31:27.977Z",
+      "isCompleted": false
+    },
+    {
+      "userId": "usr_test_alpha_1791625402653",
+      "title": "Poetical Science Principles",
+      "description": "Bridging metaphysical and mechanical disciplines",
+      "category": "Philosophy",
+      "coverIcon": "Sparkles",
+      "courseType": "custom",
+      "depth": "standard",
+      "isCompleted": true,
+      "id": "crs_1791625402655_08cqh",
+      "createdAt": "2026-10-10T09:43:22.655Z",
+      "updatedAt": "2026-10-10T09:43:22.655Z",
+      "certificateId": "MND-GHE9H8"
+    },
+    {
+      "userId": "usr_test_alpha_1791625402653",
+      "title": "Bernoulli Numbers Algorithm",
+      "description": "First published computer program",
+      "category": "Computer Science",
+      "coverIcon": "Binary",
+      "courseType": "custom",
+      "depth": "standard",
+      "isCompleted": true,
+      "id": "crs_1791625402655_rfozn",
+      "createdAt": "2026-10-10T09:43:22.655Z",
+      "updatedAt": "2026-10-10T09:43:22.655Z",
+      "certificateId": "MND-EHVD6Y"
+    },
+    {
+      "userId": "usr_test_alpha_1791625402653",
+      "title": "Analytical Engine Architecture",
+      "description": "Foundations of mechanical computing",
+      "category": "Computer Science",
+      "coverIcon": "Cpu",
+      "courseType": "custom",
+      "depth": "standard",
+      "id": "crs_1791625402655_4z0m0",
+      "createdAt": "2026-10-10T09:43:22.655Z",
+      "updatedAt": "2026-10-10T09:43:22.655Z",
+      "isCompleted": false
+    },
+    {
+      "userId": "usr_1790839315095_5umpd",
+      "title": "Vertebrate Paleontology & Fossilization",
+      "description": "Mechanisms of taphonomy, skeletal morphology, and phylogenetics across geologic eras.",
+      "category": "Paleontology",
+      "depth": "standard",
+      "dailyMinutesRange": "30–60 minutes/day",
+      "dailyStudyGoalMinutes": 35,
+      "estimatedDays": 3,
+      "studyDays": [],
+      "finalExam": [],
+      "finalExamPassed": false,
+      "finalExamScore": null,
+      "lessonsCount": 1,
+      "completedLessonsCount": 0,
+      "progressPercent": 0,
+      "isDemo": false,
+      "id": "crs_1790839321990_t8wv7",
+      "createdAt": "2026-10-01T07:22:01.990Z",
+      "updatedAt": "2026-10-01T07:22:47.088Z",
+      "isCompleted": false,
+      "lastReadLessonId": "lsn_1790839362328_n172w"
+    },
     {
       "id": "crs_market_structure",
       "userId": "usr_demo_icon",
@@ -359,6 +1174,1129 @@
           "Volume profile at discount levels"
         ]
       }
+    },
+    {
+      "courseId": "crs_1790839321990_t8wv7",
+      "userId": "usr_1790839315095_5umpd",
+      "title": "Taphonomic Processes & Mineralization",
+      "order": 1,
+      "dayNumber": 1,
+      "dayTitle": "Day 1: Foundations",
+      "isLocked": false,
+      "isCompleted": false,
+      "isBookmarked": false,
+      "originalMaterial": {
+        "type": "text",
+        "content": "Curriculum module: Taphonomic Processes & Mineralization\n\nOverview:\nHow biological structures preserve in sedimentary strata.\n\nKey Concepts:\nDiagenesis, Bioerosion, Per-mineralization",
+        "uploadedAt": "2026-10-01T07:22:42.328Z"
+      },
+      "structuredContent": {
+        "title": "Taphonomic Processes & Mineralization",
+        "overview": "The fossil record represents an intensely filtered, highly selective chronicle of evolutionary history rather than an exhaustive biological census. When an organism dies, its biological architecture enters a relentless thermodynamic and biochemical gauntlet governed by physical, chemical, and biological forces that conspire to scatter, degrade, and recycle organic matter back into elemental geochemical cycles. Taphonomy, the science of transition from the biosphere to the lithosphere, systematically investigates the physical and chemical mechanics that govern what decays, what persists, and what becomes permanently preserved in sedimentary rock. Understanding these processes is paramount for vertebrate paleontologists: before interpreting anatomy, reconstructing locomotion, or mapping ancestral clades, researchers must decouple genuine biological signals from taphonomic noise.\n\nAt the core of vertebrate preservation lies the structural chemistry of the skeleton, predominantly composed of biological apatite (bioapatite or carbonated hydroxyapatite) intertwined within an organic matrix of type I collagen. While soft tissues fall prey rapidly to autolysis and microbial heterotrophs, mineralized skeletons possess intrinsic physical resilience. However, mechanical robustness alone is insufficient. Preservation over deep time requires a kinetic decoupling from decay, facilitated by rapid entombment, geochemical stabilization, and long-term mineralogical metamorphosis. This lesson unpacks the pathway an organism takes from post-mortem demise to petrifaction, establishing the causal baseline for vertebrate paleobiology.\n\nOur conceptual roadmap begins with biostratinomy and bioerosion, examining how environmental agents, mechanical transport, and scavenger ecosystems modify bone morphology before lithification. We then trace diagenesis, investigating the physical compaction and aqueous geochemical reactions that drive post-burial alteration. Finally, we explore permineralization and authigenic mineralization, revealing how circulating groundwaters deposit secondary crystal lattices into microscopic vascular channels to turn unstable biological scaffolding into permanent stone.",
+        "learningObjectives": [
+          "Differentiate biostratinomic processes from diagenetic processes using sedimentary context and skeletal damage signatures.",
+          "Detail the step-by-step chemical and mechanical progression of bone permineralization from initial soft-tissue void formation to mineral lattice precipitation.",
+          "Evaluate the taphonomic impact of bioerosion by recognizing diagnostic macroscopic and microscopic traces left by bioeroding organisms.",
+          "Predict how varying geochemical parameters (pH, Eh, dissolved ion saturation) influence bone dissolution versus structural mineral stabilization."
+        ],
+        "mainConcepts": [
+          {
+            "id": "concept-biostratinomy-bioerosion",
+            "title": "Biostratinomy and Bioerosion: The Pre-Burial Filter",
+            "explanation": "Biostratinomy encompasses every physical, biological, and non-biological event that affects an organism's remains between death and permanent sedimentary burial. The fundamental challenge to preservation is the rapid onset of biological recycling. Immediately following death, internal cellular enzymes initiate autolysis, followed quickly by anaerobic putrefaction driven by the host's microbiome. In vertebrate remains, soft tissues liquefy within days to weeks depending on ambient temperature, scavengers, and moisture levels, exposing skeletal elements to mechanical transport and active biotic destruction.\n\nBioerosion is the destructive biological excavation, boring, and biochemical degradation of hard substrates such as bones and teeth by other living organisms. Bioeroders range from macroscopic carnivores, rodents, and osteophagous insects to endolithic fungi, cyanobacteria, and osteoclasts. Macroscopic bioerosion manifests as gouges, pits, puncture marks, and spirally fractured cortical margins caused by bone-cracking scavengers like hyaenids or carnivorous theropods. Microscopic bioerosion, often termed microscopic focal destruction (MFD), results from fungal hyphae and metabolic acids secreted by tunneling micro-organisms. These borings (such as Wedl-type borings) bore microscopic tunnels straight through the dense cortical lamellae, destroying bone histology and drastically accelerating bone porosity.\n\nSimultaneously, mechanical forces such as hydraulic transport, wave action, and subaerial weathering induce physical disintegration. According to Behrensmeyer's weathering stages, skeletal elements left subaerially exposed develop longitudinal cortical cracks, flaking of outer bone lamellae, and eventual deep, fibrous splintering driven by solar radiation and wet-dry thermal cycling. If transport occurs in fluvial channels, bones experience abrasion against sand and gravel, smoothing articular condyles and obliterating crests. Bones that survive this gauntlet are rapidly buried in low-energy or high-sedimentation environments—such as crevasse splays, lacustrine silts, or volcanic ash-falls—shutting down aerobic microbial metabolism and transitioning the specimen into the diagenetic domain.",
+            "subtopics": [
+              {
+                "title": "Mechanisms of Microscopic Focal Destruction (MFD)",
+                "explanation": "MFD begins when colonizing endolithic bacteria or saprophytic fungi infiltrate bone osteons via nutrient foramina and Haversian canals. These organisms secrete organic acids and collagenases that dissolve the bioapatite mineral sheath and digest the structural collagen scaffolding. This biological tunneling leaves spherical or linear micro-voids (0.5 to 10 micrometers across) that destroy the primary bone lamellae and osteocyte lacunae, weakening the bone and leaving recognizable micro-trace fossils."
+              },
+              {
+                "title": "Fluvial Hydraulic Sorting and Voorhies Groups",
+                "explanation": "When carcasses enter flowing water, bones disarticulate and segregate based on density, shape, and surface-area-to-volume ratio. Mike Voorhies established that mammalian bones systematically transport in predictable phases: Group I (ribs, vertebrae, sternum) disperse immediately with gentle currents; Group II (long bones like femora, humeri, and metapodials) roll along bedloads under moderate velocity; Group III (skulls and mandibles) resist transport and remain as lag deposits until extreme discharge events occur."
+              }
+            ]
+          },
+          {
+            "id": "concept-diagenesis-sedimentary-burial",
+            "title": "Diagenesis: Post-Burial Geochemical and Physical Metamorphism",
+            "explanation": "Once a bone is isolated from surface agents and buried under sediment, it enters the diagenetic realm. Diagenesis includes all post-depositional chemical, physical, and biological modifications that sediments and incorporated biological remains undergo prior to high-grade metamorphic alteration. In vertebrate paleontology, diagenetic environments dictate whether bone mineral survives intact, dissolves entirely into a hollow mold, or chemically recombines into more stable geological mineral phases.\n\nThe initial phase of diagenesis is physical compaction. As thousands of meters of overburden accumulate, lithostatic pressure increases exponentially, deforming unconsolidated skeletal matrices. Hollow avian bones or thin cranial vaults frequently collapse along structural shear lines, producing crushed, compressed compression fossils. If sediment pore fluids do not actively mineralize bone cavities, these structural collapses can obliterate fine anatomical details and warp biometric dimensions, requiring modern researchers to compute retroactive retrodeformation models using computed tomography.\n\nThe secondary phase is chemical diagenesis, governed strictly by groundwater fluid dynamics, pH (acidity), and Eh (oxidation-reduction potential). Vertebrate bone mineral is fundamentally composed of carbonated hydroxyapatite: Ca10(PO4)6-x(CO3)x(OH)2-y(CO3)y. This biogenic lattice is naturally metastable; it contains microscopic crystal defects, substantial carbonate substitution, and high internal surface area. Under acidic pore fluid conditions (pH below 6.0), such as those encountered in peat bogs or podzolic soils, biological apatite dissolves completely, which explains why acid soils leave only organic silhouettes or empty molds. Conversely, in neutral-to-alkaline, reducing groundwater (pH 7.5 to 9.0), bioapatite stabilizes, driving an exchange where carbonate is purged and ambient fluorine ions diffuse into the crystal lattice, transforming fragile hydroxyapatite into thermodynamically robust fluorapatite: Ca10(PO4)6F2.",
+            "subtopics": [
+              {
+                "title": "Fluorine Uptake and Recrystallization",
+                "explanation": "During early to middle diagenesis, fluorine present in interstitial groundwater diffuses into the micro-porosities of the carbonated hydroxyapatite crystal lattice. The fluoride ion (F-) possesses a smaller ionic radius and higher electronegativity than the hydroxyl ion (OH-), allowing it to replace hydroxyl and carbonate groups. This converts the biomineral to francolite or fluorapatite, dramatically reducing unit cell volume, increasing crystal size (recrystallization), and sharply lowering the solubility product of the fossil bone."
+              },
+              {
+                "title": "Redox Controls on Pyrite and Siderite Concretion",
+                "explanation": "In anoxic, organic-rich marine or lacustrine sediments, dissimilatory sulfate-reducing bacteria oxidize decomposing organic matter, converting interstitial sulfate (SO4^2-) into hydrogen sulfide (H2S). When H2S encounters dissolved ferrous iron (Fe2+), it precipitates iron monosulfide, which subsequently matures into cubic or framboidal pyrite (FeS2). If pore fluids are iron-rich but sulfate-poor (common in freshwater swamps), microbial methanogenesis dominates, producing bicarbonate that combines with iron to form siderite (FeCO3) concretions that encase and protect fragile bone cores."
+              }
+            ]
+          },
+          {
+            "id": "concept-permineralization-mineral-replacement",
+            "title": "Per-mineralization vs. Replacement: Petrifaction Pathways",
+            "explanation": "Permineralization is the premier preservation pathway responsible for the high-fidelity retention of vertebrate skeletal elements across the fossil record. Rather than turning bone directly into stone by turning organic cells into rock instantly, permineralization functions via interstitial casting. Vertebrate bones are naturally porous, sponge-like organs; cortical bone is traversed by Haversian canals, Volkmann's canals, and osteocyte lacunae, while trabecular (cancellous) bone consists of open, interconnected marrow-filled chambers.\n\nWhen bone is buried below the water table, mineral-saturated pore waters percolate through every connected void space. As decaying soft tissue and bone marrow proteins vacate these cavities, groundwater flows inward. Driven by changes in localized pH, fluid cooling, evaporation, or supersaturation, dissolved ions precipitate directly out of solution, forming microcrystalline crusts that grow until the entire void space is occluded. The original structural framework of bioapatite remains largely in place, while all interior voids are sealed shut with inorganic mineral cements. Common permineralizing minerals include chalcedony/silica (SiO2), calcite (CaCO3), barite (BaSO4), and iron oxides (hematite/goethite).\n\nIn stark contrast to permineralization, true mineral replacement (pseudomorphism) involves the simultaneous, molecule-by-molecule dissolution of the primary bone mineral (hydroxyapatite) and immediate deposition of an entirely foreign secondary mineral in its spatial void. In severe cases of replacement, dissolution outpaces precipitation, destroying delicate internal histology such as osteon rings, growth lines (Lines of Arrested Growth or LAGs), and canaliculi. When balanced at the micro-scale, however, replacement can retain exact pseudomorphic shapes of original biological tissues in foreign geochemical substrates like silica or pyrite.",
+            "subtopics": [
+              {
+                "title": "Silicification Mechanics and Opal-A to Quartz Diagenesis",
+                "explanation": "Silica-based permineralization commonly occurs in volcaniclastic sediments rich in weathering volcanic glass, which leaches massive quantities of silicic acid (H4SiO4) into groundwater. As the fluid penetrates bone micro-voids, silicic acid polymerizes into amorphous silica spheres known as Opal-A. Over geological time, increased temperature and lithostatic pressure drive dehydration and restructuring: Opal-A transforms through micro-porous Opal-CT (cristobalite-tridymite) before ultimately reorganizing into stable, cryptocrystalline chalcedony or microcrystalline alpha-quartz."
+              },
+              {
+                "title": "Carbonate Authigenesis and Concretionary Encasement",
+                "explanation": "Authigenesis refers to minerals that crystallize in situ within sediments during or shortly after deposition. Localized decay of carcass lipids and muscle creates an alkaline micro-environment that triggers the rapid precipitation of calcium carbonate (CaCO3). This forms a hard, indurated calcitic nodule or concretion around the bone. This concretion forms an impermeable barrier, shielding the enclosed skeletal remains from crushing lithostatic pressure and aggressive, acidic groundwater alteration."
+              }
+            ]
+          }
+        ],
+        "diagrams": [
+          {
+            "title": "The Vertebrate Taphonomic Continuum",
+            "caption": "A chronological flowchart tracing an organism from death through biostratinomic hazards, permanent burial, and divergent diagenetic pathways.",
+            "mermaidCode": "flowchart TD\n    nodeA[\"Death of Vertebrate Organism\"] --> nodeB[\"Biostratinomy: Scavenging, Bioerosion & Decay\"]\n    nodeB --> nodeC{\"Burial Environment\"}\n    nodeC -- \"Subaerial Exposure / Acidic Soil\" --> nodeD[\"Total Skeletal Destruction & Recycling\"]\n    nodeC -- \"Rapid Burial in Anoxic / Saturated Sediment\" --> nodeE[\"Early Diagenesis: Collagen Loss & Matrix Compaction\"]\n    nodeE --> nodeF{\"Interstitial Fluid Geochemistry\"}\n    nodeF -- \"Supersaturated Alkaline Groundwaters\" --> nodeG[\"Permineralization: Micro-voids Infilled\"]\n    nodeF -- \"Sulfate-Rich Anoxic Fluids\" --> nodeH[\"Pyritization: Microbial Reduction\"]\n    nodeF -- \"Aggressive Soluble Fluids\" --> nodeI[\"Replacement / Dissolution: Molds & Casts\"]\n    nodeG --> nodeJ[\"Stable Lithified Fossil in Sedimentary Strata\"]\n    nodeH --> nodeJ\n    nodeI --> nodeJ"
+          }
+        ],
+        "examples": [
+          {
+            "title": "Fluvial Deposition and Permineralization of a Sauropod Femur",
+            "description": "Consider a subadult sauropod dinosaur that drowns during a seasonal flood event within a braided river system. Step 1 (Biostratinomy): The carcass drifts downstream, bloating as gut flora produce gas, eventually grounding on a point bar. Scavengers (theropods) tear into the pelvic girdle, leaving parallel tooth drag marks and peeling cortical bone on the shaft. Fine sediment carried by a secondary crevasse splay quickly overwhelms the grounded carcass, burying the femur beneath 2 meters of well-sorted quartz sand and clay. Step 2 (Early Diagenesis): Anoxic conditions halt aerobic biodegradation. Collagen fibers within the bone matrix hydrolyze over centuries, creating micro-porosity while the heavy lithostatic load of continuing sediment accumulation begins to exert downward pressure. Step 3 (Permineralization): Alkaline groundwater saturated with dissolved calcium (Ca2+) and bicarbonate (HCO3-) filters through the surrounding sandstone, penetrating the vascular channels of the cortical Haversian systems and the cancellous spaces of the epiphysis. Calcite crystals precipitate against the internal walls of the osteon canals, growing inward until all open lumens are sealed with crystalline sparite. Step 4 (Deep Geochemical Stabilization): Fluorine ions in the pore water replace hydroxyl groups in the sauropod's bioapatite, converting it to fluorapatite. The bone is preserved, retaining internal micro-anatomy and growth rings.",
+            "fromMaterial": false
+          },
+          {
+            "title": "Microscopic Bioerosion in an Ocean Floor Whale Fall",
+            "description": "A 40-ton baleen whale dies and sinks to the abyssal benthic zone at a depth of 2,500 meters, initiating a whale-fall succession. Stage 1: Mobile scavengers (hagfishes, sleeper sharks) consume soft tissues over two years. Stage 2: Specialized opportunistic organisms, notably polychaete worms of the genus Osedax, colonize the exposed vertebrae and ribs. Step-by-step mechanism: Female Osedax lack a mouth and gut; instead, they develop green, root-like posterior structures that penetrate the bone cortex. These roots host endosymbiotic Oceanospirillales bacteria. The root tissues secrete matrix metalloproteinases and proton-pumping carbonic anhydrases, generating localized acid micro-zones that solubilize bone apatite and release bone collagen for microbial catabolism. When the worm dies, it leaves boreholes known as the trace fossil Osedacoides. This bioerosion creates extensive microscopic networks that allow ambient, corrosive, cold ocean water to deeply penetrate the bone, accelerating total dissolution before burial can occur.",
+            "fromMaterial": false
+          }
+        ],
+        "importantDistinctions": [
+          {
+            "conceptA": "Permineralization",
+            "conceptB": "Mineral Replacement (Pseudomorphism)",
+            "distinction": "Permineralization is an infilling process where dissolved minerals precipitate inside pre-existing microscopic void spaces (canals, pores, and cell cavities) of a biological structure, leaving the original skeletal scaffolding (bioapatite) largely intact. In contrast, replacement is an exchange process wherein the original biological mineral lattice dissolves completely and is simultaneously substituted on a molecular scale by a distinct secondary mineral phase (such as quartz replacing calcite, or pyrite replacing bone apatite), often risking the loss of ultra-fine internal histology."
+          },
+          {
+            "conceptA": "Biostratinomy",
+            "conceptB": "Diagenesis",
+            "distinction": "Biostratinomy is strictly restricted to events occurring between the death of the organism and its final burial within sedimentary strata, dealing with surface decay, scavenger bioerosion, weathering, and hydraulic transport. Diagenesis begins once the specimen is insulated beneath sedimentary layers, dealing with physical compaction under overburden stress, pore-water chemical reactions, crystal lattice recrystallization, and lithification."
+          },
+          {
+            "conceptA": "Bioapatite (Carbonated Hydroxyapatite)",
+            "conceptB": "Fluorapatite (Francolite)",
+            "distinction": "Bioapatite is the biogenic mineral manufactured by living vertebrates, characterized by high thermodynamic instability due to structural vacancies, substantial carbonate substitutions (4 to 8 percent), and hydroxyl ions. Fluorapatite is the stable geological product of diagenetic recrystallization, where fluoride ions replace hydroxyl and carbonate groups, generating a compact, highly insoluble crystal structure resistant to subsequent weathering."
+          }
+        ],
+        "keyTerms": [
+          {
+            "term": "Taphonomy",
+            "definition": "The multi-disciplinary study of the systematic transitions that organic materials undergo from the biosphere into the lithosphere, including biostratinomy, decay, burial, and diagenetic mineralization.",
+            "context": "Taphonomic analysis of the bonebed revealed that the ceratopsian skeletons were accumulated by a catastrophic flash flood rather than attritional predation."
+          },
+          {
+            "term": "Biostratinomy",
+            "definition": "The sub-discipline of taphonomy that analyzes physical, chemical, and biological interactions affecting organic remains from death until permanent burial in sediment.",
+            "context": "Biostratinomic weathering patterns on the theropod tibia indicated the carcass had remained unburied on the arid floodplain for at least three years."
+          },
+          {
+            "term": "Bioerosion",
+            "definition": "The mechanical excavation, chemical etching, boring, and biological degradation of hard substrates (such as bone, teeth, or shell) by the action of living organisms.",
+            "context": "Thin sections of the fossil bone revealed extensive bioerosion caused by fungal hyphae that tunneled through the dense Haversian systems."
+          },
+          {
+            "term": "Diagenesis",
+            "definition": "The sum of all physical, chemical, and biochemical transformations undergone by sediment and its contained biogenic remains after deposition, excluding high-grade metamorphic heat and pressure.",
+            "context": "Acidic diagenesis within the ancient swamp caused widespread dissolution of the dinosaur skeletons, leaving only carbonaceous traces in the shale."
+          },
+          {
+            "term": "Permineralization",
+            "definition": "A fossilization mode wherein mineral-rich groundwater infiltrates the porous cavities and cellular lumens of organic structures, precipitating inorganic crystals while preserving the original skeletal substrate.",
+            "context": "Silica permineralization preserved the cellular walls and vascular vascular channels of the hadrosaur's cortical bone down to the sub-micron scale."
+          },
+          {
+            "term": "Microscopic Focal Destruction (MFD)",
+            "definition": "Localized, microscopic zones of structural dissolution within bone cortex caused by the metabolic acids and enzymatic secretions of invading endolithic bacteria and fungi.",
+            "context": "The histological sample showed high levels of MFD, preventing the researchers from identifying the annual growth arrest lines needed for age estimation."
+          }
+        ],
+        "keyTakeaways": [
+          "Fossilization is an exceptionally rare taphonomic exception; the default thermodynamic trajectory of all organic matter is complete biological recycling and geochemical dissolution.",
+          "Preservation is partitioned into two distinct successive regimes: Biostratinomy (death to burial, dominated by biological and mechanical forces) and Diagenesis (post-burial, dominated by chemical and physical forces).",
+          "Permineralization does not replace bone material; it casts open internal biological spaces (Haversian canals, trabecular spaces) with secondary crystalline precipitates like calcite or silica.",
+          "Diagenetic longevity of vertebrate bone depends on the chemical conversion of unstable, carbonate-rich biological hydroxyapatite into thermodynamically stable, insoluble fluorapatite.",
+          "Bioerosion by scavengers, insects, and endolithic microbes leaves diagnostic trace fossil evidence that can reveal the precise paleoenvironmental conditions prior to sedimentary entombment."
+        ],
+        "reviewQuestions": [
+          {
+            "id": "q1",
+            "question": "A paleontologist analyzes a fossilized theropod femur and observes that the original carbonated hydroxyapatite structure is largely intact, but all osteocyte lacunae and Haversian canals are densely occluded with crystalline micro-quartz. What specific fossilization pathway produced this preservation state?",
+            "type": "multiple-choice",
+            "options": [
+              "Pseudomorphic molecular replacement",
+              "Silica permineralization",
+              "Authigenic pyritization",
+              "Subaerial biostratinomic carbonization"
+            ],
+            "answer": "Silica permineralization",
+            "explanation": "Silica permineralization occurs when silica-rich groundwaters infiltrate the pre-existing voids (Haversian canals, lacunae) of skeletal material and precipitate quartz, while leaving the primary bioapatite scaffolding structurally in place. Pseudomorphic replacement would have dissolved and substituted the bioapatite lattice itself. Pyritization involves iron sulfide formation, and carbonization affects soft organic polymers rather than internal bone vascular lumens.",
+            "correctIndex": 1
+          },
+          {
+            "id": "q2",
+            "question": "Which set of geochemical parameters within pore fluids is most favorable for the preservation and recrystallization of vertebrate bone bioapatite into stable fluorapatite?",
+            "type": "multiple-choice",
+            "options": [
+              "Low pH (acidic, < 5.5) and high Eh (oxidizing) with depleted fluorine",
+              "High pH (alkaline, 7.5 to 8.5) and presence of dissolved fluoride ions",
+              "Extreme physical compaction combined with high dissolved carbonic acid",
+              "Fluctuating acidic conditions with high humic acid concentrations"
+            ],
+            "answer": "High pH (alkaline, 7.5 to 8.5) and presence of dissolved fluoride ions",
+            "explanation": "Bioapatite is highly soluble in acidic solutions; any environment with a pH below 6.0 rapidly dissolves the calcium phosphate matrix of bone. Neutral-to-alkaline pH (7.5 to 8.5) inhibits apatite dissolution, while the presence of dissolved fluoride ions allows the substitution of OH- and CO3^2- groups with F-, converting metastable carbonated hydroxyapatite into insoluble, crystalline fluorapatite.",
+            "correctIndex": 1
+          },
+          {
+            "id": "q3",
+            "question": "How does Voorhies Group I skeletal material behave in a fluvial hydraulic depositional regime, and which elements belong to this category?",
+            "type": "multiple-choice",
+            "options": [
+              "It consists of massive elements like skulls and teeth, which remain as immovable lag deposits.",
+              "It consists of intermediate long bones like femora and humeri, which roll strictly along the channel bedload.",
+              "It consists of low-density, high-surface-area elements like ribs, vertebrae, and sternum, which are winnowed and transported away immediately by low-velocity currents.",
+              "It consists of mineralized ossified tendons, which chemically dissolve before any hydrodynamic transport can occur."
+            ],
+            "answer": "It consists of low-density, high-surface-area elements like ribs, vertebrae, and sternum, which are winnowed and transported away immediately by low-velocity currents.",
+            "explanation": "Voorhies Group I represents the most hydrodynamically susceptible skeletal elements—specifically vertebrae, ribs, and sternal elements. Due to their high porosity, lower bulk density, and larger surface-to-volume ratio, they are easily entrained in suspension or saltation and transported away from the death site even by gentle fluvial currents, leaving behind heavier limb bones (Group II) and crania (Group III).",
+            "correctIndex": 2
+          }
+        ],
+        "aiExplanations": "Authored from canonical principles of Vertebrate Paleontology & Fossilization by Mindly Knowledge Engine.",
+        "imageSearchTerms": [
+          "fossil bone thin section osteons histology",
+          "dinosaur bone permineralization petrified wood cross section"
+        ],
+        "suggestedFurtherLearning": [
+          "Bone Histology and Sclerochronology in Archosauria",
+          "Geochemical Proxies and Rare Earth Element (REE) Uptake in Fossil Bone Diagenesis",
+          "Fluvial Sedimentology and Vertebrate Microfossil Bonebed Formation"
+        ],
+        "images": [
+          {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Oksoko_bone_histology.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "caption": "Osteohistology of Oksoko avarsan. (a) Transverse thin section of fibula of MPC-D 102/110.a under normal light. (b) Close-up of primary osteonal bone in the cortex of (a) under cross-polarized light...",
+            "author": "Gregory F. Funston, Tsogtbaatar Chinzorig, Khis...",
+            "license": "CC BY 4.0",
+            "source": "Wikimedia Commons (CC BY 4.0 · Gregory F. Funston, Tsogtbaatar Chinzorig, Khis...)"
+          }
+        ]
+      },
+      "id": "lsn_1790839362328_n172w",
+      "createdAt": "2026-10-01T07:22:42.328Z",
+      "updatedAt": "2026-10-01T07:22:47.087Z",
+      "userNotes": "Key note on per-mineralization rates in calcite matrix",
+      "readingPosition": {
+        "scrollY": 1420,
+        "sectionId": "concept-2",
+        "dayNumber": 1,
+        "updatedAt": "2026-10-01T07:22:47.087Z"
+      }
+    },
+    {
+      "courseId": "crs_1791625402655_4z0m0",
+      "userId": "usr_test_alpha_1791625402653",
+      "title": "Punch Card Programming",
+      "order": 1,
+      "isCompleted": false,
+      "isBookmarked": false,
+      "originalMaterial": {
+        "type": "text",
+        "content": "Lesson content",
+        "uploadedAt": "2026-10-10T09:43:22.655Z"
+      },
+      "structuredContent": {
+        "title": "Punch Card Programming",
+        "overview": "Overview",
+        "learningObjectives": [],
+        "mainConcepts": [],
+        "keyTerms": [],
+        "examples": [],
+        "importantDistinctions": [],
+        "keyTakeaways": [],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1791625402655_diorc",
+      "createdAt": "2026-10-10T09:43:22.655Z",
+      "updatedAt": "2026-10-10T09:43:22.655Z"
+    },
+    {
+      "courseId": "crs_1791625402655_rfozn",
+      "userId": "usr_test_alpha_1791625402653",
+      "title": "Algorithm Design",
+      "order": 1,
+      "isCompleted": true,
+      "isBookmarked": false,
+      "originalMaterial": {
+        "type": "text",
+        "content": "Lesson content",
+        "uploadedAt": "2026-10-10T09:43:22.655Z"
+      },
+      "structuredContent": {
+        "title": "Algorithm Design",
+        "overview": "Overview",
+        "learningObjectives": [],
+        "mainConcepts": [],
+        "keyTerms": [],
+        "examples": [],
+        "importantDistinctions": [],
+        "keyTakeaways": [],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1791625402655_ocrdz",
+      "createdAt": "2026-10-10T09:43:22.655Z",
+      "updatedAt": "2026-10-10T09:43:22.655Z"
+    },
+    {
+      "courseId": "crs_1791631887977_djfxs",
+      "userId": "usr_test_alpha_1791631887975",
+      "title": "Punch Card Programming",
+      "order": 1,
+      "isCompleted": false,
+      "isBookmarked": false,
+      "originalMaterial": {
+        "type": "text",
+        "content": "Lesson content",
+        "uploadedAt": "2026-10-10T11:31:27.977Z"
+      },
+      "structuredContent": {
+        "title": "Punch Card Programming",
+        "overview": "Overview",
+        "learningObjectives": [],
+        "mainConcepts": [],
+        "keyTerms": [],
+        "examples": [],
+        "importantDistinctions": [],
+        "keyTakeaways": [],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1791631887977_dg035",
+      "createdAt": "2026-10-10T11:31:27.977Z",
+      "updatedAt": "2026-10-10T11:31:27.977Z"
+    },
+    {
+      "courseId": "crs_1791631887977_l7w9q",
+      "userId": "usr_test_alpha_1791631887975",
+      "title": "Algorithm Design",
+      "order": 1,
+      "isCompleted": true,
+      "isBookmarked": false,
+      "originalMaterial": {
+        "type": "text",
+        "content": "Lesson content",
+        "uploadedAt": "2026-10-10T11:31:27.977Z"
+      },
+      "structuredContent": {
+        "title": "Algorithm Design",
+        "overview": "Overview",
+        "learningObjectives": [],
+        "mainConcepts": [],
+        "keyTerms": [],
+        "examples": [],
+        "importantDistinctions": [],
+        "keyTakeaways": [],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1791631887977_j7b15",
+      "createdAt": "2026-10-10T11:31:27.977Z",
+      "updatedAt": "2026-10-10T11:31:27.977Z"
+    },
+    {
+      "courseId": "crs_1791631952513_qb028",
+      "userId": "usr_test_alpha_1791631952510",
+      "title": "Punch Card Programming",
+      "order": 1,
+      "isCompleted": false,
+      "isBookmarked": false,
+      "originalMaterial": {
+        "type": "text",
+        "content": "Lesson content",
+        "uploadedAt": "2026-10-10T11:32:32.513Z"
+      },
+      "structuredContent": {
+        "title": "Punch Card Programming",
+        "overview": "Overview",
+        "learningObjectives": [],
+        "mainConcepts": [],
+        "keyTerms": [],
+        "examples": [],
+        "importantDistinctions": [],
+        "keyTakeaways": [],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1791631952513_64r5y",
+      "createdAt": "2026-10-10T11:32:32.513Z",
+      "updatedAt": "2026-10-10T11:32:32.513Z"
+    },
+    {
+      "courseId": "crs_1791631952513_qhj0u",
+      "userId": "usr_test_alpha_1791631952510",
+      "title": "Algorithm Design",
+      "order": 1,
+      "isCompleted": true,
+      "isBookmarked": false,
+      "originalMaterial": {
+        "type": "text",
+        "content": "Lesson content",
+        "uploadedAt": "2026-10-10T11:32:32.513Z"
+      },
+      "structuredContent": {
+        "title": "Algorithm Design",
+        "overview": "Overview",
+        "learningObjectives": [],
+        "mainConcepts": [],
+        "keyTerms": [],
+        "examples": [],
+        "importantDistinctions": [],
+        "keyTakeaways": [],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1791631952513_dhnbf",
+      "createdAt": "2026-10-10T11:32:32.513Z",
+      "updatedAt": "2026-10-10T11:32:32.513Z"
+    },
+    {
+      "courseId": "crs_1791632733116_4osuw",
+      "userId": "usr_test_alpha_1791632733114",
+      "title": "Punch Card Programming",
+      "order": 1,
+      "isCompleted": false,
+      "isBookmarked": false,
+      "originalMaterial": {
+        "type": "text",
+        "content": "Lesson content",
+        "uploadedAt": "2026-10-10T11:45:33.116Z"
+      },
+      "structuredContent": {
+        "title": "Punch Card Programming",
+        "overview": "Overview",
+        "learningObjectives": [],
+        "mainConcepts": [],
+        "keyTerms": [],
+        "examples": [],
+        "importantDistinctions": [],
+        "keyTakeaways": [],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1791632733116_zqoya",
+      "createdAt": "2026-10-10T11:45:33.116Z",
+      "updatedAt": "2026-10-10T11:45:33.116Z"
+    },
+    {
+      "courseId": "crs_1791632733116_qud9u",
+      "userId": "usr_test_alpha_1791632733114",
+      "title": "Algorithm Design",
+      "order": 1,
+      "isCompleted": true,
+      "isBookmarked": false,
+      "originalMaterial": {
+        "type": "text",
+        "content": "Lesson content",
+        "uploadedAt": "2026-10-10T11:45:33.116Z"
+      },
+      "structuredContent": {
+        "title": "Algorithm Design",
+        "overview": "Overview",
+        "learningObjectives": [],
+        "mainConcepts": [],
+        "keyTerms": [],
+        "examples": [],
+        "importantDistinctions": [],
+        "keyTakeaways": [],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1791632733116_w40fi",
+      "createdAt": "2026-10-10T11:45:33.116Z",
+      "updatedAt": "2026-10-10T11:45:33.116Z"
+    },
+    {
+      "courseId": "crs_1791789864442_cue69",
+      "userId": "usr_test_alpha_1791789864439",
+      "title": "Punch Card Programming",
+      "order": 1,
+      "isCompleted": false,
+      "isBookmarked": false,
+      "originalMaterial": {
+        "type": "text",
+        "content": "Lesson content",
+        "uploadedAt": "2026-10-12T07:24:24.442Z"
+      },
+      "structuredContent": {
+        "title": "Punch Card Programming",
+        "overview": "Overview",
+        "learningObjectives": [],
+        "mainConcepts": [],
+        "keyTerms": [],
+        "examples": [],
+        "importantDistinctions": [],
+        "keyTakeaways": [],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1791789864442_m746g",
+      "createdAt": "2026-10-12T07:24:24.442Z",
+      "updatedAt": "2026-10-12T07:24:24.442Z"
+    },
+    {
+      "courseId": "crs_1791789864442_ddcf4",
+      "userId": "usr_test_alpha_1791789864439",
+      "title": "Algorithm Design",
+      "order": 1,
+      "isCompleted": true,
+      "isBookmarked": false,
+      "originalMaterial": {
+        "type": "text",
+        "content": "Lesson content",
+        "uploadedAt": "2026-10-12T07:24:24.442Z"
+      },
+      "structuredContent": {
+        "title": "Algorithm Design",
+        "overview": "Overview",
+        "learningObjectives": [],
+        "mainConcepts": [],
+        "keyTerms": [],
+        "examples": [],
+        "importantDistinctions": [],
+        "keyTakeaways": [],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1791789864442_fmios",
+      "createdAt": "2026-10-12T07:24:24.442Z",
+      "updatedAt": "2026-10-12T07:24:24.442Z"
+    },
+    {
+      "courseId": "crs_1791792468400_2scva",
+      "userId": "usr_alpha_1791792468399",
+      "title": "BB84 Protocol & Entanglement",
+      "order": 1,
+      "structuredContent": {
+        "title": "BB84 Protocol & Entanglement",
+        "overview": "Confidential protocol implementation details.",
+        "mainConcepts": [
+          {
+            "id": "c1",
+            "title": "Photon Polarisation",
+            "explanation": "Secret",
+            "subtopics": []
+          }
+        ],
+        "examples": [],
+        "importantDistinctions": [],
+        "keyTerms": [],
+        "keyTakeaways": [],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1791792468400_s4mno",
+      "createdAt": "2026-10-12T08:07:48.400Z",
+      "updatedAt": "2026-10-12T08:07:48.400Z"
+    },
+    {
+      "id": "lsn_cd_01_1791792468402",
+      "courseId": "crs_cross_device_1791792468402",
+      "userId": "usr_learner_1791792468402",
+      "title": "Raft Consensus Algorithm & Leader Election",
+      "order": 1,
+      "dayNumber": 1,
+      "dayTitle": "Day 1: Consensus Primitives",
+      "structuredContent": {
+        "title": "Raft Consensus Algorithm & Leader Election",
+        "overview": "Deconstruct Raft state machines, term numbers, and randomized election timeouts.",
+        "mainConcepts": [
+          {
+            "id": "c1",
+            "title": "Heartbeat & Election Timeouts",
+            "explanation": "Randomized election timeouts break split-vote symmetry.",
+            "subtopics": []
+          }
+        ],
+        "examples": [
+          "etcd cluster election traces",
+          "CockroachDB multi-raft replication"
+        ],
+        "importantDistinctions": [
+          "Raft vs Paxos mental complexity"
+        ],
+        "keyTerms": [
+          {
+            "term": "Term Number",
+            "definition": "Monotonically increasing logical epoch counter."
+          }
+        ],
+        "keyTakeaways": [
+          "Leaders are authoritative for log replication."
+        ],
+        "reviewQuestions": [
+          {
+            "question": "How are split votes resolved?",
+            "options": [
+              "Randomized timeouts",
+              "Fixed priority"
+            ],
+            "correctIndex": 0
+          }
+        ]
+      },
+      "createdAt": "2026-10-12T08:07:48.402Z",
+      "updatedAt": "2026-10-12T08:07:48.403Z",
+      "isCompleted": true,
+      "quizScore": 100
+    },
+    {
+      "id": "lsn_cd_02_1791792468402",
+      "courseId": "crs_cross_device_1791792468402",
+      "userId": "usr_learner_1791792468402",
+      "title": "Log Replication & Safety Invariants",
+      "order": 2,
+      "dayNumber": 1,
+      "dayTitle": "Day 1: Consensus Primitives",
+      "structuredContent": {
+        "title": "Log Replication & Safety Invariants",
+        "overview": "Understanding committed entry durability and leader completeness.",
+        "mainConcepts": [
+          {
+            "id": "c2",
+            "title": "Leader Completeness Property",
+            "explanation": "Committed entries are present in all higher-termed leaders.",
+            "subtopics": []
+          }
+        ],
+        "examples": [
+          "Log matching property proof"
+        ],
+        "importantDistinctions": [
+          "Uncommitted vs Committed entries"
+        ],
+        "keyTerms": [
+          {
+            "term": "Commit Index",
+            "definition": "Highest log entry known to be committed."
+          }
+        ],
+        "keyTakeaways": [
+          "Entries are never overwritten once committed."
+        ],
+        "reviewQuestions": []
+      },
+      "createdAt": "2026-10-12T08:07:48.402Z",
+      "updatedAt": "2026-10-12T08:07:48.402Z"
+    },
+    {
+      "courseId": "crs_reverse_1791792468403",
+      "userId": "usr_learner_1791792468402",
+      "title": "Distributed Tracing & Context Propagation",
+      "order": 1,
+      "structuredContent": {
+        "title": "Distributed Tracing & Context Propagation",
+        "overview": "W3C Trace Context, span IDs, and baggage header forwarding.",
+        "mainConcepts": [
+          {
+            "id": "c1",
+            "title": "W3C Trace Context",
+            "explanation": "Standard traceparent format",
+            "subtopics": []
+          }
+        ],
+        "examples": [
+          "OpenTelemetry collector pipeline"
+        ],
+        "importantDistinctions": [
+          "Span vs Trace ID"
+        ],
+        "keyTerms": [
+          {
+            "term": "Traceparent",
+            "definition": "Header format for context propagation."
+          }
+        ],
+        "keyTakeaways": [
+          "Every request carries correlation context."
+        ],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1791792468403_v34o2",
+      "createdAt": "2026-10-12T08:07:48.403Z",
+      "updatedAt": "2026-10-12T08:07:48.403Z"
+    },
+    {
+      "courseId": "crs_1791792488502_k0pje",
+      "userId": "usr_alpha_1791792488501",
+      "title": "BB84 Protocol & Entanglement",
+      "order": 1,
+      "structuredContent": {
+        "title": "BB84 Protocol & Entanglement",
+        "overview": "Confidential protocol implementation details.",
+        "mainConcepts": [
+          {
+            "id": "c1",
+            "title": "Photon Polarisation",
+            "explanation": "Secret",
+            "subtopics": []
+          }
+        ],
+        "examples": [],
+        "importantDistinctions": [],
+        "keyTerms": [],
+        "keyTakeaways": [],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1791792488503_8ynrb",
+      "createdAt": "2026-10-12T08:08:08.503Z",
+      "updatedAt": "2026-10-12T08:08:08.503Z"
+    },
+    {
+      "id": "lsn_cd_01_1791792488503",
+      "courseId": "crs_cross_device_1791792488503",
+      "userId": "usr_learner_1791792488503",
+      "title": "Raft Consensus Algorithm & Leader Election",
+      "order": 1,
+      "dayNumber": 1,
+      "dayTitle": "Day 1: Consensus Primitives",
+      "structuredContent": {
+        "title": "Raft Consensus Algorithm & Leader Election",
+        "overview": "Deconstruct Raft state machines, term numbers, and randomized election timeouts.",
+        "mainConcepts": [
+          {
+            "id": "c1",
+            "title": "Heartbeat & Election Timeouts",
+            "explanation": "Randomized election timeouts break split-vote symmetry.",
+            "subtopics": []
+          }
+        ],
+        "examples": [
+          "etcd cluster election traces",
+          "CockroachDB multi-raft replication"
+        ],
+        "importantDistinctions": [
+          "Raft vs Paxos mental complexity"
+        ],
+        "keyTerms": [
+          {
+            "term": "Term Number",
+            "definition": "Monotonically increasing logical epoch counter."
+          }
+        ],
+        "keyTakeaways": [
+          "Leaders are authoritative for log replication."
+        ],
+        "reviewQuestions": [
+          {
+            "question": "How are split votes resolved?",
+            "options": [
+              "Randomized timeouts",
+              "Fixed priority"
+            ],
+            "correctIndex": 0
+          }
+        ]
+      },
+      "createdAt": "2026-10-12T08:08:08.503Z",
+      "updatedAt": "2026-10-12T08:08:08.504Z",
+      "isCompleted": true,
+      "quizScore": 100
+    },
+    {
+      "id": "lsn_cd_02_1791792488503",
+      "courseId": "crs_cross_device_1791792488503",
+      "userId": "usr_learner_1791792488503",
+      "title": "Log Replication & Safety Invariants",
+      "order": 2,
+      "dayNumber": 1,
+      "dayTitle": "Day 1: Consensus Primitives",
+      "structuredContent": {
+        "title": "Log Replication & Safety Invariants",
+        "overview": "Understanding committed entry durability and leader completeness.",
+        "mainConcepts": [
+          {
+            "id": "c2",
+            "title": "Leader Completeness Property",
+            "explanation": "Committed entries are present in all higher-termed leaders.",
+            "subtopics": []
+          }
+        ],
+        "examples": [
+          "Log matching property proof"
+        ],
+        "importantDistinctions": [
+          "Uncommitted vs Committed entries"
+        ],
+        "keyTerms": [
+          {
+            "term": "Commit Index",
+            "definition": "Highest log entry known to be committed."
+          }
+        ],
+        "keyTakeaways": [
+          "Entries are never overwritten once committed."
+        ],
+        "reviewQuestions": []
+      },
+      "createdAt": "2026-10-12T08:08:08.503Z",
+      "updatedAt": "2026-10-12T08:08:08.503Z"
+    },
+    {
+      "courseId": "crs_reverse_1791792488504",
+      "userId": "usr_learner_1791792488503",
+      "title": "Distributed Tracing & Context Propagation",
+      "order": 1,
+      "structuredContent": {
+        "title": "Distributed Tracing & Context Propagation",
+        "overview": "W3C Trace Context, span IDs, and baggage header forwarding.",
+        "mainConcepts": [
+          {
+            "id": "c1",
+            "title": "W3C Trace Context",
+            "explanation": "Standard traceparent format",
+            "subtopics": []
+          }
+        ],
+        "examples": [
+          "OpenTelemetry collector pipeline"
+        ],
+        "importantDistinctions": [
+          "Span vs Trace ID"
+        ],
+        "keyTerms": [
+          {
+            "term": "Traceparent",
+            "definition": "Header format for context propagation."
+          }
+        ],
+        "keyTakeaways": [
+          "Every request carries correlation context."
+        ],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1791792488504_aj2b3",
+      "createdAt": "2026-10-12T08:08:08.504Z",
+      "updatedAt": "2026-10-12T08:08:08.504Z"
+    },
+    {
+      "courseId": "crs_1791792503517_183og",
+      "userId": "usr_test_alpha_1791792503514",
+      "title": "Punch Card Programming",
+      "order": 1,
+      "isCompleted": false,
+      "isBookmarked": false,
+      "originalMaterial": {
+        "type": "text",
+        "content": "Lesson content",
+        "uploadedAt": "2026-10-12T08:08:23.517Z"
+      },
+      "structuredContent": {
+        "title": "Punch Card Programming",
+        "overview": "Overview",
+        "learningObjectives": [],
+        "mainConcepts": [],
+        "keyTerms": [],
+        "examples": [],
+        "importantDistinctions": [],
+        "keyTakeaways": [],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1791792503518_ga52k",
+      "createdAt": "2026-10-12T08:08:23.518Z",
+      "updatedAt": "2026-10-12T08:08:23.518Z"
+    },
+    {
+      "courseId": "crs_1791792503518_9u9m3",
+      "userId": "usr_test_alpha_1791792503514",
+      "title": "Algorithm Design",
+      "order": 1,
+      "isCompleted": true,
+      "isBookmarked": false,
+      "originalMaterial": {
+        "type": "text",
+        "content": "Lesson content",
+        "uploadedAt": "2026-10-12T08:08:23.518Z"
+      },
+      "structuredContent": {
+        "title": "Algorithm Design",
+        "overview": "Overview",
+        "learningObjectives": [],
+        "mainConcepts": [],
+        "keyTerms": [],
+        "examples": [],
+        "importantDistinctions": [],
+        "keyTakeaways": [],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1791792503518_5qafy",
+      "createdAt": "2026-10-12T08:08:23.518Z",
+      "updatedAt": "2026-10-12T08:08:23.518Z"
+    },
+    {
+      "courseId": "crs_1792992602485_7xhdb",
+      "userId": "usr_test_alpha_1792992602482",
+      "title": "Punch Card Programming",
+      "order": 1,
+      "isCompleted": false,
+      "isBookmarked": false,
+      "originalMaterial": {
+        "type": "text",
+        "content": "Lesson content",
+        "uploadedAt": "2026-10-26T05:30:02.485Z"
+      },
+      "structuredContent": {
+        "title": "Punch Card Programming",
+        "overview": "Overview",
+        "learningObjectives": [],
+        "mainConcepts": [],
+        "keyTerms": [],
+        "examples": [],
+        "importantDistinctions": [],
+        "keyTakeaways": [],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1792992602485_d0ag2",
+      "createdAt": "2026-10-26T05:30:02.485Z",
+      "updatedAt": "2026-10-26T05:30:02.485Z"
+    },
+    {
+      "courseId": "crs_1792992602485_rg43v",
+      "userId": "usr_test_alpha_1792992602482",
+      "title": "Algorithm Design",
+      "order": 1,
+      "isCompleted": true,
+      "isBookmarked": false,
+      "originalMaterial": {
+        "type": "text",
+        "content": "Lesson content",
+        "uploadedAt": "2026-10-26T05:30:02.485Z"
+      },
+      "structuredContent": {
+        "title": "Algorithm Design",
+        "overview": "Overview",
+        "learningObjectives": [],
+        "mainConcepts": [],
+        "keyTerms": [],
+        "examples": [],
+        "importantDistinctions": [],
+        "keyTakeaways": [],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1792992602485_vl10x",
+      "createdAt": "2026-10-26T05:30:02.485Z",
+      "updatedAt": "2026-10-26T05:30:02.485Z"
+    },
+    {
+      "courseId": "crs_1792992616112_p8izz",
+      "userId": "usr_alpha_1792992616110",
+      "title": "BB84 Protocol & Entanglement",
+      "order": 1,
+      "originalMaterial": {
+        "type": "text",
+        "content": "",
+        "uploadedAt": "2026-10-26T05:30:16.112Z"
+      },
+      "isCompleted": false,
+      "isBookmarked": false,
+      "structuredContent": {
+        "title": "BB84 Protocol & Entanglement",
+        "overview": "Confidential protocol implementation details.",
+        "learningObjectives": [
+          "Master quantum key distribution principles."
+        ],
+        "mainConcepts": [
+          {
+            "id": "c1",
+            "title": "Photon Polarisation",
+            "explanation": "Secret",
+            "subtopics": []
+          }
+        ],
+        "examples": [],
+        "importantDistinctions": [],
+        "keyTerms": [],
+        "keyTakeaways": [],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1792992616112_chyku",
+      "createdAt": "2026-10-26T05:30:16.112Z",
+      "updatedAt": "2026-10-26T05:30:16.112Z"
+    },
+    {
+      "id": "lsn_cd_01_1792992616113",
+      "courseId": "crs_cross_device_1792992616113",
+      "userId": "usr_learner_1792992616113",
+      "title": "Raft Consensus Algorithm & Leader Election",
+      "order": 1,
+      "dayNumber": 1,
+      "dayTitle": "Day 1: Consensus Primitives",
+      "originalMaterial": {
+        "type": "text",
+        "content": "",
+        "uploadedAt": "2026-10-26T05:30:16.113Z"
+      },
+      "isCompleted": true,
+      "isBookmarked": false,
+      "structuredContent": {
+        "title": "Raft Consensus Algorithm & Leader Election",
+        "overview": "Deconstruct Raft state machines, term numbers, and randomized election timeouts.",
+        "learningObjectives": [
+          "Understand Raft leader election."
+        ],
+        "mainConcepts": [
+          {
+            "id": "c1",
+            "title": "Heartbeat & Election Timeouts",
+            "explanation": "Randomized election timeouts break split-vote symmetry.",
+            "subtopics": []
+          }
+        ],
+        "examples": [
+          {
+            "title": "etcd cluster",
+            "description": "etcd cluster election traces",
+            "fromMaterial": true
+          }
+        ],
+        "importantDistinctions": [
+          {
+            "conceptA": "Raft",
+            "conceptB": "Paxos",
+            "distinction": "mental complexity"
+          }
+        ],
+        "keyTerms": [
+          {
+            "term": "Term Number",
+            "definition": "Monotonically increasing logical epoch counter."
+          }
+        ],
+        "keyTakeaways": [
+          "Leaders are authoritative for log replication."
+        ],
+        "reviewQuestions": [
+          {
+            "id": "q1",
+            "question": "How are split votes resolved?",
+            "type": "multiple_choice",
+            "options": [
+              "Randomized timeouts",
+              "Fixed priority"
+            ],
+            "answer": "Randomized timeouts",
+            "explanation": "Randomized timeouts break symmetry"
+          }
+        ]
+      },
+      "createdAt": "2026-10-26T05:30:16.113Z",
+      "updatedAt": "2026-10-26T05:30:16.114Z",
+      "quizScore": 100
+    },
+    {
+      "id": "lsn_cd_02_1792992616113",
+      "courseId": "crs_cross_device_1792992616113",
+      "userId": "usr_learner_1792992616113",
+      "title": "Log Replication & Safety Invariants",
+      "order": 2,
+      "dayNumber": 1,
+      "dayTitle": "Day 1: Consensus Primitives",
+      "originalMaterial": {
+        "type": "text",
+        "content": "",
+        "uploadedAt": "2026-10-26T05:30:16.114Z"
+      },
+      "isCompleted": false,
+      "isBookmarked": false,
+      "structuredContent": {
+        "title": "Log Replication & Safety Invariants",
+        "overview": "Understanding committed entry durability and leader completeness.",
+        "learningObjectives": [
+          "Understand log replication."
+        ],
+        "mainConcepts": [
+          {
+            "id": "c2",
+            "title": "Leader Completeness Property",
+            "explanation": "Committed entries are present in all higher-termed leaders.",
+            "subtopics": []
+          }
+        ],
+        "examples": [
+          {
+            "title": "Proof",
+            "description": "Log matching property proof",
+            "fromMaterial": true
+          }
+        ],
+        "importantDistinctions": [
+          {
+            "conceptA": "Uncommitted",
+            "conceptB": "Committed",
+            "distinction": "durability"
+          }
+        ],
+        "keyTerms": [
+          {
+            "term": "Commit Index",
+            "definition": "Highest log entry known to be committed."
+          }
+        ],
+        "keyTakeaways": [
+          "Entries are never overwritten once committed."
+        ],
+        "reviewQuestions": []
+      },
+      "createdAt": "2026-10-26T05:30:16.114Z",
+      "updatedAt": "2026-10-26T05:30:16.114Z"
+    },
+    {
+      "courseId": "crs_reverse_1792992616114",
+      "userId": "usr_learner_1792992616113",
+      "title": "Distributed Tracing & Context Propagation",
+      "order": 1,
+      "originalMaterial": {
+        "type": "text",
+        "content": "",
+        "uploadedAt": "2026-10-26T05:30:16.114Z"
+      },
+      "isCompleted": false,
+      "isBookmarked": false,
+      "structuredContent": {
+        "title": "Distributed Tracing & Context Propagation",
+        "overview": "W3C Trace Context, span IDs, and baggage header forwarding.",
+        "learningObjectives": [
+          "Understand context propagation in distributed architectures."
+        ],
+        "mainConcepts": [
+          {
+            "id": "c1",
+            "title": "W3C Trace Context",
+            "explanation": "Standard traceparent format",
+            "subtopics": []
+          }
+        ],
+        "examples": [
+          {
+            "title": "Pipeline",
+            "description": "OpenTelemetry collector pipeline",
+            "fromMaterial": true
+          }
+        ],
+        "importantDistinctions": [
+          {
+            "conceptA": "Span",
+            "conceptB": "Trace ID",
+            "distinction": "granularity"
+          }
+        ],
+        "keyTerms": [
+          {
+            "term": "Traceparent",
+            "definition": "Header format for context propagation."
+          }
+        ],
+        "keyTakeaways": [
+          "Every request carries correlation context."
+        ],
+        "reviewQuestions": []
+      },
+      "id": "lsn_1792992616114_g84lk",
+      "createdAt": "2026-10-26T05:30:16.114Z",
+      "updatedAt": "2026-10-26T05:30:16.114Z"
     }
   ],
   "notes": [
@@ -396,67 +2334,89 @@
       "updatedAt": "2026-09-21T23:56:43.670Z"
     }
   ],
-  "keyTerms": [
+  "terms": [
     {
-      "id": "trm_bos",
-      "term": "BOS",
-      "definition": "Break of Structure: A verified candle close beyond a significant prior swing high or swing low in the trend direction.",
-      "context": "Market Structure — Lesson 1",
-      "relatedConcepts": [
-        "CHoCH",
-        "Higher High",
-        "Swing Point"
-      ],
-      "courseId": "crs_market_structure",
-      "lessonId": "lsn_intro_ms",
-      "lessonTitle": "01 — Introduction to Market Structure"
+      "userId": "usr_1790839315095_5umpd",
+      "term": "Microscopic Focal Destruction (MFD)",
+      "definition": "Localized, microscopic zones of structural dissolution within bone cortex caused by the metabolic acids and enzymatic secretions of invading endolithic bacteria and fungi.",
+      "context": "Vertebrate Paleontology & Fossilization — Taphonomic Processes & Mineralization",
+      "courseId": "crs_1790839321990_t8wv7",
+      "lessonId": "lsn_1790839362328_n172w",
+      "lessonTitle": "Taphonomic Processes & Mineralization",
+      "id": "trm_1790839362328_0to10"
     },
     {
-      "id": "trm_hl",
-      "term": "Higher Low (HL)",
-      "definition": "A swing low trough that forms at a higher price than the preceding trough in a bullish trending market.",
-      "context": "Market Structure — Lesson 1",
-      "relatedConcepts": [
-        "Higher High",
-        "Discount Zone",
-        "BOS"
-      ],
-      "courseId": "crs_market_structure",
-      "lessonId": "lsn_intro_ms",
-      "lessonTitle": "01 — Introduction to Market Structure"
+      "userId": "usr_1790839315095_5umpd",
+      "term": "Permineralization",
+      "definition": "A fossilization mode wherein mineral-rich groundwater infiltrates the porous cavities and cellular lumens of organic structures, precipitating inorganic crystals while preserving the original skeletal substrate.",
+      "context": "Vertebrate Paleontology & Fossilization — Taphonomic Processes & Mineralization",
+      "courseId": "crs_1790839321990_t8wv7",
+      "lessonId": "lsn_1790839362328_n172w",
+      "lessonTitle": "Taphonomic Processes & Mineralization",
+      "id": "trm_1790839362328_fy8iw"
     },
     {
-      "id": "trm_swing_high",
-      "term": "Swing High",
-      "definition": "A fractal peak candle surrounded by lower highs on both preceding and subsequent candles.",
-      "context": "Market Structure — Lesson 2",
-      "relatedConcepts": [
-        "Swing Low",
-        "Fractal",
-        "External Liquidity"
-      ],
-      "courseId": "crs_market_structure",
-      "lessonId": "lsn_swing_points",
-      "lessonTitle": "02 — Swing Highs and Swing Lows"
+      "userId": "usr_1790839315095_5umpd",
+      "term": "Diagenesis",
+      "definition": "The sum of all physical, chemical, and biochemical transformations undergone by sediment and its contained biogenic remains after deposition, excluding high-grade metamorphic heat and pressure.",
+      "context": "Vertebrate Paleontology & Fossilization — Taphonomic Processes & Mineralization",
+      "courseId": "crs_1790839321990_t8wv7",
+      "lessonId": "lsn_1790839362328_n172w",
+      "lessonTitle": "Taphonomic Processes & Mineralization",
+      "id": "trm_1790839362328_7ayhh"
+    },
+    {
+      "userId": "usr_1790839315095_5umpd",
+      "term": "Bioerosion",
+      "definition": "The mechanical excavation, chemical etching, boring, and biological degradation of hard substrates (such as bone, teeth, or shell) by the action of living organisms.",
+      "context": "Vertebrate Paleontology & Fossilization — Taphonomic Processes & Mineralization",
+      "courseId": "crs_1790839321990_t8wv7",
+      "lessonId": "lsn_1790839362328_n172w",
+      "lessonTitle": "Taphonomic Processes & Mineralization",
+      "id": "trm_1790839362328_u7mmk"
+    },
+    {
+      "userId": "usr_1790839315095_5umpd",
+      "term": "Biostratinomy",
+      "definition": "The sub-discipline of taphonomy that analyzes physical, chemical, and biological interactions affecting organic remains from death until permanent burial in sediment.",
+      "context": "Vertebrate Paleontology & Fossilization — Taphonomic Processes & Mineralization",
+      "courseId": "crs_1790839321990_t8wv7",
+      "lessonId": "lsn_1790839362328_n172w",
+      "lessonTitle": "Taphonomic Processes & Mineralization",
+      "id": "trm_1790839362328_gflk3"
+    },
+    {
+      "userId": "usr_1790839315095_5umpd",
+      "term": "Taphonomy",
+      "definition": "The multi-disciplinary study of the systematic transitions that organic materials undergo from the biosphere into the lithosphere, including biostratinomy, decay, burial, and diagenetic mineralization.",
+      "context": "Vertebrate Paleontology & Fossilization — Taphonomic Processes & Mineralization",
+      "courseId": "crs_1790839321990_t8wv7",
+      "lessonId": "lsn_1790839362328_n172w",
+      "lessonTitle": "Taphonomic Processes & Mineralization",
+      "id": "trm_1790839362328_e440q"
+    }
+  ],
+  "studySessions": [
+    {
+      "id": "sess_1790035383700_r3oe",
+      "userId": "usr_demo_icon",
+      "lessonId": "lsn_intro_ms",
+      "lessonTitle": "01 — Introduction to Market Structure",
+      "seconds": 720,
+      "date": "2026-09-22",
+      "timestamp": "2026-09-22T00:03:03.700Z"
     }
   ],
   "quizAttempts": [],
-  "materials": [
-    {
-      "id": "mat_demo_1",
-      "userId": "usr_demo_icon",
-      "courseId": "crs_market_structure",
-      "courseTitle": "Market Structure",
-      "lessonId": "lsn_intro_ms",
-      "lessonTitle": "01 — Introduction to Market Structure",
-      "type": "transcript",
-      "title": "Market Structure 101 Lecture Transcript",
-      "rawSnippet": "Welcome traders. Today we are breaking down pure market structure. Everything in technical trading begins with understanding whether the market is making Higher Highs...",
-      "createdAt": "2026-09-21T23:56:43.670Z",
-      "status": "structured"
-    }
-  ],
   "activities": [
+    {
+      "userId": "usr_1790839315095_5umpd",
+      "type": "course_created",
+      "title": "Created course \"Vertebrate Paleontology & Fossilization\" (standard depth, 7 Study Days)",
+      "courseId": "crs_1790839321990_t8wv7",
+      "id": "act_1790839362328_la6jq",
+      "timestamp": "2026-10-01T07:22:42.328Z"
+    },
     {
       "id": "act_1",
       "type": "lesson_completed",
@@ -473,15 +2433,641 @@
       "courseId": "crs_market_structure"
     }
   ],
-  "studySessions": [
+  "materials": [
     {
-      "id": "sess_1790035383700_r3oe",
+      "id": "mat_demo_1",
       "userId": "usr_demo_icon",
+      "courseId": "crs_market_structure",
+      "courseTitle": "Market Structure",
       "lessonId": "lsn_intro_ms",
       "lessonTitle": "01 — Introduction to Market Structure",
-      "seconds": 720,
-      "date": "2026-09-22",
-      "timestamp": "2026-09-22T00:03:03.700Z"
+      "type": "transcript",
+      "title": "Market Structure 101 Lecture Transcript",
+      "rawSnippet": "Welcome traders. Today we are breaking down pure market structure. Everything in technical trading begins with understanding whether the market is making Higher Highs...",
+      "createdAt": "2026-09-21T23:56:43.670Z",
+      "status": "structured"
     }
-  ]
+  ],
+  "sessions": [
+    {
+      "userId": "usr_1790839315095_5umpd",
+      "token": "c370cf3c880c1a11ef66ff08baf7a402b2a4d073a40dbb677e50b348a569561d",
+      "expiresAt": "2026-10-31T07:21:55.095Z",
+      "id": "ses_1790839315095_bnagm",
+      "createdAt": "2026-10-01T07:21:55.095Z",
+      "lastUsedAt": "2026-10-01T07:22:47.087Z"
+    }
+  ],
+  "passwordResetTokens": [],
+  "certificates": [
+    {
+      "userId": "usr_test_alpha_1792992602482",
+      "courseId": "crs_1792992602486_nxo91",
+      "certificateId": "MND-CDUZNM",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitle": "Poetical Science Principles",
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-CDUZNM",
+      "grade": "Distinction",
+      "totalLessons": 1,
+      "hoursInvested": 2,
+      "id": "crt_1792992602487_t2nge",
+      "createdAt": "2026-10-26T05:30:02.487Z"
+    },
+    {
+      "userId": "usr_test_alpha_1792992602482",
+      "courseId": "crs_1792992602485_rg43v",
+      "certificateId": "MND-46OWC6",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitle": "Bernoulli Numbers Algorithm",
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-46OWC6",
+      "grade": "Distinction",
+      "totalLessons": 1,
+      "hoursInvested": 1.5,
+      "id": "crt_1792992602487_vm0g4",
+      "createdAt": "2026-10-26T05:30:02.487Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791792503514",
+      "courseId": "crs_1791792503518_7lxr3",
+      "certificateId": "MND-6336IF",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitle": "Poetical Science Principles",
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-6336IF",
+      "grade": "Distinction",
+      "totalLessons": 1,
+      "hoursInvested": 2,
+      "id": "crt_1791792503519_99udn",
+      "createdAt": "2026-10-12T08:08:23.519Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791792503514",
+      "courseId": "crs_1791792503518_9u9m3",
+      "certificateId": "MND-D56XBX",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitle": "Bernoulli Numbers Algorithm",
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-D56XBX",
+      "grade": "Distinction",
+      "totalLessons": 1,
+      "hoursInvested": 1.5,
+      "id": "crt_1791792503519_54sqd",
+      "createdAt": "2026-10-12T08:08:23.519Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791789864439",
+      "courseId": "crs_1791789864442_4afhk",
+      "certificateId": "MND-4UGREJ",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitle": "Poetical Science Principles",
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-4UGREJ",
+      "grade": "Distinction",
+      "totalLessons": 1,
+      "hoursInvested": 2,
+      "id": "crt_1791789864443_9auh0",
+      "createdAt": "2026-10-12T07:24:24.443Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791789864439",
+      "courseId": "crs_1791789864442_ddcf4",
+      "certificateId": "MND-EW125C",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitle": "Bernoulli Numbers Algorithm",
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-EW125C",
+      "grade": "Distinction",
+      "totalLessons": 1,
+      "hoursInvested": 1.5,
+      "id": "crt_1791789864443_mpvv3",
+      "createdAt": "2026-10-12T07:24:24.443Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791632733114",
+      "courseId": "crs_1791632733116_ixqoh",
+      "certificateId": "MND-DZL9HY",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitle": "Poetical Science Principles",
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-DZL9HY",
+      "grade": "Distinction",
+      "totalLessons": 1,
+      "hoursInvested": 2,
+      "id": "crt_1791632733117_wpct7",
+      "createdAt": "2026-10-10T11:45:33.117Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791632733114",
+      "courseId": "crs_1791632733116_qud9u",
+      "certificateId": "MND-5ALB8Z",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitle": "Bernoulli Numbers Algorithm",
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-5ALB8Z",
+      "grade": "Distinction",
+      "totalLessons": 1,
+      "hoursInvested": 1.5,
+      "id": "crt_1791632733117_nq1hd",
+      "createdAt": "2026-10-10T11:45:33.117Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791631952510",
+      "courseId": "crs_1791631952513_9no5b",
+      "certificateId": "MND-8YCEKW",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitle": "Poetical Science Principles",
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-8YCEKW",
+      "grade": "Distinction",
+      "totalLessons": 1,
+      "hoursInvested": 2,
+      "id": "crt_1791631952514_gugt6",
+      "createdAt": "2026-10-10T11:32:32.514Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791631952510",
+      "courseId": "crs_1791631952513_qhj0u",
+      "certificateId": "MND-3H7HTN",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitle": "Bernoulli Numbers Algorithm",
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-3H7HTN",
+      "grade": "Distinction",
+      "totalLessons": 1,
+      "hoursInvested": 1.5,
+      "id": "crt_1791631952514_5hhmz",
+      "createdAt": "2026-10-10T11:32:32.514Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791631887975",
+      "courseId": "crs_1791631887978_nibdt",
+      "certificateId": "MND-MX1AT3",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitle": "Poetical Science Principles",
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-MX1AT3",
+      "grade": "Distinction",
+      "totalLessons": 1,
+      "hoursInvested": 2,
+      "id": "crt_1791631887978_ag2v1",
+      "createdAt": "2026-10-10T11:31:27.978Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791631887975",
+      "courseId": "crs_1791631887977_l7w9q",
+      "certificateId": "MND-Z1ZFN9",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitle": "Bernoulli Numbers Algorithm",
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-Z1ZFN9",
+      "grade": "Distinction",
+      "totalLessons": 1,
+      "hoursInvested": 1.5,
+      "id": "crt_1791631887978_hs4fw",
+      "createdAt": "2026-10-10T11:31:27.978Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791625402653",
+      "courseId": "crs_1791625402655_08cqh",
+      "certificateId": "MND-GHE9H8",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitle": "Poetical Science Principles",
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-GHE9H8",
+      "grade": "Distinction",
+      "totalLessons": 1,
+      "hoursInvested": 2,
+      "id": "crt_1791625402656_1qc04",
+      "createdAt": "2026-10-10T09:43:22.656Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791625402653",
+      "courseId": "crs_1791625402655_rfozn",
+      "certificateId": "MND-EHVD6Y",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitle": "Bernoulli Numbers Algorithm",
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-EHVD6Y",
+      "grade": "Distinction",
+      "totalLessons": 1,
+      "hoursInvested": 1.5,
+      "id": "crt_1791625402656_f0kfd",
+      "createdAt": "2026-10-10T09:43:22.656Z"
+    }
+  ],
+  "combinedCertificates": [
+    {
+      "userId": "usr_test_alpha_1792992602482",
+      "certificateId": "MND-COMB-CNBVBW",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitles": [
+        "Bernoulli Numbers Algorithm",
+        "Poetical Science Principles"
+      ],
+      "certificateIds": [
+        "MND-46OWC6",
+        "MND-CDUZNM"
+      ],
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-COMB-CNBVBW",
+      "id": "comb_1792992602488_iifjr",
+      "createdAt": "2026-10-26T05:30:02.488Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791792503514",
+      "certificateId": "MND-COMB-IYXVNQ",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitles": [
+        "Bernoulli Numbers Algorithm",
+        "Poetical Science Principles"
+      ],
+      "certificateIds": [
+        "MND-D56XBX",
+        "MND-6336IF"
+      ],
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-COMB-IYXVNQ",
+      "id": "comb_1791792503520_rpf35",
+      "createdAt": "2026-10-12T08:08:23.520Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791789864439",
+      "certificateId": "MND-COMB-0AR9EF",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitles": [
+        "Bernoulli Numbers Algorithm",
+        "Poetical Science Principles"
+      ],
+      "certificateIds": [
+        "MND-EW125C",
+        "MND-4UGREJ"
+      ],
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-COMB-0AR9EF",
+      "id": "comb_1791789864444_hou3q",
+      "createdAt": "2026-10-12T07:24:24.444Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791632733114",
+      "certificateId": "MND-COMB-D2BKUM",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitles": [
+        "Bernoulli Numbers Algorithm",
+        "Poetical Science Principles"
+      ],
+      "certificateIds": [
+        "MND-5ALB8Z",
+        "MND-DZL9HY"
+      ],
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-COMB-D2BKUM",
+      "id": "comb_1791632733118_sgkoq",
+      "createdAt": "2026-10-10T11:45:33.118Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791631952510",
+      "certificateId": "MND-COMB-OMBSY9",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitles": [
+        "Bernoulli Numbers Algorithm",
+        "Poetical Science Principles"
+      ],
+      "certificateIds": [
+        "MND-3H7HTN",
+        "MND-8YCEKW"
+      ],
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-COMB-OMBSY9",
+      "id": "comb_1791631952515_ygunm",
+      "createdAt": "2026-10-10T11:32:32.515Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791631887975",
+      "certificateId": "MND-COMB-KSI179",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitles": [
+        "Bernoulli Numbers Algorithm",
+        "Poetical Science Principles"
+      ],
+      "certificateIds": [
+        "MND-Z1ZFN9",
+        "MND-MX1AT3"
+      ],
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-COMB-KSI179",
+      "id": "comb_1791631887979_6j459",
+      "createdAt": "2026-10-10T11:31:27.979Z"
+    },
+    {
+      "userId": "usr_test_alpha_1791625402653",
+      "certificateId": "MND-COMB-WFZZTN",
+      "realName": "Augusta Ada King-Noel",
+      "courseTitles": [
+        "Bernoulli Numbers Algorithm",
+        "Poetical Science Principles"
+      ],
+      "certificateIds": [
+        "MND-EHVD6Y",
+        "MND-GHE9H8"
+      ],
+      "completionDate": "April 10, 2026",
+      "verificationCode": "VER-COMB-WFZZTN",
+      "id": "comb_1791625402656_g22zx",
+      "createdAt": "2026-10-10T09:43:22.656Z"
+    }
+  ],
+  "circles": [
+    {
+      "name": "Alice Physics Circle",
+      "topic": "Physics",
+      "description": "Quantum and theoretical physics study circle",
+      "id": "cir_1792992609046_75c35",
+      "membersCount": 3,
+      "createdAt": "2026-10-26T05:30:09.046Z"
+    },
+    {
+      "name": "Alice Physics Circle",
+      "topic": "Physics",
+      "description": "Quantum and theoretical physics study circle",
+      "id": "cir_1791792497026_lo555",
+      "membersCount": 3,
+      "createdAt": "2026-10-12T08:08:17.026Z"
+    },
+    {
+      "name": "Alice Physics Circle",
+      "topic": "Physics",
+      "description": "Quantum and theoretical physics study circle",
+      "id": "cir_1791789942181_4mwlp",
+      "membersCount": 3,
+      "createdAt": "2026-10-12T07:25:42.181Z"
+    },
+    {
+      "name": "Alice Physics Circle",
+      "topic": "Physics",
+      "description": "Quantum and theoretical physics study circle",
+      "id": "cir_1791789849228_r2ewm",
+      "membersCount": 3,
+      "createdAt": "2026-10-12T07:24:09.228Z"
+    },
+    {
+      "name": "Alice Physics Circle",
+      "topic": "Physics",
+      "description": "Quantum and theoretical physics study circle",
+      "id": "cir_1791789831979_b7kcp",
+      "membersCount": 3,
+      "createdAt": "2026-10-12T07:23:51.979Z"
+    },
+    {
+      "name": "Alice Physics Circle",
+      "topic": "Physics",
+      "description": "Quantum and theoretical physics study circle",
+      "id": "cir_1791789818415_0morv",
+      "membersCount": 3,
+      "createdAt": "2026-10-12T07:23:38.415Z"
+    },
+    {
+      "id": "circle_market_structure",
+      "name": "Market Structure & Trading",
+      "description": "Analyzing price action, order flow, liquidity dynamics, and high-probability setups across global assets.",
+      "topic": "Trading",
+      "membersCount": 142,
+      "createdAt": "2026-10-01T07:21:52.155Z"
+    },
+    {
+      "id": "circle_aerodynamics",
+      "name": "Aerodynamics & Flight Dynamics",
+      "description": "Fluid mechanics, lift-to-drag optimization, boundary layer control, and supersonic airflow principles.",
+      "topic": "Aerodynamics",
+      "membersCount": 88,
+      "createdAt": "2026-10-01T07:21:52.155Z"
+    },
+    {
+      "id": "circle_cs_systems",
+      "name": "Computer Science & Distributed Systems",
+      "description": "Concurrency, distributed consensus, data modeling, algorithms, and systems programming.",
+      "topic": "Programming",
+      "membersCount": 230,
+      "createdAt": "2026-10-01T07:21:52.155Z"
+    },
+    {
+      "id": "circle_cognitive_psych",
+      "name": "Cognitive Science & Memory Retention",
+      "description": "Spaced repetition, neural plasticity, pedagogical structuring, and mental model synthesis.",
+      "topic": "Cognitive Science",
+      "membersCount": 175,
+      "createdAt": "2026-10-01T07:21:52.155Z"
+    },
+    {
+      "id": "circle_macroeconomics",
+      "name": "Macroeconomics & Monetary Policy",
+      "description": "Central banking, liquidity cycles, fiscal policy transmission, and international trade dynamics.",
+      "topic": "Economics",
+      "membersCount": 119,
+      "createdAt": "2026-10-01T07:21:52.155Z"
+    }
+  ],
+  "circleMemberships": [
+    {
+      "circleId": "cir_1791789818415_0morv",
+      "userId": "usr_alice_1791789818413",
+      "joinedAt": "2026-10-12T07:23:38.415Z"
+    },
+    {
+      "circleId": "cir_1791789818415_0morv",
+      "userId": "usr_bob_1791789818413",
+      "joinedAt": "2026-10-12T07:23:38.416Z"
+    },
+    {
+      "circleId": "cir_1791789831979_b7kcp",
+      "userId": "usr_alice_1791789831978",
+      "joinedAt": "2026-10-12T07:23:51.980Z"
+    },
+    {
+      "circleId": "cir_1791789831979_b7kcp",
+      "userId": "usr_bob_1791789831978",
+      "joinedAt": "2026-10-12T07:23:51.981Z"
+    },
+    {
+      "circleId": "cir_1791789849228_r2ewm",
+      "userId": "usr_alice_1791789849226",
+      "joinedAt": "2026-10-12T07:24:09.228Z"
+    },
+    {
+      "circleId": "cir_1791789849228_r2ewm",
+      "userId": "usr_bob_1791789849226",
+      "joinedAt": "2026-10-12T07:24:09.230Z"
+    },
+    {
+      "circleId": "cir_1791789942181_4mwlp",
+      "userId": "usr_alice_1791789942179",
+      "joinedAt": "2026-10-12T07:25:42.181Z"
+    },
+    {
+      "circleId": "cir_1791789942181_4mwlp",
+      "userId": "usr_bob_1791789942179",
+      "joinedAt": "2026-10-12T07:25:42.182Z"
+    },
+    {
+      "circleId": "cir_1791792497026_lo555",
+      "userId": "usr_alice_1791792497024",
+      "joinedAt": "2026-10-12T08:08:17.026Z"
+    },
+    {
+      "circleId": "cir_1791792497026_lo555",
+      "userId": "usr_bob_1791792497024",
+      "joinedAt": "2026-10-12T08:08:17.028Z"
+    },
+    {
+      "circleId": "cir_1792992609046_75c35",
+      "userId": "usr_alice_1792992609044",
+      "joinedAt": "2026-10-26T05:30:09.046Z"
+    },
+    {
+      "circleId": "cir_1792992609046_75c35",
+      "userId": "usr_bob_1792992609044",
+      "joinedAt": "2026-10-26T05:30:09.047Z"
+    }
+  ],
+  "discussions": [
+    {
+      "id": "disc_ms_01",
+      "userId": "usr_community_seed",
+      "authorName": "Marcus Vance",
+      "authorUsername": "@marcus_v",
+      "circleId": "circle_market_structure",
+      "circleName": "Market Structure & Trading",
+      "title": "What is the exact distinction between a Break of Structure (BOS) and a Change of Character (CHoCH)?",
+      "content": "When price pierces the previous swing point by a mere wick versus a full candle body close on the 4H timeframe, do you count that as confirmed structural continuation or liquidity grab?",
+      "type": "question",
+      "replyCount": 3,
+      "createdAt": "2026-10-01T02:21:52.155Z",
+      "updatedAt": "2026-10-01T02:21:52.155Z"
+    },
+    {
+      "id": "disc_aero_01",
+      "userId": "usr_community_seed_2",
+      "authorName": "Elena Rostova",
+      "authorUsername": "@elena_flight",
+      "circleId": "circle_aerodynamics",
+      "circleName": "Aerodynamics & Flight Dynamics",
+      "title": "How do you intuitively understand circulation in the Kutta-Joukowski theorem?",
+      "content": "I finally had a breakthrough understanding how boundary layer viscosity actually generates the starting vortex shed at the trailing edge, which establishes net circulation around the airfoil.",
+      "type": "insight",
+      "replyCount": 2,
+      "createdAt": "2026-09-30T19:21:52.155Z",
+      "updatedAt": "2026-09-30T19:21:52.155Z"
+    }
+  ],
+  "discussionReplies": [
+    {
+      "id": "reply_ms_01",
+      "discussionId": "disc_ms_01",
+      "userId": "usr_community_seed_3",
+      "authorName": "Sarah Jenkins",
+      "authorUsername": "@sjenkins",
+      "content": "A Break of Structure (BOS) represents trend continuation in the direction of the dominant order flow. A Change of Character (CHoCH) is the first structural failure against the trend, signaling an early potential transition.",
+      "createdAt": "2026-10-01T04:21:52.155Z",
+      "updatedAt": "2026-10-01T04:21:52.155Z"
+    }
+  ],
+  "studyRooms": [
+    {
+      "creatorId": "usr_alice_1792992609044",
+      "creatorName": "Alice Springs",
+      "creatorUsername": "@alicesprings",
+      "name": "Quantum Optics Silent Room",
+      "topic": "Quantum Optics",
+      "description": "Optics and photonics study room session",
+      "id": "room_1792992609046_6u2z7",
+      "membersCount": 1,
+      "createdAt": "2026-10-26T05:30:09.046Z"
+    },
+    {
+      "creatorId": "usr_alice_1791792497024",
+      "creatorName": "Alice Springs",
+      "creatorUsername": "@alicesprings",
+      "name": "Quantum Optics Silent Room",
+      "topic": "Quantum Optics",
+      "description": "Optics and photonics study room session",
+      "id": "room_1791792497027_tl1lm",
+      "membersCount": 1,
+      "createdAt": "2026-10-12T08:08:17.027Z"
+    },
+    {
+      "creatorId": "usr_alice_1791789942179",
+      "creatorName": "Alice Springs",
+      "creatorUsername": "@alicesprings",
+      "name": "Quantum Optics Silent Room",
+      "topic": "Quantum Optics",
+      "description": "Optics and photonics study room session",
+      "id": "room_1791789942181_etfk8",
+      "membersCount": 1,
+      "createdAt": "2026-10-12T07:25:42.181Z"
+    },
+    {
+      "creatorId": "usr_alice_1791789849226",
+      "creatorName": "Alice Springs",
+      "creatorUsername": "@alicesprings",
+      "name": "Quantum Optics Silent Room",
+      "topic": "Quantum Optics",
+      "id": "room_1791789849228_c46jb",
+      "membersCount": 1,
+      "createdAt": "2026-10-12T07:24:09.228Z"
+    },
+    {
+      "creatorId": "usr_alice_1791789831978",
+      "creatorName": "Alice Springs",
+      "creatorUsername": "@alicesprings",
+      "name": "Quantum Optics Silent Room",
+      "topic": "Quantum Optics",
+      "id": "room_1791789831980_edkaz",
+      "membersCount": 1,
+      "createdAt": "2026-10-12T07:23:51.980Z"
+    },
+    {
+      "creatorId": "usr_alice_1791789818413",
+      "creatorName": "Alice Springs",
+      "creatorUsername": "@alicesprings",
+      "name": "Quantum Optics Silent Room",
+      "topic": "Quantum Optics",
+      "id": "room_1791789818415_hwzbn",
+      "membersCount": 1,
+      "createdAt": "2026-10-12T07:23:38.415Z"
+    }
+  ],
+  "studyRoomMembers": [
+    {
+      "roomId": "room_1791789818415_hwzbn",
+      "userId": "usr_alice_1791789818413",
+      "joinedAt": "2026-10-12T07:23:38.415Z"
+    },
+    {
+      "roomId": "room_1791789831980_edkaz",
+      "userId": "usr_alice_1791789831978",
+      "joinedAt": "2026-10-12T07:23:51.980Z"
+    },
+    {
+      "roomId": "room_1791789849228_c46jb",
+      "userId": "usr_alice_1791789849226",
+      "joinedAt": "2026-10-12T07:24:09.228Z"
+    },
+    {
+      "roomId": "room_1791789942181_etfk8",
+      "userId": "usr_alice_1791789942179",
+      "joinedAt": "2026-10-12T07:25:42.181Z"
+    },
+    {
+      "roomId": "room_1791792497027_tl1lm",
+      "userId": "usr_alice_1791792497024",
+      "joinedAt": "2026-10-12T08:08:17.027Z"
+    },
+    {
+      "roomId": "room_1792992609046_6u2z7",
+      "userId": "usr_alice_1792992609044",
+      "joinedAt": "2026-10-26T05:30:09.046Z"
+    }
+  ],
+  "sharedCourses": []
 }

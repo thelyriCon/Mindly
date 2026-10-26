@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   X,
   FileText,
@@ -13,9 +13,18 @@ import {
   Plus,
   Trash2,
   BookOpen,
+  Mic,
+  MicOff,
+  Pause,
+  Play,
+  RotateCcw,
+  Check,
+  Bookmark,
+  StickyNote,
+  Radio,
 } from 'lucide-react';
 import { api } from '../lib/api';
-import { Course, StructuredContent, OriginalMaterial } from '../types';
+import { Course, StructuredContent, OriginalMaterial, Note } from '../types';
 
 interface AddMaterialModalProps {
   isOpen: boolean;
@@ -24,9 +33,12 @@ interface AddMaterialModalProps {
   initialCourseId?: string;
   onLessonSaved: (courseId: string, lessonId: string) => void;
   onCourseCreated?: (newCourse: Course) => void;
+  onNoteCreated?: (note: Note) => void;
 }
 
-type MaterialInputType = 'paste' | 'image' | 'document' | 'notes';
+type MaterialInputType = 'paste' | 'document' | 'image' | 'audio';
+type CaptureDestination = 'existing_course' | 'new_course' | 'standalone_note';
+type AudioMode = 'capture_lesson' | 'voice_note';
 
 export const AddMaterialModal: React.FC<AddMaterialModalProps> = ({
   isOpen,
@@ -35,15 +47,22 @@ export const AddMaterialModal: React.FC<AddMaterialModalProps> = ({
   initialCourseId,
   onLessonSaved,
   onCourseCreated,
+  onNoteCreated,
 }) => {
+  // Destination
+  const [destination, setDestination] = useState<CaptureDestination>(
+    courses.length > 0 ? 'existing_course' : 'new_course'
+  );
   const [selectedCourseId, setSelectedCourseId] = useState<string>(
     initialCourseId || (courses.length > 0 ? courses[0].id : '')
   );
-  const [showNewCourseInput, setShowNewCourseInput] = useState(courses.length === 0);
   const [newCourseTitle, setNewCourseTitle] = useState('');
+  const [noteTags, setNoteTags] = useState('raw-capture, voice');
+
+  // Input Type
   const [inputType, setInputType] = useState<MaterialInputType>('paste');
 
-  // Input states
+  // Text & Document
   const [rawText, setRawText] = useState('');
   const [sourceTitle, setSourceTitle] = useState('');
   const [customInstructions, setCustomInstructions] = useState('');
@@ -58,10 +77,165 @@ export const AddMaterialModal: React.FC<AddMaterialModalProps> = ({
   const [structuredOutput, setStructuredOutput] = useState<StructuredContent | null>(null);
   const [isSaving, setIsSaving] = useState(false);
 
+  // Document ingestion state (PDF, DOCX, TXT)
+  const [isExtractingDoc, setIsExtractingDoc] = useState(false);
+  const [extractedDocMeta, setExtractedDocMeta] = useState<{
+    fileName: string;
+    pageCount?: number;
+    wordCount?: number;
+    fileSize?: number;
+    isScanned?: boolean;
+  } | null>(null);
+
+  // Audio Recording & Transcription
+  const [audioMode, setAudioMode] = useState<AudioMode>('capture_lesson');
+  const [isRecording, setIsRecording] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [recordSeconds, setRecordSeconds] = useState(0);
+  const [recordedAudioBlob, setRecordedAudioBlob] = useState<Blob | null>(null);
+  const [recordedAudioUrl, setRecordedAudioUrl] = useState<string | null>(null);
+  const [isTranscribing, setIsTranscribing] = useState(false);
+  const [transcriptionDone, setTranscriptionDone] = useState(false);
+  const [transcribedWordCount, setTranscribedWordCount] = useState<number | null>(null);
+
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
+  const timerRef = useRef<any>(null);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const docInputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+      if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+        mediaRecorderRef.current.stop();
+      }
+    };
+  }, []);
+
   if (!isOpen) return null;
+
+  // Format mm:ss
+  const formatTime = (secs: number) => {
+    const m = Math.floor(secs / 60);
+    const s = secs % 60;
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  };
+
+  // Start recording
+  const startRecording = async () => {
+    setErrorMessage(null);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      audioChunksRef.current = [];
+      const recorder = new MediaRecorder(stream);
+
+      recorder.ondataavailable = (e) => {
+        if (e.data.size > 0) {
+          audioChunksRef.current.push(e.data);
+        }
+      };
+
+      recorder.onstop = () => {
+        const mimeType = recorder.mimeType || 'audio/webm';
+        const blob = new Blob(audioChunksRef.current, { type: mimeType });
+        setRecordedAudioBlob(blob);
+        setRecordedAudioUrl(URL.createObjectURL(blob));
+        // Stop all audio tracks to release microphone
+        stream.getTracks().forEach((track) => track.stop());
+      };
+
+      recorder.start(500); // 500ms slices
+      mediaRecorderRef.current = recorder;
+      setIsRecording(true);
+      setIsPaused(false);
+      setRecordSeconds(0);
+      setTranscriptionDone(false);
+
+      timerRef.current = setInterval(() => {
+        setRecordSeconds((prev) => prev + 1);
+      }, 1000);
+    } catch (err: any) {
+      console.error('Audio capture error:', err);
+      setErrorMessage(
+        'Could not access microphone. Please ensure microphone permissions are granted in your browser.'
+      );
+    }
+  };
+
+  const pauseRecording = () => {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
+      mediaRecorderRef.current.pause();
+      setIsPaused(true);
+      if (timerRef.current) clearInterval(timerRef.current);
+    }
+  };
+
+  const resumeRecording = () => {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'paused') {
+      mediaRecorderRef.current.resume();
+      setIsPaused(false);
+      timerRef.current = setInterval(() => {
+        setRecordSeconds((prev) => prev + 1);
+      }, 1000);
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+      setIsPaused(false);
+      if (timerRef.current) clearInterval(timerRef.current);
+    }
+  };
+
+  const handleTranscribeAudio = async () => {
+    if (!recordedAudioBlob) return;
+    setIsTranscribing(true);
+    setErrorMessage(null);
+
+    try {
+      const reader = new FileReader();
+      reader.onload = async () => {
+        try {
+          const base64Data = reader.result as string;
+          const mimeType = recordedAudioBlob.type || 'audio/webm';
+          const result = await api.transcribeAudio({
+            audioBase64: base64Data,
+            mimeType,
+            mode: audioMode,
+            promptHint: sourceTitle || 'Educational lesson audio recording',
+          });
+
+          setRawText(result.transcript);
+          setTranscribedWordCount(result.wordCount);
+          setTranscriptionDone(true);
+          if (!sourceTitle) {
+            setSourceTitle(
+              audioMode === 'voice_note'
+                ? `Voice Note (${new Date().toLocaleDateString()})`
+                : `Lecture Capture (${new Date().toLocaleDateString()})`
+            );
+          }
+
+          // If audioMode is capture_lesson, automatically jump to structuring
+          if (audioMode === 'capture_lesson') {
+            handleStructure(result.transcript);
+          }
+        } catch (err: any) {
+          setErrorMessage(err.message || 'Audio transcription failed.');
+        } finally {
+          setIsTranscribing(false);
+        }
+      };
+      reader.readAsDataURL(recordedAudioBlob);
+    } catch (err: any) {
+      setIsTranscribing(false);
+      setErrorMessage('Failed to read recorded audio file.');
+    }
+  };
 
   // Handle Image Upload
   const handleImageFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,87 +253,152 @@ export const AddMaterialModal: React.FC<AddMaterialModalProps> = ({
     reader.readAsDataURL(file);
   };
 
-  // Handle Document Upload (TXT, MD, etc.)
+  // Handle Document Upload (PDF, DOCX, TXT, MD)
   const handleDocFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    const ext = file.name.split('.').pop()?.toLowerCase() || '';
+
     if (!sourceTitle) {
       setSourceTitle(file.name.replace(/\.[^/.]+$/, ''));
     }
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      setRawText(reader.result as string);
-    };
-    reader.readAsText(file);
+    setErrorMessage(null);
+
+    if (ext === 'pdf' || ext === 'docx') {
+      setIsExtractingDoc(true);
+      const reader = new FileReader();
+      reader.onload = async () => {
+        try {
+          const base64 = reader.result as string;
+          const res = await api.extractDocument(base64, file.name, file.type);
+          setRawText(res.extracted.text);
+          setExtractedDocMeta({
+            fileName: file.name,
+            pageCount: res.extracted.pageCount,
+            wordCount: res.extracted.wordCount,
+            fileSize: res.extracted.fileSize,
+            isScanned: res.extracted.isScanned,
+          });
+        } catch (err: any) {
+          setErrorMessage(err.message || 'Failed to extract text from document.');
+        } finally {
+          setIsExtractingDoc(false);
+        }
+      };
+      reader.readAsDataURL(file);
+    } else {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const text = (reader.result as string) || '';
+        setRawText(text);
+        const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
+        setExtractedDocMeta({
+          fileName: file.name,
+          wordCount,
+          fileSize: file.size,
+        });
+      };
+      reader.readAsText(file);
+    }
   };
 
   // Handle AI Structuring Execution
-  const handleStructure = async () => {
+  const handleStructure = async (textOverride?: string) => {
     setErrorMessage(null);
-    if (!rawText.trim() && !imageBase64) {
-      setErrorMessage('Please paste text or upload an image/document before structuring.');
+    const contentToUse = textOverride || rawText;
+
+    if (inputType !== 'image' && (!contentToUse || !contentToUse.trim())) {
+      setErrorMessage('Please provide text or capture material first.');
       return;
     }
 
-    const activeCourse = courses.find((c) => c.id === selectedCourseId);
-    const courseTitle = activeCourse ? activeCourse.title : newCourseTitle;
+    if (inputType === 'image' && !imageBase64) {
+      setErrorMessage('Please upload a diagram or image.');
+      return;
+    }
 
     setIsStructuring(true);
-    setStructuringStage('Analyzing raw material & identifying core concepts...');
+    setStructuringStage('Reading raw learning input...');
 
     try {
-      const stageTimer1 = setTimeout(() => {
-        setStructuringStage('Organizing subtopics, extracting examples & distinctions...');
-      }, 1500);
+      const currentCourse = courses.find((c) => c.id === selectedCourseId);
+      const courseTitle = currentCourse ? currentCourse.title : (newCourseTitle || 'General Knowledge');
 
-      const stageTimer2 = setTimeout(() => {
-        setStructuringStage('Building pedagogical review questions & key terms glossary...');
-      }, 3000);
+      setTimeout(() => setStructuringStage('Extracting core concepts and subtopics...'), 600);
+      setTimeout(() => setStructuringStage('Separating original quotes from pedagogical explanations...'), 1200);
+
+      const mimeType = imageBase64 ? imageBase64.substring(5, imageBase64.indexOf(';')) : undefined;
 
       const res = await api.structureMaterial({
-        rawContent: rawText,
-        contentType: inputType,
+        rawContent: contentToUse,
+        contentType: inputType === 'image' ? 'image' : inputType === 'audio' ? 'audio' : 'text',
         courseTitle,
         customInstructions,
         imageBase64: imageBase64 || undefined,
-        mimeType: imageBase64?.startsWith('data:image/png') ? 'image/png' : 'image/jpeg',
+        mimeType,
       });
 
-      clearTimeout(stageTimer1);
-      clearTimeout(stageTimer2);
-
       setStructuredOutput(res.structured);
-      setPreviewTab('structured');
+      if (!sourceTitle && res.structured.title) {
+        setSourceTitle(res.structured.title);
+      }
     } catch (err: any) {
-      setErrorMessage(
-        err.message || 'Something went wrong while structuring your material. Your original material is safe.'
-      );
+      console.error('Structuring failed:', err);
+      setErrorMessage(err.message || 'Could not structure your learning material. Raw text is safe.');
     } finally {
       setIsStructuring(false);
+      setStructuringStage('');
     }
   };
 
-  // Save the structured lesson to the course
+  // Handle Standalone Note Save
+  const handleSaveStandaloneNote = async () => {
+    if (!rawText.trim()) {
+      setErrorMessage('Note content cannot be empty.');
+      return;
+    }
+
+    setIsSaving(true);
+    setErrorMessage(null);
+    try {
+      const cleanTags = noteTags.split(',').map((t) => t.trim()).filter(Boolean);
+      const res = await api.createNote({
+        title: sourceTitle.trim() || 'Quick Capture Note',
+        content: rawText,
+        tags: cleanTags,
+        type: 'general',
+      });
+
+      if (onNoteCreated) onNoteCreated(res.note);
+      onClose();
+    } catch (err: any) {
+      setErrorMessage(err.message || 'Failed to save note.');
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  // Handle Lesson Save into Course
   const handleSaveLesson = async () => {
     if (!structuredOutput) return;
-
-    let targetCourseId = selectedCourseId;
     setIsSaving(true);
     setErrorMessage(null);
 
+    let targetCourseId = selectedCourseId;
+
     try {
-      // If user selected to create a new course inline
-      if (showNewCourseInput || !targetCourseId) {
+      if (destination === 'new_course' || !targetCourseId) {
         if (!newCourseTitle.trim()) {
-          setErrorMessage('Please provide a course name.');
+          setErrorMessage('Please provide a course title.');
           setIsSaving(false);
           return;
         }
         const created = await api.createCourse({
           title: newCourseTitle.trim(),
-          category: 'Personal Learning',
+          category: 'Personal Knowledge',
           courseType: 'ai-assisted',
+          depth: 'standard',
         });
         targetCourseId = created.course.id;
         if (onCourseCreated) onCourseCreated(created.course);
@@ -168,13 +407,16 @@ export const AddMaterialModal: React.FC<AddMaterialModalProps> = ({
       const originalMaterialData: OriginalMaterial = {
         type: inputType === 'image' ? 'image' : inputType === 'document' ? 'document' : 'text',
         content: imageBase64 || rawText,
-        sourceTitle: sourceTitle || 'Imported Knowledge Dump',
+        sourceTitle: sourceTitle || 'Captured Knowledge',
         uploadedAt: new Date().toISOString(),
-        fileName: imageFileName || undefined,
+        fileName: extractedDocMeta?.fileName || imageFileName || undefined,
+        fileType: extractedDocMeta ? extractedDocMeta.fileName.split('.').pop() || 'document' : inputType === 'image' ? 'image' : 'text',
+        pageCount: extractedDocMeta?.pageCount,
+        wordCount: extractedDocMeta?.wordCount || (rawText ? rawText.split(/\s+/).filter(Boolean).length : 0),
       };
 
       const res = await api.createLesson(targetCourseId, {
-        title: structuredOutput.title || 'New Lesson',
+        title: structuredOutput.title || sourceTitle || 'New Lesson',
         originalMaterial: originalMaterialData,
         structuredContent: structuredOutput,
       });
@@ -189,510 +431,564 @@ export const AddMaterialModal: React.FC<AddMaterialModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-sm animate-in fade-in duration-150">
-      <div className="relative w-full max-w-4xl max-h-[92vh] flex flex-col rounded-2xl bg-[#121316] border border-[#262831] shadow-2xl text-zinc-100 overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#07132b]/85 backdrop-blur-md animate-in fade-in duration-150">
+      <div className="relative w-full max-w-4xl max-h-[92vh] flex flex-col rounded-2xl bg-[#0B1F44] border border-[#1a366f] shadow-2xl text-white overflow-hidden">
+        
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#21232b] bg-[#141519]">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#1a366f] bg-[#081734]">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
-              <Sparkles className="w-4 h-4" />
+            <div className="w-9 h-9 rounded-xl bg-[#00B4FF]/15 border border-[#00B4FF]/30 flex items-center justify-center text-[#00B4FF]">
+              <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-base font-semibold text-white">Knowledge Dump & Material Import</h2>
-              <p className="text-xs text-zinc-400">
-                Bring raw information into Mindly. AI turns it into structured, teachable lessons.
+              <h2 className="text-base font-bold text-white tracking-tight">Capture Hub</h2>
+              <p className="text-xs text-[#9bb1d6]">
+                Transform raw material into structured lessons, key terms, or permanent notes.
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-zinc-400 hover:text-zinc-200 rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer"
+            className="p-1.5 text-[#9bb1d6] hover:text-white rounded-lg hover:bg-[#1a366f]/50 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Course Target Selector */}
-        <div className="px-6 py-3 bg-[#0d0e11] border-b border-[#1e2027] flex flex-wrap items-center justify-between gap-3 text-xs">
-          <div className="flex items-center gap-2 flex-1 min-w-[280px]">
-            <BookOpen className="w-4 h-4 text-indigo-400 shrink-0" />
-            <span className="text-zinc-300 font-medium">Assign to Course:</span>
-            {!showNewCourseInput ? (
+        {/* Destination Selector Bar */}
+        <div className="px-6 py-3 bg-[#07132b] border-b border-[#1a366f] flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2">
+            <span className="text-[#9bb1d6] font-medium">Destination:</span>
+            <div className="inline-flex rounded-lg bg-[#0B1F44] p-0.5 border border-[#1a366f]">
+              {courses.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setDestination('existing_course')}
+                  className={`px-3 py-1 rounded-md text-xs font-medium transition-colors cursor-pointer ${
+                    destination === 'existing_course'
+                      ? 'bg-[#00B4FF] text-[#0B1F44] font-bold'
+                      : 'text-[#9bb1d6] hover:text-white'
+                  }`}
+                >
+                  Existing Course
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => setDestination('new_course')}
+                className={`px-3 py-1 rounded-md text-xs font-medium transition-colors cursor-pointer ${
+                  destination === 'new_course'
+                    ? 'bg-[#00B4FF] text-[#0B1F44] font-bold'
+                    : 'text-[#9bb1d6] hover:text-white'
+                }`}
+              >
+                + Create New Course
+              </button>
+              <button
+                type="button"
+                onClick={() => setDestination('standalone_note')}
+                className={`px-3 py-1 rounded-md text-xs font-medium transition-colors cursor-pointer ${
+                  destination === 'standalone_note'
+                    ? 'bg-[#00B4FF] text-[#0B1F44] font-bold'
+                    : 'text-[#9bb1d6] hover:text-white'
+                }`}
+              >
+                Standalone Note
+              </button>
+            </div>
+          </div>
+
+          {/* Conditional Destination Inputs */}
+          {destination === 'existing_course' && (
+            <div className="flex items-center gap-2">
+              <span className="text-[#9bb1d6]">Select:</span>
               <select
                 value={selectedCourseId}
-                onChange={(e) => {
-                  if (e.target.value === '__new__') {
-                    setShowNewCourseInput(true);
-                  } else {
-                    setSelectedCourseId(e.target.value);
-                  }
-                }}
-                className="px-3 py-1.5 rounded-lg bg-[#18191f] border border-[#2b2d38] text-zinc-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
+                onChange={(e) => setSelectedCourseId(e.target.value)}
+                className="px-2.5 py-1 rounded-lg bg-[#0B1F44] border border-[#1a366f] text-xs text-white focus:outline-none focus:border-[#00B4FF]"
               >
                 {courses.map((c) => (
                   <option key={c.id} value={c.id}>
                     {c.title}
                   </option>
                 ))}
-                <option value="__new__">+ Create New Course</option>
               </select>
-            ) : (
-              <div className="flex items-center gap-2 flex-1">
-                <input
-                  type="text"
-                  placeholder="New Course Title (e.g. Aerodynamics)..."
-                  value={newCourseTitle}
-                  onChange={(e) => setNewCourseTitle(e.target.value)}
-                  className="flex-1 px-3 py-1.5 rounded-lg bg-[#18191f] border border-[#2b2d38] text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
-                />
-                {courses.length > 0 && (
-                  <button
-                    type="button"
-                    onClick={() => setShowNewCourseInput(false)}
-                    className="text-[11px] text-zinc-400 hover:text-zinc-200 px-2 py-1 rounded bg-zinc-800"
-                  >
-                    Cancel
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
+            </div>
+          )}
+
+          {destination === 'new_course' && (
+            <div className="flex items-center gap-2 flex-1 min-w-[200px]">
+              <input
+                type="text"
+                placeholder="New Course Title (e.g. Cognitive Psychology)..."
+                value={newCourseTitle}
+                onChange={(e) => setNewCourseTitle(e.target.value)}
+                className="flex-1 px-3 py-1 rounded-lg bg-[#0B1F44] border border-[#1a366f] text-xs text-white placeholder-[#627ca8] focus:outline-none focus:border-[#00B4FF]"
+              />
+            </div>
+          )}
+
+          {destination === 'standalone_note' && (
+            <div className="flex items-center gap-2">
+              <span className="text-[#9bb1d6]">Tags:</span>
+              <input
+                type="text"
+                value={noteTags}
+                onChange={(e) => setNoteTags(e.target.value)}
+                placeholder="comma, separated, tags"
+                className="px-2.5 py-1 rounded-lg bg-[#0B1F44] border border-[#1a366f] text-xs text-white placeholder-[#627ca8] focus:outline-none focus:border-[#00B4FF]"
+              />
+            </div>
+          )}
         </div>
 
-        {/* Main Body: Input Mode or Structured Review */}
+        {/* Input Format Tabs */}
+        <div className="flex border-b border-[#1a366f] bg-[#0B1F44] px-6">
+          <button
+            type="button"
+            onClick={() => setInputType('paste')}
+            className={`flex items-center gap-2 py-3 px-4 text-xs font-semibold border-b-2 transition-colors cursor-pointer ${
+              inputType === 'paste'
+                ? 'border-[#00B4FF] text-[#00B4FF]'
+                : 'border-transparent text-[#9bb1d6] hover:text-white'
+            }`}
+          >
+            <Edit3 className="w-4 h-4" />
+            <span>Type / Paste</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setInputType('document')}
+            className={`flex items-center gap-2 py-3 px-4 text-xs font-semibold border-b-2 transition-colors cursor-pointer ${
+              inputType === 'document'
+                ? 'border-[#00B4FF] text-[#00B4FF]'
+                : 'border-transparent text-[#9bb1d6] hover:text-white'
+            }`}
+          >
+            <UploadCloud className="w-4 h-4" />
+            <span>Upload File (PDF / DOCX / TXT)</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setInputType('image')}
+            className={`flex items-center gap-2 py-3 px-4 text-xs font-semibold border-b-2 transition-colors cursor-pointer ${
+              inputType === 'image'
+                ? 'border-[#00B4FF] text-[#00B4FF]'
+                : 'border-transparent text-[#9bb1d6] hover:text-white'
+            }`}
+          >
+            <ImageIcon className="w-4 h-4" />
+            <span>Image / Diagram</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setInputType('audio')}
+            className={`flex items-center gap-2 py-3 px-4 text-xs font-semibold border-b-2 transition-colors cursor-pointer ${
+              inputType === 'audio'
+                ? 'border-[#00B4FF] text-[#00B4FF]'
+                : 'border-transparent text-[#9bb1d6] hover:text-white'
+            }`}
+          >
+            <Mic className="w-4 h-4" />
+            <span>Record Audio</span>
+          </button>
+        </div>
+
+        {/* Body Content */}
         <div className="flex-1 overflow-y-auto p-6 space-y-5">
           {errorMessage && (
-            <div className="p-3.5 rounded-xl bg-red-950/40 border border-red-800/60 text-red-200 text-xs flex items-start gap-2.5">
-              <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+            <div className="p-3.5 rounded-xl bg-rose-950/40 border border-rose-800/60 text-xs text-rose-200 flex items-start gap-2.5">
+              <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+              <span>{errorMessage}</span>
+            </div>
+          )}
+
+          {/* Mode 1: TYPE / PASTE */}
+          {inputType === 'paste' && (
+            <div className="space-y-4">
               <div>
-                <p className="font-medium">Notice</p>
-                <p className="mt-0.5 text-zinc-300">{errorMessage}</p>
+                <label className="block text-xs font-semibold text-white uppercase tracking-wider mb-1.5">
+                  Source Title or Lesson Name
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g., Chapter 3: Market Liquidity Principles"
+                  value={sourceTitle}
+                  onChange={(e) => setSourceTitle(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#07132b] border border-[#1a366f] text-xs text-white placeholder-[#627ca8] focus:outline-none focus:border-[#00B4FF]"
+                />
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="block text-xs font-semibold text-white uppercase tracking-wider">
+                    Raw Material / Transcript / Book Excerpt
+                  </label>
+                  <span className="text-[11px] text-[#627ca8]">
+                    {rawText ? `${rawText.split(/\s+/).filter(Boolean).length} words` : 'Zero data loss'}
+                  </span>
+                </div>
+                <textarea
+                  rows={9}
+                  placeholder="Paste lecture transcript, video notes, article text, textbook chapter, or messy thoughts..."
+                  value={rawText}
+                  onChange={(e) => setRawText(e.target.value)}
+                  className="w-full p-3.5 rounded-xl bg-[#07132b] border border-[#1a366f] text-xs text-white placeholder-[#627ca8] focus:outline-none focus:border-[#00B4FF] leading-relaxed font-mono"
+                />
               </div>
             </div>
           )}
 
-          {!structuredOutput ? (
-            /* STEP 1: RAW INPUT WORKSPACE */
+          {/* Mode 2: UPLOAD FILE */}
+          {inputType === 'document' && (
             <div className="space-y-4">
-              {/* Input Type Selector */}
-              <div className="flex gap-2 border-b border-[#22242c] pb-3 overflow-x-auto">
-                <button
-                  type="button"
-                  onClick={() => setInputType('paste')}
-                  className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer ${
-                    inputType === 'paste'
-                      ? 'bg-indigo-600/30 text-indigo-200 border border-indigo-500/50'
-                      : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/60'
-                  }`}
-                >
-                  <FileText className="w-3.5 h-3.5" />
-                  <span>Paste Text / Transcript</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setInputType('image')}
-                  className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer ${
-                    inputType === 'image'
-                      ? 'bg-indigo-600/30 text-indigo-200 border border-indigo-500/50'
-                      : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/60'
-                  }`}
-                >
-                  <ImageIcon className="w-3.5 h-3.5" />
-                  <span>Upload Screenshot / Diagram</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setInputType('document')}
-                  className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer ${
-                    inputType === 'document'
-                      ? 'bg-indigo-600/30 text-indigo-200 border border-indigo-500/50'
-                      : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/60'
-                  }`}
-                >
-                  <UploadCloud className="w-3.5 h-3.5" />
-                  <span>Upload Document (.txt, .md)</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setInputType('notes')}
-                  className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer ${
-                    inputType === 'notes'
-                      ? 'bg-indigo-600/30 text-indigo-200 border border-indigo-500/50'
-                      : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/60'
-                  }`}
-                >
-                  <Edit3 className="w-3.5 h-3.5" />
-                  <span>Manual Notes</span>
-                </button>
+              <input
+                ref={docInputRef}
+                type="file"
+                accept=".pdf,.docx,.txt,.md"
+                onChange={handleDocFile}
+                className="hidden"
+              />
+
+              <div
+                onClick={() => docInputRef.current?.click()}
+                className="p-8 rounded-2xl border-2 border-dashed border-[#1a366f] hover:border-[#00B4FF] bg-[#07132b] text-center cursor-pointer transition-colors space-y-3"
+              >
+                <UploadCloud className="w-10 h-10 text-[#00B4FF] mx-auto opacity-80" />
+                <div>
+                  <p className="text-sm font-semibold text-white">
+                    {extractedDocMeta ? extractedDocMeta.fileName : 'Click to upload learning document'}
+                  </p>
+                  <p className="text-xs text-[#9bb1d6] mt-1">
+                    Supports PDF, DOCX, TXT, and Markdown files.
+                  </p>
+                </div>
+                {isExtractingDoc && (
+                  <div className="flex items-center justify-center gap-2 text-xs text-[#00B4FF]">
+                    <div className="w-3.5 h-3.5 border-2 border-[#00B4FF] border-t-transparent rounded-full animate-spin" />
+                    <span>Extracting document text and metadata...</span>
+                  </div>
+                )}
               </div>
 
-              {/* Source Title & Optional Focus */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-medium text-zinc-300 mb-1">
-                    Source Title / Label (Optional)
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. YouTube Video: Market Structure 101, or Textbook Ch. 3"
-                    value={sourceTitle}
-                    onChange={(e) => setSourceTitle(e.target.value)}
-                    className="w-full px-3 py-2 text-xs rounded-lg bg-[#0e0f12] border border-[#272932] text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-zinc-300 mb-1">
-                    Learner Focus / Special Instructions (Optional)
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Focus on practical chart setups, explain simply"
-                    value={customInstructions}
-                    onChange={(e) => setCustomInstructions(e.target.value)}
-                    className="w-full px-3 py-2 text-xs rounded-lg bg-[#0e0f12] border border-[#272932] text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-indigo-500"
-                  />
-                </div>
-              </div>
-
-              {/* Specific Mode Inputs */}
-              {inputType === 'paste' && (
-                <div>
-                  <label className="block text-xs font-medium text-zinc-300 mb-1">
-                    Raw Material Content (Paste messy text, video transcripts, paragraphs)
-                  </label>
+              {rawText && (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs text-[#9bb1d6]">
+                    <span>Extracted Preview</span>
+                    <span>{rawText.split(/\s+/).filter(Boolean).length} words</span>
+                  </div>
                   <textarea
-                    rows={10}
-                    placeholder="Paste your raw learning content here. Don't worry about formatting, repetition, or structure—Mindly's AI will organize and clean it..."
+                    rows={6}
                     value={rawText}
                     onChange={(e) => setRawText(e.target.value)}
-                    className="w-full p-3 text-xs font-mono leading-relaxed rounded-xl bg-[#0b0c0e] border border-[#262831] text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-indigo-500"
-                  />
-                </div>
-              )}
-
-              {inputType === 'image' && (
-                <div className="space-y-3">
-                  <div
-                    onClick={() => fileInputRef.current?.click()}
-                    className="border-2 border-dashed border-[#2d303b] hover:border-indigo-500/60 bg-[#0e0f12] rounded-xl p-8 text-center cursor-pointer transition-colors"
-                  >
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageFile}
-                      className="hidden"
-                    />
-                    <ImageIcon className="w-8 h-8 text-indigo-400 mx-auto mb-2 opacity-80" />
-                    <p className="text-xs font-medium text-zinc-200">
-                      Click to upload a screenshot, diagram, or photo of handwritten notes
-                    </p>
-                    <p className="text-[11px] text-zinc-500 mt-1">PNG, JPG, WEBP up to 25MB</p>
-                  </div>
-
-                  {imageBase64 && (
-                    <div className="p-3 rounded-xl bg-[#16171d] border border-[#282a35] flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <img
-                          src={imageBase64}
-                          alt="Uploaded preview"
-                          className="w-16 h-16 object-cover rounded-lg border border-zinc-700"
-                        />
-                        <div>
-                          <p className="text-xs font-medium text-zinc-200">{imageFileName || 'Selected image'}</p>
-                          <p className="text-[10px] text-zinc-400">Ready for visual concept extraction</p>
-                        </div>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setImageBase64(null);
-                          setImageFileName('');
-                        }}
-                        className="text-xs text-red-400 hover:text-red-300 px-2 py-1 rounded hover:bg-zinc-800"
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  )}
-
-                  <div>
-                    <label className="block text-xs font-medium text-zinc-300 mb-1">
-                      Accompanying Notes (Optional)
-                    </label>
-                    <textarea
-                      rows={3}
-                      placeholder="Add any context or questions about this diagram..."
-                      value={rawText}
-                      onChange={(e) => setRawText(e.target.value)}
-                      className="w-full p-2.5 text-xs rounded-lg bg-[#0e0f12] border border-[#262831] text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-indigo-500"
-                    />
-                  </div>
-                </div>
-              )}
-
-              {inputType === 'document' && (
-                <div className="space-y-3">
-                  <div
-                    onClick={() => docInputRef.current?.click()}
-                    className="border-2 border-dashed border-[#2d303b] hover:border-indigo-500/60 bg-[#0e0f12] rounded-xl p-8 text-center cursor-pointer transition-colors"
-                  >
-                    <input
-                      ref={docInputRef}
-                      type="file"
-                      accept=".txt,.md,.text"
-                      onChange={handleDocFile}
-                      className="hidden"
-                    />
-                    <UploadCloud className="w-8 h-8 text-indigo-400 mx-auto mb-2 opacity-80" />
-                    <p className="text-xs font-medium text-zinc-200">
-                      Click to upload text document (.txt, .md)
-                    </p>
-                    <p className="text-[11px] text-zinc-500 mt-1">Full content will be loaded into the workspace</p>
-                  </div>
-
-                  {rawText && (
-                    <div>
-                      <label className="block text-xs font-medium text-zinc-300 mb-1">
-                        Loaded Document Preview ({rawText.length} characters)
-                      </label>
-                      <textarea
-                        rows={6}
-                        value={rawText}
-                        onChange={(e) => setRawText(e.target.value)}
-                        className="w-full p-3 text-xs font-mono rounded-xl bg-[#0b0c0e] border border-[#262831] text-zinc-200"
-                      />
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {inputType === 'notes' && (
-                <div>
-                  <label className="block text-xs font-medium text-zinc-300 mb-1">
-                    Direct Notes & Thoughts
-                  </label>
-                  <textarea
-                    rows={8}
-                    placeholder="Type your notes freely. Mindly will detect key definitions, create hierarchical concept headings, and extract glossary terms..."
-                    value={rawText}
-                    onChange={(e) => setRawText(e.target.value)}
-                    className="w-full p-3 text-xs rounded-xl bg-[#0b0c0e] border border-[#262831] text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-indigo-500"
+                    className="w-full p-3.5 rounded-xl bg-[#07132b] border border-[#1a366f] text-xs text-white font-mono"
                   />
                 </div>
               )}
             </div>
-          ) : (
-            /* STEP 2: STRUCTURED LESSON REVIEW & EDITING */
+          )}
+
+          {/* Mode 3: IMAGE / DIAGRAM */}
+          {inputType === 'image' && (
+            <div className="space-y-4">
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleImageFile}
+                className="hidden"
+              />
+
+              {!imageBase64 ? (
+                <div
+                  onClick={() => fileInputRef.current?.click()}
+                  className="p-8 rounded-2xl border-2 border-dashed border-[#1a366f] hover:border-[#00B4FF] bg-[#07132b] text-center cursor-pointer transition-colors space-y-3"
+                >
+                  <ImageIcon className="w-10 h-10 text-[#00B4FF] mx-auto opacity-80" />
+                  <div>
+                    <p className="text-sm font-semibold text-white">Upload Screenshot, Diagram, or Whiteboard Photo</p>
+                    <p className="text-xs text-[#9bb1d6] mt-1">
+                      Gemini analyzes charts, diagrams, formulas, and handwritten text.
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <div className="relative rounded-xl overflow-hidden border border-[#1a366f] bg-[#07132b] max-h-64 flex items-center justify-center">
+                    <img src={imageBase64} alt="Upload preview" className="max-h-64 object-contain" />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setImageBase64(null);
+                        setImageFileName('');
+                      }}
+                      className="absolute top-2 right-2 p-1.5 rounded-lg bg-black/60 text-white hover:bg-rose-600 transition-colors"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Diagram title / subject..."
+                    value={sourceTitle}
+                    onChange={(e) => setSourceTitle(e.target.value)}
+                    className="w-full px-3.5 py-2 rounded-xl bg-[#07132b] border border-[#1a366f] text-xs text-white"
+                  />
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Mode 4: RECORD AUDIO */}
+          {inputType === 'audio' && (
             <div className="space-y-5">
-              {/* Mode Switch: Structured Lesson vs Original Material */}
-              <div className="flex items-center justify-between border-b border-[#242630] pb-2">
+              {/* Audio Mode Selection */}
+              <div className="p-3.5 rounded-xl bg-[#07132b] border border-[#1a366f] flex items-center justify-between gap-3">
+                <div className="space-y-0.5">
+                  <span className="text-xs font-bold text-white">Audio Capture Mode</span>
+                  <p className="text-[11px] text-[#9bb1d6]">
+                    Choose between a short personal voice note or a full lecture transcription.
+                  </p>
+                </div>
                 <div className="flex gap-2">
                   <button
                     type="button"
-                    onClick={() => setPreviewTab('structured')}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
-                      previewTab === 'structured'
-                        ? 'bg-indigo-600/30 text-indigo-200 border border-indigo-500/40'
-                        : 'text-zinc-400 hover:text-zinc-200'
+                    onClick={() => setAudioMode('voice_note')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${
+                      audioMode === 'voice_note'
+                        ? 'bg-[#00B4FF] text-[#0B1F44]'
+                        : 'bg-[#0f2756] text-[#9bb1d6]'
                     }`}
                   >
-                    <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-                    <span>AI Structured Lesson</span>
+                    Quick Voice Note
                   </button>
                   <button
                     type="button"
-                    onClick={() => setPreviewTab('original')}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
-                      previewTab === 'original'
-                        ? 'bg-zinc-800 text-zinc-200 border border-zinc-700'
-                        : 'text-zinc-400 hover:text-zinc-200'
+                    onClick={() => setAudioMode('capture_lesson')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${
+                      audioMode === 'capture_lesson'
+                        ? 'bg-[#00B4FF] text-[#0B1F44]'
+                        : 'bg-[#0f2756] text-[#9bb1d6]'
                     }`}
                   >
-                    <Eye className="w-3.5 h-3.5" />
-                    <span>Original Material (Preserved)</span>
+                    Capture Lesson
                   </button>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setStructuredOutput(null)}
-                  className="text-xs text-zinc-400 hover:text-zinc-200 px-2 py-1 rounded hover:bg-zinc-800 cursor-pointer"
-                >
-                  ← Re-structure or edit input
-                </button>
               </div>
 
-              {previewTab === 'original' ? (
-                <div className="p-4 rounded-xl bg-[#0b0c0e] border border-[#22242c] font-mono text-xs text-zinc-300 leading-relaxed whitespace-pre-wrap max-h-96 overflow-y-auto">
-                  {imageBase64 && (
-                    <img
-                      src={imageBase64}
-                      alt="Original upload"
-                      className="max-h-72 rounded-lg border border-zinc-800 mb-4"
-                    />
-                  )}
-                  {rawText || 'No text provided'}
+              {/* Legal Notice Required by Specification */}
+              <div className="p-3 rounded-xl bg-[#0f2756]/50 border border-[#1a366f] text-[11px] text-[#9bb1d6] flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-[#00B4FF] shrink-0" />
+                <span>
+                  <strong>Legal Notice:</strong> Recording others may require consent depending on applicable laws in your jurisdiction.
+                </span>
+              </div>
+
+              {/* Recording Controls */}
+              <div className="p-6 rounded-2xl bg-[#07132b] border border-[#1a366f] text-center space-y-4">
+                <div className="text-3xl font-mono font-bold text-white tracking-widest">
+                  {formatTime(recordSeconds)}
                 </div>
-              ) : (
-                /* Structured Lesson Details & Inline Edits */
-                <div className="space-y-4">
-                  {/* Title & Overview */}
-                  <div className="p-4 rounded-xl bg-[#16171d] border border-[#262833] space-y-3">
-                    <div>
-                      <label className="block text-[11px] font-mono uppercase tracking-wider text-indigo-400 mb-1">
-                        Lesson Title
-                      </label>
-                      <input
-                        type="text"
-                        value={structuredOutput.title}
-                        onChange={(e) =>
-                          setStructuredOutput({ ...structuredOutput, title: e.target.value })
-                        }
-                        className="w-full text-base font-semibold px-3 py-1.5 rounded-lg bg-[#0e0f12] border border-[#272932] text-white focus:outline-none focus:border-indigo-500"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[11px] font-mono uppercase tracking-wider text-indigo-400 mb-1">
-                        Overview
-                      </label>
-                      <textarea
-                        rows={2}
-                        value={structuredOutput.overview}
-                        onChange={(e) =>
-                          setStructuredOutput({ ...structuredOutput, overview: e.target.value })
-                        }
-                        className="w-full text-xs px-3 py-2 rounded-lg bg-[#0e0f12] border border-[#272932] text-zinc-200 focus:outline-none focus:border-indigo-500"
-                      />
-                    </div>
-                  </div>
 
-                  {/* Learning Objectives */}
-                  <div className="p-4 rounded-xl bg-[#16171d] border border-[#262833]">
-                    <h3 className="text-xs font-semibold text-zinc-200 mb-2">Learning Objectives</h3>
-                    <ul className="space-y-1.5">
-                      {structuredOutput.learningObjectives.map((obj, i) => (
-                        <li key={i} className="flex items-start gap-2 text-xs text-zinc-300">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400 shrink-0 mt-0.5" />
-                          <span>{obj}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Main Concepts */}
-                  <div className="space-y-3">
-                    <h3 className="text-xs font-semibold text-zinc-200">Main Concepts & Explanations</h3>
-                    {structuredOutput.mainConcepts.map((concept, idx) => (
-                      <div key={concept.id || idx} className="p-4 rounded-xl bg-[#15161c] border border-[#242630]">
-                        <h4 className="text-xs font-semibold text-white mb-1.5">{concept.title}</h4>
-                        <p className="text-xs text-zinc-300 leading-relaxed mb-3">{concept.explanation}</p>
-                        {concept.subtopics && concept.subtopics.length > 0 && (
-                          <div className="space-y-2 pl-3 border-l-2 border-indigo-500/40">
-                            {concept.subtopics.map((sub, sIdx) => (
-                              <div key={sIdx}>
-                                <h5 className="text-[11px] font-medium text-indigo-300">{sub.title}</h5>
-                                <p className="text-xs text-zinc-400 mt-0.5 leading-relaxed">{sub.explanation}</p>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
+                {/* Waveform indicator */}
+                {isRecording && !isPaused && (
+                  <div className="flex items-center justify-center gap-1 h-8">
+                    {[16, 28, 12, 32, 20, 10, 24, 30, 18, 22].map((h, i) => (
+                      <div
+                        key={i}
+                        className="w-1.5 rounded-full bg-[#00B4FF] animate-pulse"
+                        style={{ height: `${h}px`, animationDelay: `${i * 80}ms` }}
+                      />
                     ))}
                   </div>
+                )}
 
-                  {/* Distinctions & Key Terms */}
-                  {structuredOutput.importantDistinctions?.length > 0 && (
-                    <div className="p-4 rounded-xl bg-[#15161c] border border-[#242630]">
-                      <h3 className="text-xs font-semibold text-zinc-200 mb-2">Important Distinctions</h3>
-                      <div className="space-y-2">
-                        {structuredOutput.importantDistinctions.map((d, dIdx) => (
-                          <div key={dIdx} className="p-3 rounded-lg bg-[#0e0f12] text-xs">
-                            <span className="font-semibold text-indigo-300">{d.conceptA}</span>
-                            <span className="text-zinc-500 mx-2">vs</span>
-                            <span className="font-semibold text-indigo-300">{d.conceptB}</span>
-                            <p className="text-zinc-400 mt-1">{d.distinction}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                <div className="flex items-center justify-center gap-3">
+                  {!isRecording && !recordedAudioBlob && (
+                    <button
+                      type="button"
+                      onClick={startRecording}
+                      className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#00B4FF] text-[#0B1F44] font-bold text-xs hover:bg-[#009de0] transition-colors cursor-pointer shadow-lg shadow-[#00B4FF]/20"
+                    >
+                      <Mic className="w-4 h-4" />
+                      <span>Start Recording</span>
+                    </button>
                   )}
 
-                  {/* Key Terms */}
-                  {structuredOutput.keyTerms?.length > 0 && (
-                    <div className="p-4 rounded-xl bg-[#15161c] border border-[#242630]">
-                      <h3 className="text-xs font-semibold text-zinc-200 mb-2">Extracted Key Terms (Glossary)</h3>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {structuredOutput.keyTerms.map((t, tIdx) => (
-                          <div key={tIdx} className="p-2.5 rounded-lg bg-[#0e0f12] text-xs">
-                            <span className="font-semibold text-white">{t.term}</span>
-                            <p className="text-zinc-400 mt-0.5 text-[11px]">{t.definition}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                  {isRecording && (
+                    <>
+                      {!isPaused ? (
+                        <button
+                          type="button"
+                          onClick={pauseRecording}
+                          className="p-2.5 rounded-xl bg-[#0f2756] text-white hover:bg-[#1a366f] transition-colors cursor-pointer"
+                          title="Pause"
+                        >
+                          <Pause className="w-4 h-4" />
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={resumeRecording}
+                          className="p-2.5 rounded-xl bg-[#00B4FF] text-[#0B1F44] hover:bg-[#009de0] transition-colors cursor-pointer"
+                          title="Resume"
+                        >
+                          <Play className="w-4 h-4" />
+                        </button>
+                      )}
+
+                      <button
+                        type="button"
+                        onClick={stopRecording}
+                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-rose-600 text-white font-bold text-xs hover:bg-rose-500 transition-colors cursor-pointer"
+                      >
+                        <MicOff className="w-4 h-4" />
+                        <span>Finish Recording</span>
+                      </button>
+                    </>
                   )}
 
-                  {/* Pedagogical Origin Markers */}
-                  <div className="p-3.5 rounded-xl bg-[#0d0e11] border border-[#1f2027] text-[11px] space-y-1.5">
-                    {structuredOutput.fromMaterialNotes && (
-                      <p className="text-zinc-400">
-                        <span className="text-emerald-400 font-medium">[From Your Material]</span>{' '}
-                        {structuredOutput.fromMaterialNotes}
-                      </p>
-                    )}
-                    {structuredOutput.aiExplanations && (
-                      <p className="text-zinc-400">
-                        <span className="text-indigo-400 font-medium">[AI Clarification]</span>{' '}
-                        {structuredOutput.aiExplanations}
-                      </p>
-                    )}
+                  {recordedAudioBlob && !isRecording && (
+                    <div className="flex items-center gap-3">
+                      <audio controls src={recordedAudioUrl || undefined} className="h-9" />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setRecordedAudioBlob(null);
+                          setRecordedAudioUrl(null);
+                          setRecordSeconds(0);
+                        }}
+                        className="p-2 rounded-lg text-[#9bb1d6] hover:text-white hover:bg-[#1a366f]"
+                        title="Re-record"
+                      >
+                        <RotateCcw className="w-4 h-4" />
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={handleTranscribeAudio}
+                        disabled={isTranscribing}
+                        className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#00B4FF] text-[#0B1F44] font-bold text-xs hover:bg-[#009de0] transition-colors cursor-pointer disabled:opacity-50"
+                      >
+                        {isTranscribing ? (
+                          <>
+                            <div className="w-3.5 h-3.5 border-2 border-[#0B1F44] border-t-transparent rounded-full animate-spin" />
+                            <span>Transcribing...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Sparkles className="w-3.5 h-3.5" />
+                            <span>Transcribe Audio</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Transcribed Text Display */}
+              {rawText && (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs text-[#9bb1d6]">
+                    <span>Audio Transcript</span>
+                    <span>{transcribedWordCount || rawText.split(/\s+/).filter(Boolean).length} words</span>
                   </div>
+                  <textarea
+                    rows={5}
+                    value={rawText}
+                    onChange={(e) => setRawText(e.target.value)}
+                    className="w-full p-3.5 rounded-xl bg-[#07132b] border border-[#1a366f] text-xs text-white font-mono"
+                  />
                 </div>
               )}
+            </div>
+          )}
+
+          {/* Structured Output Preview (If available) */}
+          {structuredOutput && (
+            <div className="p-4 rounded-xl bg-[#07132b] border border-[#00B4FF]/40 space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#00B4FF]" />
+                  <span className="text-xs font-bold text-white">Lesson Structure Ready</span>
+                </div>
+                <span className="text-[11px] font-mono text-[#00B4FF]">
+                  {structuredOutput.mainConcepts?.length || 0} Concepts &bull; {structuredOutput.keyTerms?.length || 0} Terms
+                </span>
+              </div>
+              <h3 className="text-sm font-bold text-white">{structuredOutput.title}</h3>
+              <p className="text-xs text-[#9bb1d6]">{structuredOutput.overview}</p>
             </div>
           )}
         </div>
 
         {/* Footer Actions */}
-        <div className="px-6 py-4 border-t border-[#21232b] bg-[#141519] flex items-center justify-between">
-          <div className="text-xs text-zinc-400">
-            {isStructuring && <span className="text-indigo-400 animate-pulse">{structuringStage}</span>}
-          </div>
+        <div className="flex items-center justify-between px-6 py-4 border-t border-[#1a366f] bg-[#081734]">
+          <button
+            type="button"
+            onClick={onClose}
+            className="text-xs text-[#9bb1d6] hover:text-white cursor-pointer"
+          >
+            Cancel
+          </button>
 
           <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors cursor-pointer"
-            >
-              Cancel
-            </button>
-
-            {!structuredOutput ? (
+            {destination === 'standalone_note' ? (
               <button
                 type="button"
-                id="structure-with-ai-btn"
-                onClick={handleStructure}
-                disabled={isStructuring || (!rawText.trim() && !imageBase64)}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold tracking-wide transition-all shadow-md shadow-indigo-950/40 disabled:opacity-40 cursor-pointer"
+                onClick={handleSaveStandaloneNote}
+                disabled={isSaving || !rawText.trim()}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#00B4FF] text-[#0B1F44] font-bold text-xs hover:bg-[#009de0] transition-colors cursor-pointer disabled:opacity-50"
               >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>{isStructuring ? 'Structuring Material...' : 'Structure with AI'}</span>
+                <StickyNote className="w-4 h-4" />
+                <span>Save Note</span>
+              </button>
+            ) : !structuredOutput ? (
+              <button
+                type="button"
+                onClick={() => handleStructure()}
+                disabled={isStructuring || (!rawText.trim() && !imageBase64)}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#00B4FF] text-[#0B1F44] font-bold text-xs hover:bg-[#009de0] transition-colors cursor-pointer disabled:opacity-50"
+              >
+                {isStructuring ? (
+                  <>
+                    <div className="w-3.5 h-3.5 border-2 border-[#0B1F44] border-t-transparent rounded-full animate-spin" />
+                    <span>{structuringStage || 'Structuring Material...'}</span>
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="w-4 h-4" />
+                    <span>Structure into Lesson</span>
+                  </>
+                )}
               </button>
             ) : (
               <button
                 type="button"
-                id="save-lesson-btn"
                 onClick={handleSaveLesson}
                 disabled={isSaving}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold tracking-wide transition-all shadow-md shadow-emerald-950/40 disabled:opacity-50 cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#00B4FF] text-[#0B1F44] font-bold text-xs hover:bg-[#009de0] transition-colors cursor-pointer disabled:opacity-50"
               >
-                <CheckCircle2 className="w-4 h-4" />
-                <span>{isSaving ? 'Saving Lesson...' : 'Save Lesson to Course'}</span>
+                {isSaving ? (
+                  <>
+                    <div className="w-3.5 h-3.5 border-2 border-[#0B1F44] border-t-transparent rounded-full animate-spin" />
+                    <span>Saving to Course...</span>
+                  </>
+                ) : (
+                  <>
+                    <Check className="w-4 h-4" />
+                    <span>Save Lesson to Course</span>
+                  </>
+                )}
               </button>
             )}
           </div>
         </div>
+
       </div>
     </div>
   );

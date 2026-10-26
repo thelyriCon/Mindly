@@ -1,0 +1,467 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile containing legal real name for certificates and unique username.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase user ID" },
+        "email": { "type": "string", "description": "User email address" },
+        "realName": { "type": "string", "description": "Legal learner name for certificates" },
+        "username": { "type": "string", "description": "Unique username handle" },
+        "profileImage": { "type": "string", "description": "Profile avatar image URL" },
+        "bio": { "type": "string", "description": "Short bio description" },
+        "interests": { "type": "array", "description": "Selected subject interests" },
+        "hasCompletedOnboarding": { "type": "boolean", "description": "Onboarding completion flag" },
+        "dailyStudyGoalMinutes": { "type": "number", "description": "Daily goal in minutes" },
+        "todayStudySeconds": { "type": "number", "description": "Seconds studied today" },
+        "createdAt": { "type": "string", "description": "ISO timestamp of registration" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp of last update" }
+      },
+      "required": ["uid", "email", "realName", "username", "createdAt"]
+    },
+    "UsernameReservation": {
+      "title": "UsernameReservation",
+      "description": "Unique username registry document to guarantee handle uniqueness.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Owner Firebase UID" },
+        "username": { "type": "string", "description": "Clean lowercase username" },
+        "createdAt": { "type": "string", "description": "ISO timestamp of reservation" }
+      },
+      "required": ["uid", "username", "createdAt"]
+    },
+    "Course": {
+      "title": "Course",
+      "description": "Educational curriculum containing modules, metadata, and progress tracking.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique course ID" },
+        "userId": { "type": "string", "description": "Owner Firebase UID or 'system'" },
+        "title": { "type": "string", "description": "Course title" },
+        "description": { "type": "string", "description": "Course overview and scope" },
+        "category": { "type": "string", "description": "Subject category" },
+        "coverIcon": { "type": "string", "description": "Lucide icon identifier" },
+        "coverImage": { "type": "string", "description": "Course banner URL" },
+        "courseType": { "type": "string", "description": "Creation type (self-created, ai-assisted, imported)" },
+        "depth": { "type": "string", "description": "quick, standard, or deep" },
+        "dailyMinutesRange": { "type": "string", "description": "Estimated daily study time" },
+        "dailyStudyGoalMinutes": { "type": "number", "description": "Goal in minutes per day" },
+        "estimatedDays": { "type": "number", "description": "Total planned days" },
+        "learningObjectives": { "type": "array", "description": "Curriculum goals" },
+        "studyDays": { "type": "array", "description": "Grouped study day milestones and checkpoint quizzes" },
+        "finalExam": { "type": "array", "description": "Comprehensive final review questions" },
+        "finalExamPassed": { "type": "boolean", "description": "Whether final exam was passed" },
+        "finalExamScore": { "type": "number", "description": "Final exam percentage score" },
+        "finalExamPassedAt": { "type": "string", "description": "ISO timestamp of exam passage" },
+        "lastReadLessonId": { "type": "string", "description": "Last accessed lesson ID" },
+        "isDemo": { "type": "boolean", "description": "Whether this is a system-provided starter course" },
+        "isCompleted": { "type": "boolean", "description": "Course completion status" },
+        "lessonsCount": { "type": "number", "description": "Total lessons count" },
+        "completedLessonsCount": { "type": "number", "description": "Completed lessons count" },
+        "progressPercent": { "type": "number", "description": "Completion percentage" },
+        "isArchived": { "type": "boolean", "description": "Whether the course is archived" },
+        "archivedAt": { "type": "string", "description": "ISO timestamp of archival" },
+        "shareId": { "type": "string", "description": "Active public share ID" },
+        "originalShareId": { "type": "string", "description": "Share ID from which this course was imported" },
+        "createdAt": { "type": "string", "description": "ISO timestamp of creation" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp of last update" }
+      },
+      "required": ["id", "userId", "title", "createdAt", "updatedAt"]
+    },
+    "SharedCourse": {
+      "title": "SharedCourse",
+      "description": "Public shareable course representation containing full curriculum without personal progress or notes.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique public share token" },
+        "courseId": { "type": "string", "description": "Origin course ID" },
+        "creatorId": { "type": "string", "description": "Creator Firebase UID" },
+        "creatorName": { "type": "string", "description": "Creator display name" },
+        "title": { "type": "string", "description": "Course title" },
+        "description": { "type": "string", "description": "Course overview" },
+        "category": { "type": "string", "description": "Subject category" },
+        "coverImage": { "type": "string", "description": "Cover banner image URL" },
+        "coverIcon": { "type": "string", "description": "Lucide icon name" },
+        "depth": { "type": "string", "description": "Curriculum depth" },
+        "dailyMinutesRange": { "type": "string", "description": "Estimated time commitment" },
+        "estimatedDays": { "type": "number", "description": "Duration in days" },
+        "learningObjectives": { "type": "array", "description": "Curriculum goals" },
+        "studyDays": { "type": "array", "description": "Day structure milestones" },
+        "finalExam": { "type": "array", "description": "Final review questions" },
+        "lessonCount": { "type": "number", "description": "Total lessons count" },
+        "lessons": { "type": "array", "description": "List of course lessons without private notes or progress" },
+        "createdAt": { "type": "string", "description": "ISO timestamp of creation" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp of update" }
+      },
+      "required": ["id", "title", "lessons", "createdAt"]
+    },
+    "Lesson": {
+      "title": "Lesson",
+      "description": "Individual learning unit within a course with structured notes and review items.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique lesson ID" },
+        "courseId": { "type": "string", "description": "Parent course ID" },
+        "userId": { "type": "string", "description": "Owner Firebase UID or 'system'" },
+        "title": { "type": "string", "description": "Lesson title" },
+        "order": { "type": "number", "description": "Sequential order within curriculum" },
+        "dayNumber": { "type": "number", "description": "Study day number" },
+        "dayTitle": { "type": "string", "description": "Day heading title" },
+        "isLocked": { "type": "boolean", "description": "Milestone gate lock status" },
+        "originalMaterial": { "type": "object", "description": "Source text or transcript" },
+        "structuredContent": { "type": "object", "description": "AI-authored educational breakdown" },
+        "isCompleted": { "type": "boolean", "description": "Completion status" },
+        "isBookmarked": { "type": "boolean", "description": "Bookmark flag" },
+        "quizScore": { "type": "number", "description": "Latest quiz score" },
+        "spacedRepetition": { "type": "object", "description": "Spaced repetition state and schedule" },
+        "scrollOffsetPosition": { "type": "number", "description": "Reading scroll position" },
+        "userNotes": { "type": "string", "description": "Learner margin notes" },
+        "readingPosition": { "type": "object", "description": "Detailed reading progress" },
+        "isDemo": { "type": "boolean", "description": "Demo lesson flag" },
+        "createdAt": { "type": "string", "description": "ISO timestamp of creation" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp of last update" }
+      },
+      "required": ["id", "courseId", "userId", "title", "order", "createdAt", "updatedAt"]
+    },
+    "Note": {
+      "title": "Note",
+      "description": "User learning note or concept summary optionally linked to a course/lesson.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique note ID" },
+        "userId": { "type": "string", "description": "Owner Firebase UID" },
+        "title": { "type": "string", "description": "Note title" },
+        "content": { "type": "string", "description": "Markdown note content" },
+        "courseId": { "type": "string", "description": "Associated course ID" },
+        "lessonId": { "type": "string", "description": "Associated lesson ID" },
+        "courseTitle": { "type": "string", "description": "Denormalized course title" },
+        "lessonTitle": { "type": "string", "description": "Denormalized lesson title" },
+        "tags": { "type": "array", "description": "Topic tags" },
+        "type": { "type": "string", "description": "general, course, or lesson" },
+        "createdAt": { "type": "string", "description": "ISO creation timestamp" },
+        "updatedAt": { "type": "string", "description": "ISO update timestamp" }
+      },
+      "required": ["id", "userId", "title", "createdAt", "updatedAt"]
+    },
+    "KeyTerm": {
+      "title": "KeyTerm",
+      "description": "Glossary term definition and context extracted from study material or created by learner.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique term ID" },
+        "userId": { "type": "string", "description": "Owner Firebase UID or system" },
+        "term": { "type": "string", "description": "Key vocabulary term" },
+        "definition": { "type": "string", "description": "Rigorous definition" },
+        "context": { "type": "string", "description": "Subject or lesson context" },
+        "relatedConcepts": { "type": "array", "description": "Related concept tags" },
+        "courseId": { "type": "string", "description": "Associated course ID" },
+        "lessonId": { "type": "string", "description": "Associated lesson ID" },
+        "lessonTitle": { "type": "string", "description": "Associated lesson title" },
+        "createdAt": { "type": "string", "description": "ISO timestamp" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp" }
+      },
+      "required": ["id", "userId", "term", "definition"]
+    },
+    "Material": {
+      "title": "Material",
+      "description": "Captured learning material, transcript, article, or document snippet.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique material ID" },
+        "userId": { "type": "string", "description": "Owner Firebase UID" },
+        "title": { "type": "string", "description": "Material title" },
+        "rawSnippet": { "type": "string", "description": "Extracted text snippet" },
+        "type": { "type": "string", "description": "transcript, article, screenshot, notes, document" },
+        "status": { "type": "string", "description": "raw or structured" },
+        "courseId": { "type": "string", "description": "Associated course ID" },
+        "courseTitle": { "type": "string", "description": "Associated course title" },
+        "lessonId": { "type": "string", "description": "Associated lesson ID" },
+        "lessonTitle": { "type": "string", "description": "Associated lesson title" },
+        "createdAt": { "type": "string", "description": "ISO creation timestamp" }
+      },
+      "required": ["id", "userId", "title", "createdAt"]
+    },
+    "StudySession": {
+      "title": "StudySession",
+      "description": "Logged study duration increment for daily goals and streak calculations.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique session ID" },
+        "userId": { "type": "string", "description": "Owner Firebase UID" },
+        "lessonId": { "type": "string", "description": "Studied lesson ID" },
+        "lessonTitle": { "type": "string", "description": "Studied lesson title" },
+        "seconds": { "type": "number", "description": "Duration in seconds" },
+        "date": { "type": "string", "description": "Calendar date YYYY-MM-DD" },
+        "timestamp": { "type": "string", "description": "ISO timestamp of session" }
+      },
+      "required": ["id", "userId", "seconds", "date", "timestamp"]
+    },
+    "StudyActivity": {
+      "title": "StudyActivity",
+      "description": "Audit and activity event in learner feed.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique activity ID" },
+        "userId": { "type": "string", "description": "Owner Firebase UID" },
+        "type": { "type": "string", "description": "Activity event type" },
+        "title": { "type": "string", "description": "Descriptive event label" },
+        "details": { "type": "string", "description": "Optional event details" },
+        "courseId": { "type": "string", "description": "Associated course ID" },
+        "lessonId": { "type": "string", "description": "Associated lesson ID" },
+        "timestamp": { "type": "string", "description": "ISO event timestamp" }
+      },
+      "required": ["id", "userId", "type", "title", "timestamp"]
+    },
+    "QuizAttempt": {
+      "title": "QuizAttempt",
+      "description": "Record of a learner checkpoint quiz assessment.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique attempt ID" },
+        "userId": { "type": "string", "description": "Owner Firebase UID" },
+        "lessonId": { "type": "string", "description": "Target lesson ID" },
+        "score": { "type": "number", "description": "Correct answers score" },
+        "totalQuestions": { "type": "number", "description": "Total assessment questions" },
+        "answers": { "type": "object", "description": "User answer selections" },
+        "date": { "type": "string", "description": "ISO timestamp of attempt" }
+      },
+      "required": ["id", "userId", "lessonId", "score", "totalQuestions", "date"]
+    },
+    "Certificate": {
+      "title": "Certificate",
+      "description": "Official course completion certificate issued strictly in learner real name.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Internal certificate ID" },
+        "userId": { "type": "string", "description": "Owner Firebase UID" },
+        "courseId": { "type": "string", "description": "Completed course ID" },
+        "certificateId": { "type": "string", "description": "Official credential ID formatted MND-XXXXXX" },
+        "realName": { "type": "string", "description": "Learner verified legal real name" },
+        "courseTitle": { "type": "string", "description": "Completed course title" },
+        "completionDate": { "type": "string", "description": "Formatted date or ISO date of graduation" },
+        "verificationCode": { "type": "string", "description": "Verification code formatted VER-XXXXXX" },
+        "grade": { "type": "string", "description": "Honor or distinction grade" },
+        "totalLessons": { "type": "number", "description": "Total lessons completed in course" },
+        "hoursInvested": { "type": "number", "description": "Estimated hours invested" },
+        "createdAt": { "type": "string", "description": "ISO creation timestamp" }
+      },
+      "required": ["id", "userId", "courseId", "certificateId", "realName", "courseTitle", "completionDate", "verificationCode", "createdAt"]
+    },
+    "CombinedCertificate": {
+      "title": "CombinedCertificate",
+      "description": "Master curriculum certificate combining multiple completed courses.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Internal combined certificate ID" },
+        "userId": { "type": "string", "description": "Owner Firebase UID" },
+        "certificateId": { "type": "string", "description": "Official credential ID formatted MND-COMB-XXXXXX" },
+        "realName": { "type": "string", "description": "Learner verified legal real name" },
+        "courseTitles": { "type": "array", "description": "Titles of component courses completed" },
+        "certificateIds": { "type": "array", "description": "IDs of component certificates merged" },
+        "completionDate": { "type": "string", "description": "Formatted date or ISO date of issuance" },
+        "verificationCode": { "type": "string", "description": "Verification code formatted VER-COMB-XXXXXX" },
+        "createdAt": { "type": "string", "description": "ISO creation timestamp" }
+      },
+      "required": ["id", "userId", "certificateId", "realName", "courseTitles", "certificateIds", "completionDate", "verificationCode", "createdAt"]
+    },
+    "Circle": {
+      "title": "Circle",
+      "description": "Learning community circle for subject exploration.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique circle ID" },
+        "name": { "type": "string", "description": "Circle name" },
+        "description": { "type": "string", "description": "Circle focus description" },
+        "topic": { "type": "string", "description": "Subject topic" },
+        "membersCount": { "type": "number", "description": "Active members count" },
+        "createdAt": { "type": "string", "description": "ISO creation timestamp" }
+      },
+      "required": ["id", "name", "description", "topic", "createdAt"]
+    },
+    "CircleMembership": {
+      "title": "CircleMembership",
+      "description": "Record of learner enrollment in a learning circle.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique membership ID formatted {circleId}_{userId}" },
+        "circleId": { "type": "string", "description": "Target circle ID" },
+        "userId": { "type": "string", "description": "Member Firebase UID" },
+        "joinedAt": { "type": "string", "description": "ISO timestamp of joining" }
+      },
+      "required": ["id", "circleId", "userId", "joinedAt"]
+    },
+    "Discussion": {
+      "title": "Discussion",
+      "description": "Community question, thought, or conceptual insight post.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique discussion post ID" },
+        "userId": { "type": "string", "description": "Author Firebase UID" },
+        "authorName": { "type": "string", "description": "Author display or real name" },
+        "authorUsername": { "type": "string", "description": "Author @handle" },
+        "authorAvatar": { "type": "string", "description": "Author profile avatar URL" },
+        "circleId": { "type": "string", "description": "Optional associated circle ID" },
+        "circleName": { "type": "string", "description": "Optional associated circle title" },
+        "title": { "type": "string", "description": "Post title or question" },
+        "content": { "type": "string", "description": "Post body content" },
+        "type": { "type": "string", "description": "question, discussion, or insight" },
+        "replyCount": { "type": "number", "description": "Number of replies" },
+        "createdAt": { "type": "string", "description": "ISO creation timestamp" },
+        "updatedAt": { "type": "string", "description": "ISO update timestamp" }
+      },
+      "required": ["id", "userId", "authorName", "authorUsername", "title", "content", "type", "createdAt"]
+    },
+    "DiscussionReply": {
+      "title": "DiscussionReply",
+      "description": "Reply or answer to a community discussion post.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique reply ID" },
+        "discussionId": { "type": "string", "description": "Parent discussion ID" },
+        "userId": { "type": "string", "description": "Reply author Firebase UID" },
+        "authorName": { "type": "string", "description": "Author display name" },
+        "authorUsername": { "type": "string", "description": "Author @handle" },
+        "authorAvatar": { "type": "string", "description": "Author avatar image URL" },
+        "content": { "type": "string", "description": "Reply text content" },
+        "createdAt": { "type": "string", "description": "ISO timestamp" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp" }
+      },
+      "required": ["id", "discussionId", "userId", "authorName", "authorUsername", "content", "createdAt"]
+    },
+    "StudyRoom": {
+      "title": "StudyRoom",
+      "description": "Collaborative study room session for focused peer learning.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique study room ID" },
+        "creatorId": { "type": "string", "description": "Room host Firebase UID" },
+        "creatorName": { "type": "string", "description": "Host display name" },
+        "creatorUsername": { "type": "string", "description": "Host @handle" },
+        "name": { "type": "string", "description": "Room name" },
+        "topic": { "type": "string", "description": "Study focus topic" },
+        "description": { "type": "string", "description": "Room description" },
+        "membersCount": { "type": "number", "description": "Count of current members" },
+        "studyGoal": { "type": "string", "description": "Target learning milestone" },
+        "sessionTime": { "type": "string", "description": "Scheduled session time" },
+        "createdAt": { "type": "string", "description": "ISO creation timestamp" }
+      },
+      "required": ["id", "creatorId", "name", "topic", "createdAt"]
+    },
+    "StudyRoomMember": {
+      "title": "StudyRoomMember",
+      "description": "Membership record for a peer in a study room.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique membership ID formatted {roomId}_{userId}" },
+        "roomId": { "type": "string", "description": "Target study room ID" },
+        "userId": { "type": "string", "description": "Member Firebase UID" },
+        "joinedAt": { "type": "string", "description": "ISO timestamp of joining" }
+      },
+      "required": ["id", "roomId", "userId", "joinedAt"]
+    },
+    "SharedCourse": {
+      "title": "SharedCourse",
+      "description": "Publicly shareable course record containing complete curriculum and sanitized lesson content.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique share ID" },
+        "courseId": { "type": "string", "description": "Source course ID" },
+        "creatorId": { "type": "string", "description": "Creator UID" },
+        "creatorName": { "type": "string", "description": "Sanitized creator display name" },
+        "title": { "type": "string", "description": "Course title" },
+        "description": { "type": "string", "description": "Course description" },
+        "category": { "type": "string", "description": "Course category" },
+        "coverIcon": { "type": "string", "description": "Cover icon" },
+        "coverImage": { "type": "string", "description": "Cover image URL" },
+        "depth": { "type": "string", "description": "quick, standard, or deep" },
+        "estimatedDays": { "type": "number", "description": "Estimated days" },
+        "dailyMinutesRange": { "type": "string", "description": "Daily minutes range" },
+        "learningObjectives": { "type": "array", "description": "Course objectives" },
+        "lessonCount": { "type": "number", "description": "Total lessons" },
+        "lessons": { "type": "array", "description": "Clean lesson items" },
+        "createdAt": { "type": "string", "description": "ISO timestamp" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp" }
+      },
+      "required": ["id", "courseId", "creatorId", "title", "lessonCount", "lessons", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Canonical user profile documents keyed by Firebase UID"
+    },
+    "/usernames/{username}": {
+      "schema": "UsernameReservation",
+      "description": "Uniqueness lock for @username handles"
+    },
+    "/courses/{courseId}": {
+      "schema": "Course",
+      "description": "Curriculum course document keyed by course ID"
+    },
+    "/courses/{courseId}/lessons/{lessonId}": {
+      "schema": "Lesson",
+      "description": "Subcollection lesson documents belonging to parent course"
+    },
+    "/notes/{noteId}": {
+      "schema": "Note",
+      "description": "User learning notes keyed by note ID"
+    },
+    "/terms/{termId}": {
+      "schema": "KeyTerm",
+      "description": "Subject glossary terms keyed by term ID"
+    },
+    "/materials/{materialId}": {
+      "schema": "Material",
+      "description": "Captured learning materials keyed by material ID"
+    },
+    "/studySessions/{sessionId}": {
+      "schema": "StudySession",
+      "description": "Logged learning sessions keyed by session ID"
+    },
+    "/studyActivity/{activityId}": {
+      "schema": "StudyActivity",
+      "description": "Learner activity history keyed by activity ID"
+    },
+    "/quizAttempts/{attemptId}": {
+      "schema": "QuizAttempt",
+      "description": "Quiz assessment attempts keyed by attempt ID"
+    },
+    "/certificates/{certificateId}": {
+      "schema": "Certificate",
+      "description": "Individual course completion certificate document"
+    },
+    "/combinedCertificates/{combinedCertificateId}": {
+      "schema": "CombinedCertificate",
+      "description": "Combined multi-course completion certificate document"
+    },
+    "/circles/{circleId}": {
+      "schema": "Circle",
+      "description": "Learning community circles documents"
+    },
+    "/circleMemberships/{membershipId}": {
+      "schema": "CircleMembership",
+      "description": "Circle membership join records"
+    },
+    "/discussions/{discussionId}": {
+      "schema": "Discussion",
+      "description": "Community questions and discussion posts"
+    },
+    "/discussionReplies/{replyId}": {
+      "schema": "DiscussionReply",
+      "description": "Replies to discussion posts"
+    },
+    "/studyRooms/{roomId}": {
+      "schema": "StudyRoom",
+      "description": "Peer study room session documents"
+    },
+    "/studyRoomMembers/{memberId}": {
+      "schema": "StudyRoomMember",
+      "description": "Study room peer membership records"
+    },
+    "/sharedCourses/{shareId}": {
+      "schema": "SharedCourse",
+      "description": "Publicly shared courses keyed by shareId"
+    }
+  }
+}

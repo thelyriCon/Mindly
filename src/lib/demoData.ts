@@ -30,6 +30,16 @@ export function getDemoDatabase() {
       createdAt: now,
       updatedAt: now,
       isDemo: true,
+      spacedRepetition: {
+        stage: 2,
+        nextReviewDate: new Date(Date.now() - 3600 * 1000 * 4).toISOString(), // Due now
+        lastReviewedAt: new Date(Date.now() - 3600 * 1000 * 76).toISOString(),
+        reviewCount: 2,
+        easeFactor: 2.5,
+        intervalDays: 3,
+        retentionEstimate: 78,
+        lastRating: 'good',
+      },
       originalMaterial: {
         type: "text",
         sourceTitle: "Market Structure 101 Lecture Transcript",
@@ -134,6 +144,16 @@ export function getDemoDatabase() {
       createdAt: now,
       updatedAt: now,
       isDemo: true,
+      spacedRepetition: {
+        stage: 3,
+        nextReviewDate: new Date(Date.now() + 3600 * 1000 * 48).toISOString(), // Upcoming in 2 days
+        lastReviewedAt: new Date(Date.now() - 3600 * 1000 * 120).toISOString(),
+        reviewCount: 3,
+        easeFactor: 2.6,
+        intervalDays: 7,
+        retentionEstimate: 92,
+        lastRating: 'good',
+      },
       originalMaterial: {
         type: "text",
         sourceTitle: "Swing Identification Field Notes",
@@ -377,7 +397,9 @@ export function getDemoDatabase() {
 
   const defaultUser: User = {
     id: defaultUserId,
-    name: "iCon",
+    name: "Jimmy Wangota",
+    realName: "Jimmy Wangota",
+    username: "iCon",
     email: "icon@mindly.app",
     interests: ["Trading", "Programming", "Cognitive Science"],
     createdAt: now,
@@ -397,8 +419,22 @@ export function getDemoDatabase() {
     todayMinutes: 12,
     progressPercent: 40,
     streakDays: 3,
+    longestStreakDays: 5,
+    hasActivityToday: true,
+    milestoneTitle: 'Momentum Builder',
+    nextMilestoneDays: 7,
+    totalActiveDays: 8,
     remainingMinutes: 18,
     isGoalReached: false,
+    recentActivityDays: [
+      { date: '2026-09-16', dayName: 'Wed', dayNumber: 16, hasActivity: false, minutesStudied: 0, activityCount: 0, isToday: false },
+      { date: '2026-09-17', dayName: 'Thu', dayNumber: 17, hasActivity: false, minutesStudied: 0, activityCount: 0, isToday: false },
+      { date: '2026-09-18', dayName: 'Fri', dayNumber: 18, hasActivity: false, minutesStudied: 0, activityCount: 0, isToday: false },
+      { date: '2026-09-19', dayName: 'Sat', dayNumber: 19, hasActivity: true, minutesStudied: 20, activityCount: 2, isToday: false },
+      { date: '2026-09-20', dayName: 'Sun', dayNumber: 20, hasActivity: true, minutesStudied: 25, activityCount: 3, isToday: false },
+      { date: '2026-09-21', dayName: 'Mon', dayNumber: 21, hasActivity: true, minutesStudied: 30, activityCount: 2, isToday: false },
+      { date: '2026-09-22', dayName: 'Tue', dayNumber: 22, hasActivity: true, minutesStudied: 12, activityCount: 1, isToday: true },
+    ],
   };
 
   return {
